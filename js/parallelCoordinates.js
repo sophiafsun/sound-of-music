@@ -42,32 +42,64 @@ class ParallelCoordinates {
             .domain(["setosa", "versicolor", "virginica" ])
             .range([ "#440154ff", "#21908dff", "#fde725ff"]);
 
-        vis.wrangleData()
+        // hardcoding dimensions
+        let dimensions = ['acousticness', 'danceability', 'energy', 'instrumentalness'];
+
+        // For each dimension, I build a linear scale. I store all in a y object
+        let y = {}
+        for (let i in dimensions) {
+            name = dimensions[i]
+            y[name] = d3.scaleLinear()
+                .domain( d3.extent(vis.audioFeatures, function(d) { return +d[name]; }) )
+                .range([vis.height, 0])
+        }
+
+
+        // Build the X scale -> it find the best position for each Y axis
+        vis.x = d3.scalePoint()
+            .range([0, vis.width])
+            .padding(1)
+            .domain(dimensions);
+
+        // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
+        function path(d) {
+            return d3.line()(dimensions.map(function(p) { return [vis.x(p), y[p](d[p])]; }));
+        }
+
+        // Draw the lines
+        vis.svg
+            .selectAll("myPath")
+            .data(vis.audioFeatures)
+            .enter().append("path")
+            .attr("d",  path)
+            .style("fill", "none")
+            .style("stroke", "#69b3a2")
+            .style("opacity", 0.5)
+
+        // Draw the axis:
+        vis.svg.selectAll("myAxis")
+            // For each dimension of the dataset I add a 'g' element:
+            .data(dimensions).enter()
+            .append("g")
+            // I translate this element to its right position on the x axis
+            .attr("transform", function(d) { return "translate(" + vis.x(d) + ")"; })
+            // And I build the axis with the call function
+            .each(function(d) { d3.select(this).call(d3.axisLeft().scale(y[d])); })
+            // Add axis title
+            .append("text")
+            .style("text-anchor", "middle")
+            .attr("y", -9)
+            .text(function(d) { return d; })
+            .style("fill", "black")
+
+
+
+
+    vis.wrangleData()
     }
 
     wrangleData(){
         let vis = this;
-
-
-        // Rucha is trying to get the top ten songs and then create the parallel coordinates chart
-        // vis.dimensions = {};
-
-        // console.log("vis.billboard", vis.billboard);
-
-        // console.log("vis.audio", vis.audioFeatures);
-
-        // vis.audioFeatures.forEach(function(d){
-
-            // console.log("d.key", d.key);
-
-            // vis.dimensions[d.key] = d.values.filter(function (object) {
-            //     let popularity = object.spotify_track_popularity;
-            //     return popularity <= 10;
-            // });
-        // });
-
-        // console.log("dimensions", vis.dimensions);
-
 
         vis.updateVis()
     }
