@@ -18,8 +18,8 @@ class ParallelCoordinates {
 
         // set the dimensions and margins of the graph
         vis.margin = {top: 30, right: 50, bottom: 10, left: 50};
-        vis.width = 460 - vis.margin.left - vis.margin.right;
-        vis.height = 400 - vis.margin.top - vis.margin.bottom;
+        vis.width = 500 - vis.margin.left - vis.margin.right;
+        vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
         // Sophia keeps getting negative values for height, so I hard coded it in above.
         // vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
@@ -50,8 +50,8 @@ class ParallelCoordinates {
         for (let i in dimensions) {
             name = dimensions[i]
             y[name] = d3.scaleLinear()
-                .domain( d3.extent(vis.audioFeatures, function(d) { return +d[name]; }) )
-                .range([vis.height, 0])
+                .domain(d3.extent(vis.audioFeatures, function(d) { return +d[name]; }) )
+                .range([vis.height-20, 0])
         }
 
 
@@ -77,7 +77,7 @@ class ParallelCoordinates {
             .attr("d",  path)
             .style("fill", "none")
             .style("stroke", "#69b3a2")
-            .style("opacity", 0.5)
+            .style("opacity", 0.5);
 
         // Draw the axis:
         vis.svg.selectAll("myAxis")
@@ -91,7 +91,7 @@ class ParallelCoordinates {
             // Add axis title
             .append("text")
             .style("text-anchor", "middle")
-            .attr("y", -9)
+            .attr("y", 10)
             .text(function(d) { return d; })
             .style("fill", "black")
 

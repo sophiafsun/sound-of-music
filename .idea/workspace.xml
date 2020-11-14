@@ -20,11 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7f5d2d3-bb2b-4b83-b5e3-12aa9ab27d27" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/scroll.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/scroll.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/scroll.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/css/scroll.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/scroll.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/scroll.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/parallelCoordinates.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/parallelCoordinates.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +70,7 @@
       <workItem from="1605369845899" duration="4610000" />
       <workItem from="1605380356414" duration="57000" />
       <workItem from="1605381510542" duration="10118000" />
+      <workItem from="1605393675073" duration="947000" />
     </task>
     <servers />
   </component>
