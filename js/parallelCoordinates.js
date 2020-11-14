@@ -40,13 +40,34 @@ class ParallelCoordinates {
         // return a color based on genre
         vis.colorScale = d3.scaleOrdinal()
             .domain(["setosa", "versicolor", "virginica" ])
-            .range([ "#440154ff", "#21908dff", "#fde725ff"])
+            .range([ "#440154ff", "#21908dff", "#fde725ff"]);
 
         vis.wrangleData()
     }
 
     wrangleData(){
         let vis = this;
+
+
+        // Rucha is trying to get the top ten songs and then create the parallel coordinates chart
+        // vis.dimensions = {};
+
+        // console.log("vis.billboard", vis.billboard);
+
+        // console.log("vis.audio", vis.audioFeatures);
+
+        // vis.audioFeatures.forEach(function(d){
+
+            // console.log("d.key", d.key);
+
+            // vis.dimensions[d.key] = d.values.filter(function (object) {
+            //     let popularity = object.spotify_track_popularity;
+            //     return popularity <= 10;
+            // });
+        // });
+
+        // console.log("dimensions", vis.dimensions);
+
 
         vis.updateVis()
     }
