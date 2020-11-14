@@ -5,18 +5,27 @@ html {
   scroll-snap-type: y mandatory;
 }
 
+h2 {
+  margin-bottom: 0px;
+}
+
 section {
   height: 100vh;
   width: 100%;
   scroll-snap-align: start;
   display: flex;
-  align-items: center;
   justify-content: center;
   text-align: center;
-  color: #64868E;
+  align-items: center;
+  color: #565656;
 }
 section#one {
-  background-color: #98B4A6;
+  color: #4a6767;
+  font-family: "Montserrat", serif;
+  background-color: #0c0d0e;
+  background-image: linear-gradient(335deg, black 23px, transparent 23px), linear-gradient(155deg, black 23px, transparent 23px), linear-gradient(335deg, black 23px, transparent 23px), linear-gradient(155deg, black 23px, transparent 23px);
+  background-size: 58px 58px;
+  background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
 }
 section#two {
   background-color: #D1E4D1;
@@ -39,8 +48,8 @@ section#seven {
 
 nav.nav {
   position: fixed;
-  top: 30%;
-  padding-left: 1em;
+  top: 35%;
+  padding-left: 2em;
 }
 nav.nav ul {
   padding: 0;
@@ -51,7 +60,7 @@ nav.nav ul {
 }
 nav.nav ul a {
   text-decoration: none;
-  color: #3a4e52;
+  color: #565656;
 }
 nav.nav ul li {
   margin: 0 0;
@@ -64,22 +73,170 @@ nav.nav ul li:before {
   width: 10px;
   height: 10px;
   margin-right: 0.5em;
-  border: 2px solid #64868E;
+  border: 2px solid #565656;
   border-radius: 100px;
-  box-shadow: 0 0 2px #64868E;
+  box-shadow: 0 0 2px #565656;
   transition: linear 0.3s;
 }
 nav.nav ul li:hover {
   cursor: pointer;
 }
 nav.nav ul li:hover:before {
-  box-shadow: 0 0 3px #4f6a70;
+  box-shadow: 0 0 3px #3d3d3d;
 }
 nav.nav ul li.active {
   transition: linear 0.3s;
 }
 nav.nav ul li.active:before {
-  background-color: #64868E;
+  background-color: #1DB954;
+  border: 2px solid #1DB954;
+  box-shadow: 0 0 2px #1DB954;
+}
+
+.sign {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+  font-family: "Codystar", cursive;
+  background-image: radial-gradient(ellipse 50% 35% at 50% 50%, darkcyan, transparent);
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  font-size: 4em;
+  color: lightcyan;
+  text-shadow: 0 0 0.6rem lightcyan, 0 0 1.5rem cyan, -0.2rem 0.1rem 1rem cyan, 0.2rem 0.1rem 1rem cyan, 0 -0.5rem 2rem darkcyan, 0 0.5rem 3rem #017373;
+  animation: shine 2s forwards, flicker 3s infinite;
+}
+
+@keyframes blink {
+  0%, 22%, 36%, 75% {
+    color: cyan;
+    text-shadow: 0 0 0.6rem cyan, 0 0 1.5rem cyan, -0.2rem 0.1rem 1rem cyan, 0.2rem 0.1rem 1rem cyan, 0 -0.5rem 2rem darkcyan, 0 0.5rem 3rem #017373;
+  }
+  28%, 33% {
+    color: #7ef3f3;
+    text-shadow: none;
+  }
+  82%, 97% {
+    color: cyan;
+    text-shadow: none;
+  }
+}
+.flicker {
+  animation: shine 2s forwards, blink 3s 2s infinite;
+}
+
+.fast-flicker {
+  animation: shine 2s forwards, blink 10s 1s infinite;
+}
+
+@keyframes shine {
+  0% {
+    color: #016464;
+    text-shadow: none;
+  }
+  100% {
+    color: #5aefef;
+    text-shadow: 0 0 0.6rem lightcyan, 0 0 1.5rem cyan, -0.2rem 0.1rem 1rem cyan, 0.2rem 0.1rem 1rem darkcyan, 0 -0.5rem 2rem darkcyan, 0 0.5rem 3rem #017373;
+  }
+}
+@keyframes flicker {
+  from {
+    opacity: 1;
+  }
+  4% {
+    opacity: 0.9;
+  }
+  6% {
+    opacity: 0.85;
+  }
+  8% {
+    opacity: 0.95;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  11% {
+    opacity: 0.922;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  14% {
+    opacity: 0.95;
+  }
+  16% {
+    opacity: 0.98;
+  }
+  17% {
+    opacity: 0.9;
+  }
+  19% {
+    opacity: 0.93;
+  }
+  20% {
+    opacity: 0.99;
+  }
+  24% {
+    opacity: 1;
+  }
+  26% {
+    opacity: 0.94;
+  }
+  28% {
+    opacity: 0.98;
+  }
+  37% {
+    opacity: 0.93;
+  }
+  38% {
+    opacity: 0.5;
+  }
+  39% {
+    opacity: 0.96;
+  }
+  42% {
+    opacity: 1;
+  }
+  44% {
+    opacity: 0.97;
+  }
+  46% {
+    opacity: 0.94;
+  }
+  56% {
+    opacity: 0.9;
+  }
+  58% {
+    opacity: 0.9;
+  }
+  60% {
+    opacity: 0.99;
+  }
+  68% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.9;
+  }
+  72% {
+    opacity: 0.95;
+  }
+  93% {
+    opacity: 0.93;
+  }
+  95% {
+    opacity: 0.95;
+  }
+  97% {
+    opacity: 0.93;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /*# sourceMappingURL=scroll.css.map */
