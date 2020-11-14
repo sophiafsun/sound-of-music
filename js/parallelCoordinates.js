@@ -63,13 +63,16 @@ class ParallelCoordinates {
 
         // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
         function path(d) {
-            return d3.line()(dimensions.map(function(p) { return [vis.x(p), y[p](d[p])]; }));
+            return d3.line()(dimensions.map(function(p) {
+                return [vis.x(p), y[p](d[p])];
+            }));
         }
 
         // Draw the lines
         vis.svg
             .selectAll("myPath")
-            .data(vis.audioFeatures)
+            // First fifty songs in audio features
+            .data(vis.audioFeatures.filter(function(d,i){ return i < 50 }))
             .enter().append("path")
             .attr("d",  path)
             .style("fill", "none")
