@@ -5,8 +5,17 @@ html {
   scroll-snap-type: y mandatory;
 }
 
+
+h1 {
+  margin-top: 200px;
+}
+
 h2 {
-  margin-bottom: 0px;
+  margin-bottom: -10px;
+}
+
+h3 {
+  margin-top: -30px;
 }
 
 section {
@@ -128,7 +137,7 @@ nav.nav {
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
-  font-size: 4em;
+  font-size: 8em;
   color: lightcyan;
   text-shadow: 0 0 0.6rem lightcyan, 0 0 1.5rem cyan,
   -0.2rem 0.1rem 1rem cyan, 0.2rem 0.1rem 1rem cyan,
