@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a7f5d2d3-bb2b-4b83-b5e3-12aa9ab27d27" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/parallelCoordinates.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/parallelCoordinates.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,8 +32,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -67,6 +68,8 @@
       <updated>1605319645504</updated>
       <workItem from="1605319654453" duration="2625000" />
       <workItem from="1605369845899" duration="4610000" />
+      <workItem from="1605380356414" duration="57000" />
+      <workItem from="1605381510542" duration="2533000" />
     </task>
     <servers />
   </component>
@@ -84,5 +87,11 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="292" y="168" key="EditFileWatcherDialog" timestamp="1605384027081">
+      <screen x="0" y="23" width="1280" height="719" />
+    </state>
+    <state x="292" y="168" key="EditFileWatcherDialog/0.23.1280.719@0.23.1280.719" timestamp="1605384027081" />
   </component>
 </project>

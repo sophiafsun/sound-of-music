@@ -1,0 +1,85 @@
+html {
+  font-family: sans-serif;
+  scroll-snap-type: mandatory;
+  scroll-snap-points-y: repeat(100vh);
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #64868E;
+}
+section#one {
+  background-color: #98B4A6;
+}
+section#two {
+  background-color: #D1E4D1;
+}
+section#three {
+  background-color: #F3FBF1;
+}
+section#four {
+  background-color: lightskyblue;
+}
+section#five {
+  background-color: violet;
+}
+section#six {
+  background-color: aqua;
+}
+section#seven {
+  background-color: pink;
+}
+
+nav.nav {
+  position: fixed;
+  top: 30%;
+  padding-left: 1em;
+}
+nav.nav ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+nav.nav ul a {
+  text-decoration: none;
+  color: #3a4e52;
+}
+nav.nav ul li {
+  margin: 0 0;
+  transition: linear 0.3s;
+}
+nav.nav ul li:before {
+  position: relative;
+  display: inline-block;
+  content: "";
+  width: 10px;
+  height: 10px;
+  margin-right: 0.5em;
+  border: 2px solid #64868E;
+  border-radius: 100px;
+  box-shadow: 0 0 2px #64868E;
+  transition: linear 0.3s;
+}
+nav.nav ul li:hover {
+  cursor: pointer;
+}
+nav.nav ul li:hover:before {
+  box-shadow: 0 0 3px #4f6a70;
+}
+nav.nav ul li.active {
+  transition: linear 0.3s;
+}
+nav.nav ul li.active:before {
+  background-color: #64868E;
+}
+
+/*# sourceMappingURL=scroll.css.map */
