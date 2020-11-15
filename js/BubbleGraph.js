@@ -17,8 +17,8 @@ class BubbleGraph {
         let vis = this;
 
         // set the dimensions and margins of the graph
-        vis.margin = {top: 30, right: 30, bottom: 10, left: 10};
-        vis.width = 700 - vis.margin.left - vis.margin.right;
+        vis.margin = {top: 30, right: 10, bottom: 30, left: 10};
+        vis.width = 1000 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
@@ -36,43 +36,37 @@ class BubbleGraph {
             .attr('class', 'tooltip')
             .style('opacity', 0);
 
-        vis.svg.append("text")
-            .text("Bubble Viz")
-            .attr("class", "bubbletitle")
-            .attr("transform",
-                "translate(" + vis.width/2.5 + "," + 50 + ")");
+        // return a color based on genre
+        vis.genres = ["rap", "rock", "edm", "rb", "latin", "jazz", "country", "pop", "misc", "unclassified"]
+        vis.colorScale = d3.scaleOrdinal()
+            .domain(vis.genres)
+            .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "black"]);
 
-        // let bubbles = null;
-        // let labels = null;
-        // let nodes = [];
-        //
-        // // location to centre the bubbles
-        // const centre = { x: width/2, y: height/2 };
-        //
-        // // charge is dependent on size of the bubble, so bigger towards the middle
-        // function charge(d) {
-        //     return Math.pow(d.radius, 2.0) * 0.01
-        // }
-        //
-        // // strength to apply to the position forces
-        // const forceStrength = 0.03;
-        //
-        // // create a force simulation and add forces to it
-        // const simulation = d3.forceSimulation()
-        //     .force('charge', d3.forceManyBody().strength(charge))
-        //     // .force('center', d3.forceCenter(centre.x, centre.y))
-        //     .force('x', d3.forceX().strength(forceStrength).x(centre.x))
-        //     .force('y', d3.forceY().strength(forceStrength).y(centre.y))
-        //     .force('collision', d3.forceCollide().radius(d => d.radius + 1));
-        //
-        // // force simulation starts up automatically, which we don't want as there aren't any nodes yet
-        // simulation.stop();
-        //
-        //
-        // // set up colour scale
-        // const fillColour = d3.scaleOrdinal()
-        //     .domain(["1", "2", "3", "5", "99"])
-        //     .range(["#0074D9", "#7FDBFF", "#39CCCC", "#3D9970", "#AAAAAA"]);
+
+        //legend
+        vis.svg.selectAll("bubble-legend-dots")
+            .data(vis.genres)
+            .enter()
+            .append("rect")
+            .attr("class", "legend-squares")
+            .attr("x", vis.width-120)
+            .attr("y", function(d,i){ return vis.width/6 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("width", 10)
+            .attr("height", 10)
+            .style("fill", function(d){ return vis.colorScale(d)})
+
+        vis.svg.selectAll("bubble-legend-labels")
+            .data(vis.genres)
+            .enter()
+            .append("text")
+            .attr("class", "bubble-legend-labels")
+            .attr("x", vis.width-100)
+            .attr("y", function(d,i){ return vis.width/6 + 5 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .style("fill", "black")
+            .text(function(d){ return d})
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle")
+
 
         vis.wrangleData()
     }
@@ -148,22 +142,79 @@ class BubbleGraph {
 
         console.log(vis.filteredData);
 
-        // Add dots
-        vis.dots = vis.svg.append('g')
-            .selectAll("dot")
-            .data(vis.filteredData)
-            .enter()
-            .append("circle")
-            .attr("cx", 10)
-            .attr("cy", 10)
-            .attr("r", 10)
-            .style("fill", "#69b3a2")
-            .style("opacity", "0.7")
-            .attr("stroke", "black")
+        let numNodes = vis.filteredData.length
+        vis.nodes = d3.range(numNodes).map(function(d) {
+            return {radius: vis.filteredData[d].weeks * 0.4}
+        })
 
-        vis.dots.exit().remove();
+        console.log(vis.nodes);
+
+        d3.forceSimulation(vis.nodes)
+            .force('x', d3.forceX().strength(-0.016))
+            .force('y', d3.forceY().strength(-0.016))
+            .force('collide', d3.forceCollide(-1))
+            .force('center', d3.forceCenter(vis.width / 5, vis.height / 4))
+            .on('tick', ticked);
 
 
+        function ticked() {
+            let dots = d3.select('svg')
+                .selectAll('circle')
+                .data(vis.nodes)
+
+            dots.enter()
+                .append('circle')
+                .merge(dots)
+                .attr('r', function(d) {
+                    return d.radius
+                })
+                .attr('cx', function(d) {
+                    return d.x
+                })
+                .attr('cy', function(d) {
+                    return d.y
+                })
+                .attr("fill", function(d) {
+                   return vis.colorScale(vis.filteredData[d.index].genre)
+                })
+                .attr("transform", "translate(" + vis.width/4 + "," + vis.height/4 + ")")
+                .on('mouseover', function(event, object){
+
+                     // grab hovered state
+                     let hoveredState = vis.filteredData[object.index];
+                     console.log(hoveredState);
+
+
+                // change color of hovered state
+                d3.select(this)
+                    .attr('opacity', 0.3);
+
+                // append tooltip with hovered state data
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                           <div style="border-radius: 5px; background: mintcream; padding: 10px">
+                                     <h5>${hoveredState.song}<h5>
+                                     <h6>${hoveredState.performer}
+                                     <br>Weeks on Top Chart: ${hoveredState.weeks}<h6>
+                            </div>`);
+            })
+                .on('mouseout', function(event, object){
+
+                    d3.select(this)
+                        .attr("opacity", 1);
+
+                    vis.tooltip
+                        .style("opacity", 0)
+                        .style("left", 0)
+                        .style("top", 0)
+                        .html(``);
+                });
+
+            dots.exit().remove()
+        }
 
         console.log("bubble viz class ran")
     }

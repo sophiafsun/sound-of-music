@@ -6,9 +6,26 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body style="background-color: rosybrown;">
 
-    <div id="parallelCoordinatesViz"></div>
+    <div class="row justify-content-center">
+        <select id='categorySelector' class="text-dark" style="padding:3px; font-size: 15px;" onChange="categoryChange()">
+            <option value="default" selected>Top 100 Overall</option>
+            <option value="pop">Pop</option>
+            <option value="rap">Rap</option>
+            <option value="rock">Rock</option>
+            <option value="rb">R&B</option>
+            <option value="latin">Latin</option>
+            <option value="jazz">Jazz</option>
+            <option value="country">Country</option>
+            <option value="misc">Miscellaneous</option>
+            <option value="unclassified">Unclassified</option>
+        </select>
+    </div>
+
+<!--    <div id="bubbleViz"></div>-->
+
+<!--    <div id="parallelCoordinatesViz"></div>-->
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -21,10 +38,12 @@
             crossorigin="anonymous"></script>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
 
+<!--    <script src="js/BubbleGraph.js"></script>-->
+<!--    <script src="js/main.js"></script>-->
+<!--    <script src="js/parallelCoordinates.js"></script>-->
 
-    <script src="js/main.js"></script>
-    <script src="js/parallelCoordinates.js"></script>
 
 </body>
 </html>
