@@ -41,11 +41,12 @@ class Timeline {
 
         // add title
         vis.svg.append('g')
-            .attr('class', 'title')
+            .attr('class', 'axistitle')
             .append('text')
-            .text('Top Songs per Year')
-            .attr('transform', `translate(${vis.width/2}, 20)`)
-            .attr('text-anchor', 'middle');
+            .text('Top Songs')
+            .attr('x', 24)
+            .attr('y', 12)
+            .attr('text-anchor', 'front');
 
         // init scales
         vis.x = d3.scaleLinear().range([0, vis.width]);

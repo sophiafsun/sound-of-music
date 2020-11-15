@@ -21,10 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7a12649e-735f-4b96-92fe-0989c3504acb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/timeline.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/timeline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testViz.html" beforeDir="false" afterPath="$PROJECT_DIR$/testViz.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +60,7 @@
       <updated>1605405946414</updated>
       <workItem from="1605405947437" duration="6227000" />
       <workItem from="1605412524087" duration="731000" />
-      <workItem from="1605413558483" duration="21619000" />
+      <workItem from="1605413558483" duration="22632000" />
     </task>
     <servers />
   </component>
@@ -85,6 +83,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="436" y="93" key="RollbackChangesDialog" timestamp="1605479820108">
+      <screen x="0" y="23" width="1280" height="719" />
+    </state>
+    <state x="436" y="93" key="RollbackChangesDialog/0.23.1280.719@0.23.1280.719" timestamp="1605479820108" />
     <state x="209" y="23" width="997" height="719" key="SettingsEditor" timestamp="1605409693534">
       <screen x="0" y="23" width="1280" height="719" />
     </state>
