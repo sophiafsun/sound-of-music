@@ -19,7 +19,6 @@
     font: 12px sans-serif;
     background: lightsteelblue;
     border-radius: 8px;
-    /*  pointer-events: none;	This line needs to be removed */
 }
 .tooltip h3,h4 {
     text-align: left;
@@ -28,7 +27,12 @@
     font: 14px sans-serif;
 }
 
-.tooltip h3 {
+#tooltip-title {
     font: 16px sans-serif;
     font-weight: bold;
+}
+
+#parallelCoordinatesViz {
+    width: 1000px;
+    height: 700px;
 }

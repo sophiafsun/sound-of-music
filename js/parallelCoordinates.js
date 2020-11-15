@@ -18,12 +18,12 @@ class ParallelCoordinates {
 
         // set the dimensions and margins of the graph
         vis.margin = {top: 30, right: 50, bottom: 10, left: 50};
-        //vis.width = 500 - vis.margin.left - vis.margin.right;
+        //vis.width = 1000 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
 
         // Sophia keeps getting negative values for height, so I hard coded it in above.
         // vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
+        vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
         // vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
@@ -159,7 +159,7 @@ class ParallelCoordinates {
                     .style("top", event.pageY + "px")
                     .html(`
                          <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
-                             <h3>${d.Song}<h3>
+                             <h4 id="tooltip-title">${d.Song}<h4>
                              <h4>Artist: ${d.Performer}</h4>  
                              <h4>Album: ${d.spotify_track_album}</h4>  
                              <h4>Genre: ${d.genre}</h4>
