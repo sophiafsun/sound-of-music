@@ -44,7 +44,7 @@ class BubbleGraph {
         let vis = this;
 
         // console.log(vis.billboard);
-        console.log(vis.audioFeatures);
+        // console.log(vis.audioFeatures);
 
 
         vis.filtered = []

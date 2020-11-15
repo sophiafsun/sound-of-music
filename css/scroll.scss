@@ -22,12 +22,6 @@ section {
   height: 100vh;
   width: 100%;
   scroll-snap-align: start;
-
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-
   color: #565656;
 
   &#one {
@@ -58,6 +52,10 @@ section {
   }
   &#seven{
     background-color: pink;
+    //justify-content: center;
+    //text-align: center;
+    //align-items: center;
+    //display: flex;
   }
 }
 
