@@ -52,6 +52,7 @@ function initMainPage(dataArray) {
     // init table
     myParallelCoordinates = new ParallelCoordinates('parallelCoordinatesViz', dataArray[0], dataArray[1]);
     myBubbleGraph = new BubbleGraph('bubbleViz', dataArray[0], dataArray[1]);
+    myTimeline = new Timeline('timeline', dataArray[0], dataArray[1]);
 }
 
 // update vis on category change

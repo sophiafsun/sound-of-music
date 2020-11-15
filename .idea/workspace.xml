@@ -21,11 +21,22 @@
   <component name="ChangeListManager">
     <list default="true" id="7a12649e-735f-4b96-92fe-0989c3504acb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/timeline.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/timeline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testViz.html" beforeDir="false" afterPath="$PROJECT_DIR$/testViz.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,7 +62,7 @@
       <updated>1605405946414</updated>
       <workItem from="1605405947437" duration="6227000" />
       <workItem from="1605412524087" duration="731000" />
-      <workItem from="1605413558483" duration="16222000" />
+      <workItem from="1605413558483" duration="21619000" />
     </task>
     <servers />
   </component>
@@ -82,6 +93,10 @@
       <screen x="0" y="23" width="1280" height="719" />
     </state>
     <state x="423" y="304" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1280.719@0.23.1280.719" timestamp="1605409302581" />
+    <state x="395" y="172" key="run.anything.popup" timestamp="1605463642224">
+      <screen x="0" y="23" width="1280" height="719" />
+    </state>
+    <state x="395" y="172" key="run.anything.popup/0.23.1280.719@0.23.1280.719" timestamp="1605463642224" />
     <state x="290" y="66" width="670" height="676" key="search.everywhere.popup" timestamp="1605409770896">
       <screen x="0" y="23" width="1280" height="719" />
     </state>
