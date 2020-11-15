@@ -21,10 +21,6 @@ section {
   height: 100vh;
   width: 100%;
   scroll-snap-align: start;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
   color: #565656;
 }
 section#one {
@@ -34,24 +30,52 @@ section#one {
   background-image: linear-gradient(335deg, black 23px, transparent 23px), linear-gradient(155deg, black 23px, transparent 23px), linear-gradient(335deg, black 23px, transparent 23px), linear-gradient(155deg, black 23px, transparent 23px);
   background-size: 58px 58px;
   background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
 }
 section#two {
-  background-color: #D1E4D1;
+  background-color: mintcream;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 section#three {
   background-color: #F3FBF1;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
 }
 section#four {
   background-color: lightskyblue;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
 }
 section#five {
   background-color: violet;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
 }
 section#six {
   background-color: aqua;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
 }
 section#seven {
   background-color: pink;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
 }
 
 nav.nav {
@@ -114,15 +138,15 @@ nav.nav ul li.active:before {
   left: 50%;
   top: 50%;
   font-size: 8em;
-  color: lightcyan;
-  text-shadow: 0 0 0.6rem lightcyan, 0 0 1.5rem cyan, -0.2rem 0.1rem 1rem cyan, 0.2rem 0.1rem 1rem cyan, 0 -0.5rem 2rem darkcyan, 0 0.5rem 3rem #017373;
+  color: #7ffcfc;
+  text-shadow: 0 0 1.6rem lightcyan, 0 0 2.5rem cyan, -1.2rem 1.1rem 2rem cyan, 1.2rem 1.1rem 2rem darkcyan, 0 -1.5rem 3rem darkcyan, 0 1.5rem 4rem #017373;
   animation: shine 2s forwards, flicker 3s infinite;
 }
 
 @keyframes blink {
   0%, 22%, 36%, 75% {
-    color: cyan;
-    text-shadow: 0 0 0.6rem cyan, 0 0 1.5rem cyan, -0.2rem 0.1rem 1rem cyan, 0.2rem 0.1rem 1rem cyan, 0 -0.5rem 2rem darkcyan, 0 0.5rem 3rem #017373;
+    color: #5aefef;
+    text-shadow: 0 0 1.6rem lightcyan, 0 0 2.5rem cyan, -1.2rem 1.1rem 2rem cyan, 1.2rem 1.1rem 2rem darkcyan, 0 -1.5rem 3rem darkcyan, 0 1.5rem 4rem #017373;
   }
   28%, 33% {
     color: #7ef3f3;
@@ -148,7 +172,7 @@ nav.nav ul li.active:before {
   }
   100% {
     color: #5aefef;
-    text-shadow: 0 0 0.6rem lightcyan, 0 0 1.5rem cyan, -0.2rem 0.1rem 1rem cyan, 0.2rem 0.1rem 1rem darkcyan, 0 -0.5rem 2rem darkcyan, 0 0.5rem 3rem #017373;
+    text-shadow: 0 0 1.6rem lightcyan, 0 0 2.5rem cyan, -1.2rem 1.1rem 2rem cyan, 1.2rem 1.1rem 2rem darkcyan, 0 -1.5rem 3rem darkcyan, 0 1.5rem 4rem #017373;
   }
 }
 @keyframes flicker {

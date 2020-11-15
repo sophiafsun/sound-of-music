@@ -3,6 +3,7 @@
 console.log("Hello JS world!");
 
 let dateParser = d3.timeParse("%m-%d-%Y");
+let selectedCategory = d3.select("#categorySelector").property("value");
 
 // load data using promises
 let promises = [
@@ -49,6 +50,17 @@ function initMainPage(dataArray) {
     console.log('check out the data', dataArray);
 
     // init table
-    // myParallelCoordinates = new ParallelCoordinates('parallelCoordinatesViz', dataArray[0], dataArray[1]);
+    myParallelCoordinates = new ParallelCoordinates('parallelCoordinatesViz', dataArray[0], dataArray[1]);
     myBubbleGraph = new BubbleGraph('bubbleViz', dataArray[0], dataArray[1]);
+}
+
+// update vis on category change
+function categoryChange() {
+
+    selectedCategory = d3.select("#categorySelector").property("value");
+
+    // console.log(selectedCategory);
+
+    myBubbleGraph.updateVis();
+
 }

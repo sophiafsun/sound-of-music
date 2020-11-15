@@ -34,28 +34,52 @@ section {
     linear-gradient(155deg, black 23px, transparent 23px);
     background-size: 58px 58px;
     background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
   }
   &#two {
-    background-color: #D1E4D1;
+    background-color: mintcream;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
   &#three{
     background-color: #F3FBF1;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
   }
   &#four{
     background-color: lightskyblue;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
   }
   &#five{
     background-color: violet;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
   }
   &#six{
     background-color: aqua;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
   }
   &#seven{
     background-color: pink;
-    //justify-content: center;
-    //text-align: center;
-    //align-items: center;
-    //display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
   }
 }
 
