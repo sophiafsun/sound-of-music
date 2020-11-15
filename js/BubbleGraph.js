@@ -61,8 +61,7 @@ class BubbleGraph {
 
         vis.sortedData = vis.filtered.sort((a,b) => d3.descending(a["Weeks on Chart"], b["Weeks on Chart"]));
 
-        // console.log(vis.sortedData[0]["SongID"]);
-
+        // console.log(vis.sortedData[0]["SongID"]); //
 
         vis.updateVis()
     }
