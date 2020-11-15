@@ -49,6 +49,6 @@ function initMainPage(dataArray) {
     console.log('check out the data', dataArray);
 
     // init table
-    myParallelCoordinates = new ParallelCoordinates('parallelCoordinatesViz', dataArray[0], dataArray[1]);
-
+    // myParallelCoordinates = new ParallelCoordinates('parallelCoordinatesViz', dataArray[0], dataArray[1]);
+    myBubbleGraph = new BubbleGraph('bubbleViz', dataArray[0], dataArray[1]);
 }

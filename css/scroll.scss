@@ -138,10 +138,10 @@ nav.nav {
   left: 50%;
   top: 50%;
   font-size: 8em;
-  color: lightcyan;
-  text-shadow: 0 0 0.6rem lightcyan, 0 0 1.5rem cyan,
-  -0.2rem 0.1rem 1rem cyan, 0.2rem 0.1rem 1rem cyan,
-  0 -0.5rem 2rem darkcyan, 0 0.5rem 3rem #017373;
+  color: #7ffcfc;
+  text-shadow: 0 0 1.6rem lightcyan, 0 0 2.5rem cyan,
+  -1.2rem 1.1rem 2rem cyan, 1.2rem 1.1rem 2rem darkcyan,
+  0 -1.5rem 3rem darkcyan, 0 1.5rem 4rem #017373;
   animation: shine 2s forwards, flicker 3s infinite;
 }
 
@@ -150,10 +150,10 @@ nav.nav {
   22%,
   36%,
   75% {
-    color: cyan;
-    text-shadow: 0 0 0.6rem cyan, 0 0 1.5rem cyan,
-    -0.2rem 0.1rem 1rem cyan, 0.2rem 0.1rem 1rem cyan,
-    0 -0.5rem 2rem darkcyan, 0 0.5rem 3rem #017373;
+    color: #5aefef;
+    text-shadow: 0 0 1.6rem lightcyan, 0 0 2.5rem cyan,
+    -1.2rem 1.1rem 2rem cyan, 1.2rem 1.1rem 2rem darkcyan,
+    0 -1.5rem 3rem darkcyan, 0 1.5rem 4rem #017373;
   }
   28%,
   33% {
@@ -182,9 +182,9 @@ nav.nav {
   }
   100% {
     color: #5aefef;
-    text-shadow: 0 0 0.6rem lightcyan, 0 0 1.5rem cyan,
-    -0.2rem 0.1rem 1rem cyan, 0.2rem 0.1rem 1rem darkcyan,
-    0 -0.5rem 2rem darkcyan, 0 0.5rem 3rem #017373;
+    text-shadow: 0 0 1.6rem lightcyan, 0 0 2.5rem cyan,
+    -1.2rem 1.1rem 2rem cyan, 1.2rem 1.1rem 2rem darkcyan,
+    0 -1.5rem 3rem darkcyan, 0 1.5rem 4rem #017373;
   }
 }
 
