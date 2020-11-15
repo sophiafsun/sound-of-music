@@ -21,11 +21,6 @@ class BubbleGraph {
         vis.width = 700 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
 
-        // Sophia keeps getting negative values for height, so I hard coded it in above.
-        // vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-        // vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-        // vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
-
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
@@ -48,20 +43,55 @@ class BubbleGraph {
     wrangleData(){
         let vis = this;
 
-        console.log(vis.billboard);
-
+        // console.log(vis.billboard);
+        console.log(vis.audioFeatures);
 
 
         vis.filtered = []
 
-        // if (vis.sortedData["Peak Position"] === 1)
-
         vis.filtered = vis.billboard.filter(function (d) {return (d["Peak Position"] === 1) })
-        console.log(vis.filtered)
 
         vis.sortedData = vis.filtered.sort((a,b) => d3.descending(a["Weeks on Chart"], b["Weeks on Chart"]));
 
-        // console.log(vis.sortedData[0]["SongID"]); //
+        vis.names = [];
+        vis.result = [];
+        let indx = -1;
+        for(let i=0; i< vis.sortedData.length; i++){
+            indx = vis.names.indexOf(vis.sortedData[i]["SongID"]);
+            if(indx === -1){
+                vis.names.push(vis.sortedData[i]["SongID"]);
+                vis.result.push(vis.sortedData[i]);
+
+            }
+        }
+        vis.topData = vis.result;
+
+
+        vis.topData.forEach( row => {
+
+            vis.song = row["Song"];
+            vis.performer = row["Performer"];
+            vis.weeks = row["Weeks on Chart"];
+            // console.log(vis.song);
+
+            vis.audioFeatures.forEach(row => {
+                if (row["Song"] === vis.song){
+                    vis.genre = row["genre"];
+                }
+            })
+
+            // populate final array
+            vis.displayData.push(
+                {
+                    song: vis.song,
+                    performer: vis.performer,
+                    weeks: vis.weeks,
+                    genre: vis.genre,
+
+                })
+        })
+
+        console.log(vis.displayData);
 
         vis.updateVis()
     }
