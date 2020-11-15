@@ -18,12 +18,12 @@ class ParallelCoordinates {
 
         // set the dimensions and margins of the graph
         vis.margin = {top: 30, right: 50, bottom: 10, left: 50};
-        vis.width = 500 - vis.margin.left - vis.margin.right;
+        //vis.width = 500 - vis.margin.left - vis.margin.right;
         vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
         // Sophia keeps getting negative values for height, so I hard coded it in above.
         // vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-        // vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
+         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
         // vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
@@ -39,8 +39,8 @@ class ParallelCoordinates {
 
         // return a color based on genre
         vis.colorScale = d3.scaleOrdinal()
-            .domain(["setosa", "versicolor", "virginica" ])
-            .range([ "#440154ff", "#21908dff", "#fde725ff"]);
+            .domain(["rap", "rock", "edm", "rb", "latin", "jazz", "country", "pop", "misc", "unclassified" ])
+            .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "black"]);
 
         // hardcoding dimensions
         let dimensions = ['acousticness', 'danceability', 'energy', 'instrumentalness'];
@@ -61,6 +61,29 @@ class ParallelCoordinates {
             .padding(1)
             .domain(dimensions);
 
+        //highlight based on genre that is hovered
+        vis.highlight = function(event, d){
+            vis.selectedGenre = d.genre
+
+            // first every group turns grey
+            d3.selectAll(".line")
+                .transition().duration(200)
+                .style("stroke", "lightgrey")
+                .style("opacity", "0.2")
+            // Second the hovered specie takes its color
+            d3.selectAll("." + vis.selectedGenre)
+                .transition().duration(200)
+                .style("stroke", vis.colorScale(vis.selectedGenre))
+                .style("opacity", "1")
+        }
+
+        vis.unhighlight = function(d){
+            d3.selectAll(".line")
+                .transition().duration(200).delay(1000)
+                .style("stroke", function(d){ return( vis.colorScale(d.genre))} )
+                .style("opacity", "1")
+        }
+
         // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
         function path(d) {
             return d3.line()(dimensions.map(function(p) {
@@ -75,9 +98,12 @@ class ParallelCoordinates {
             .data(vis.audioFeatures.filter(function(d,i){ return i < 50 }))
             .enter().append("path")
             .attr("d",  path)
+            .attr("class", d => {return "line " + d.genre})
             .style("fill", "none")
-            .style("stroke", "#69b3a2")
-            .style("opacity", 0.5);
+            .style("stroke", d => {return vis.colorScale(d.genre)})
+            .style("opacity", 0.5)
+            .on("mouseover", vis.highlight)
+            .on("mouseout", vis.unhighlight)
 
         // Draw the axis:
         vis.svg.selectAll("myAxis")
