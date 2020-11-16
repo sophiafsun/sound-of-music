@@ -1,6 +1,8 @@
 @font-face {
-  font-family: "Neon Tubes 2";
-  src: url("/css/font/NeonTubes2.otf") format("opentype");
+  font-family: 'Neon';
+  src: url("../css/font/neontubes2.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 html {
@@ -216,7 +218,7 @@ nav.nav {
   width: 50%;
   height: 50%;
   margin-top: 100px;
-  font-family:"Neon Tubes 2", cursive;
+  font-family:'Neon', cursive;
   //font-family: 'Codystar', cursive;
   background-image: radial-gradient(
                   ellipse 50% 35% at 50% 50%,
