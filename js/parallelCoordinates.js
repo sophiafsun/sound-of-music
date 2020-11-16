@@ -72,13 +72,13 @@ class ParallelCoordinates {
 
 
         // hardcoding dimensions, all but mode and loudness
-        let dimensions = ['acousticness', 'danceability', 'energy', 'speechiness', 'instrumentalness', 'liveness', 'valence', 'tempo','key'];
+        vis.dimensions = ['acousticness', 'danceability', 'energy', 'speechiness', 'instrumentalness', 'liveness', 'valence', 'tempo','key'];
 
         // For each dimension, I build a linear scale. I store all in a y object
-        let y = {}
-        for (let i in dimensions) {
-            name = dimensions[i]
-            y[name] = d3.scaleLinear()
+        vis.y = {}
+        for (let i in vis.dimensions) {
+            name = vis.dimensions[i]
+            vis.y[name] = d3.scaleLinear()
                 .domain(d3.extent(vis.audioFeatures, function(d) { return +d[name]; }) )
                 .range([vis.height-50, 100])
         }
@@ -88,44 +88,120 @@ class ParallelCoordinates {
         vis.x = d3.scalePoint()
             .range([0, vis.width-100])
             .padding(1)
-            .domain(dimensions);
+            .domain(vis.dimensions);
 
-        //highlight based on genre that is hovered
-        vis.highlight = function(event, d){
-            vis.selectedGenre = d.genre
+        // Draw the axis:
+        vis.svg.selectAll("myAxis")
+            // For each dimension of the dataset I add a 'g' element:
+            .data(vis.dimensions).enter()
+            .append("g")
+            .attr("class", "parallel-coord-axis")
+            // I translate this element to its right position on the x axis
+            .attr("transform", function(d) { return "translate(" + vis.x(d) + ")"; })
+            // And I build the axis with the call function
+            .each(function(d) { d3.select(this).call(d3.axisLeft().scale(vis.y[d])); })
+            // Add axis title
+            .append("text")
+            .style("text-anchor", "middle")
+            .attr("y", 90)
+            .text(function(d) { return d; })
+            .style("fill", "black")
 
-            // first every group turns grey
-            d3.selectAll(".line")
-                .transition().duration(200)
-                .style("stroke", "lightgrey")
-                .style("opacity", "0.2")
-            // Second the hovered specie takes its color
-            d3.selectAll("." + vis.selectedGenre)
-                .transition().duration(200)
-                .style("stroke", vis.colorScale(vis.selectedGenre))
-                .style("opacity", "1")
+        vis.wrangleData()
+    }
+
+    wrangleData(){
+        let vis = this;
+
+        vis.filtered = []
+
+        vis.filtered = vis.billboard.filter(function (d) {return (d["Peak Position"] === 1) })
+
+        vis.sortedData = vis.filtered.sort((a,b) => d3.descending(a["Weeks on Chart"], b["Weeks on Chart"]));
+
+        vis.names = [];
+        vis.result = [];
+        let indx = -1;
+        for(let i=0; i< vis.sortedData.length; i++){
+            indx = vis.names.indexOf(vis.sortedData[i]["SongID"]);
+            if(indx === -1){
+                vis.names.push(vis.sortedData[i]["SongID"]);
+                vis.result.push(vis.sortedData[i]);
+
+            }
         }
+        vis.topData = vis.result;
 
-        vis.unhighlight = function(d){
-            d3.selectAll(".line")
-                .transition().duration(200).delay(1000)
-                .style("stroke", function(d){ return( vis.colorScale(d.genre))} )
-                .style("opacity", "1")
-        }
+
+        vis.topData.forEach( row => {
+
+            vis.song = row["Song"];
+            vis.performer = row["Performer"];
+            vis.weeks = row["Weeks on Chart"];
+            vis.url = row["url"].substr(row["url"].length - 10, 4);
+            vis.url = +vis.url;
+
+
+            vis.audioFeatures.forEach(row => {
+                if (row["Song"] === vis.song){
+                    vis.album = row["spotify_track_album"];
+                    vis.genre = row["genre"];
+                    vis.acousticness = row["acousticness"];
+                    vis.danceability = row["danceability"];
+                    vis.energy = row["energy"];
+                    vis.speechiness = row["speechiness"];
+                    vis.instrumentalness = row["instrumentalness"]
+                    vis.liveness = row["liveness"];
+                    vis.key = row["key"];
+                    vis.spotify_track_id = row["spotify_track_id"];
+                    vis.valence = row["valence"];
+                    vis.tempo = row["tempo"];
+                }
+            })
+
+            // populate final array
+            vis.displayData.push(
+                {
+                    Song: vis.song,
+                    Performer: vis.performer,
+                    weeks: vis.weeks,
+                    genre: vis.genre,
+                    date: vis.url,
+                    spotify_track_album: vis.album,
+                    acousticness: vis.acousticness,
+                    danceability: vis.danceability,
+                    energy: vis.energy,
+                    speechiness: vis.speechiness,
+                    instrumentalness: vis.instrumentalness,
+                    liveness: vis.liveness,
+                    valence: vis.valence,
+                    tempo: vis.tempo,
+                    key: vis.key,
+                    spotify_track_id: vis.spotify_track_id
+                })
+        })
+
+        console.log("displayData", vis.displayData)
+        console.log("audioFeatures", vis.audioFeatures)
+
+        vis.updateVis()
+    }
+
+    updateVis(){
+        let vis = this;
 
         // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
         function path(d) {
-            return d3.line()(dimensions.map(function(p) {
-                return [vis.x(p), y[p](d[p])];
+            return d3.line()(vis.dimensions.map(function(p) {
+                return [vis.x(p), vis.y[p](d[p])];
             }));
         }
 
         // Draw the lines
         vis.svg
             .selectAll("myPath")
-            //.data(vis.audioFeatures)
             // First 500 songs in audio features
-            .data(vis.audioFeatures.filter(function(d,i){ return i < 500 }))
+            .data(vis.displayData.filter(function(d,i){ return i < 100 }))
             .enter().append("path")
             .attr("d",  path)
             .attr("class", d => {return "line " + d.genre + " A" + d.spotify_track_id})
@@ -144,7 +220,7 @@ class ParallelCoordinates {
                     .style("stroke", "lightgrey")
                     .style("opacity", "0.2")
                     .style("stroke-width", "1.5px")
-                // Second the hovered specie takes its color
+                // second the hovered genre takes its color
                 d3.selectAll("." + vis.selectedGenre)
                     .transition().duration(200)
                     .style("stroke", vis.colorScale(vis.selectedGenre))
@@ -162,13 +238,15 @@ class ParallelCoordinates {
                              <h4 id="tooltip-title">${d.Song}<h4>
                              <h4>Artist: ${d.Performer}</h4>  
                              <h4>Album: ${d.spotify_track_album}</h4>  
+                             <h4>Year: ${d.date}</h4>
+                             <h4>Weeks on Chart: ${d.weeks}</h4>
                              <h4>Genre: ${d.genre}</h4>
                              <h4>Acousticness: ${d.acousticness}</h4>  
                              <h4>Danceability: ${d.danceability}</h4>  
                              <h4>Energy: ${d.energy}</h4>  
                              <h4>Speechiness: ${d.speechiness}</h4>  
                              <h4>Instrumentalness: ${d.instrumentalness}</h4>  
-                             <h4>Liveliness: ${d.liveliness}</h4>  
+                             <h4>Liveness: ${d.liveness}</h4>  
                              <h4>Valence: ${d.valence}</h4>  
                              <h4>Key: ${d.key}</h4>  
                          </div>`);
@@ -208,38 +286,6 @@ class ParallelCoordinates {
 
                 console.log("click!")
             })
-
-        // Draw the axis:
-        vis.svg.selectAll("myAxis")
-            // For each dimension of the dataset I add a 'g' element:
-            .data(dimensions).enter()
-            .append("g")
-            .attr("class", "parallel-coord-axis")
-            // I translate this element to its right position on the x axis
-            .attr("transform", function(d) { return "translate(" + vis.x(d) + ")"; })
-            // And I build the axis with the call function
-            .each(function(d) { d3.select(this).call(d3.axisLeft().scale(y[d])); })
-            // Add axis title
-            .append("text")
-            .style("text-anchor", "middle")
-            .attr("y", 90)
-            .text(function(d) { return d; })
-            .style("fill", "black")
-
-
-
-
-    vis.wrangleData()
-    }
-
-    wrangleData(){
-        let vis = this;
-
-        vis.updateVis()
-    }
-
-    updateVis(){
-        let vis = this;
 
         console.log("parallel coordinates class ran")
     }
