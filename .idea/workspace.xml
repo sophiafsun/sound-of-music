@@ -20,11 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a12649e-735f-4b96-92fe-0989c3504acb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/css/font/NeonTubes2.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/stackedAreaChart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/scroll.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/scroll.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/scroll.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/css/scroll.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/scroll.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/scroll.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testViz.html" beforeDir="false" afterPath="$PROJECT_DIR$/testViz.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +53,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">

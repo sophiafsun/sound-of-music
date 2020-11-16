@@ -4,7 +4,8 @@ console.log("Hello JS world!");
 
 let myBubbleGraph,
     myParallelCoordinates,
-    myTimeline;
+    myTimeline,
+    myStackedAreaChart;
 let dateParser = d3.timeParse("%m-%d-%Y");
 let selectedCategory = d3.select("#categorySelector").property("value");
 let selectedTimeRange = [];
@@ -58,6 +59,7 @@ function initMainPage(dataArray) {
     myBubbleGraph = new BubbleGraph('bubbleViz', dataArray[0], dataArray[1]);
     myTimeline = new Timeline('timeline', dataArray[0], dataArray[1]);
     myTimelineParCoord = new Timeline('timeline-par-coord', dataArray[0], dataArray[1]);
+    myStackedAreaChart = new StackedAreaChart('stackedAreaChart', dataArray[0], dataArray[1]);
 
 }
 
