@@ -2,8 +2,12 @@
 
 console.log("Hello JS world!");
 
+let myBubbleGraph,
+    myParallelCoordinates,
+    myTimeline;
 let dateParser = d3.timeParse("%m-%d-%Y");
 let selectedCategory = d3.select("#categorySelector").property("value");
+let selectedTimeRange = [];
 
 // load data using promises
 let promises = [

@@ -6,6 +6,7 @@ class BubbleGraph {
         this.billboard = billboard;
         this.audioFeatures = audioFeatures;
         this.displayData = [];
+        this.displayData1 = [];
 
         // parse date method
         this.parseDate = d3.timeParse("%m/%d/%Y");
@@ -77,7 +78,6 @@ class BubbleGraph {
         // console.log(vis.billboard);
         // console.log(vis.audioFeatures);
 
-
         vis.filtered = []
 
         vis.filtered = vis.billboard.filter(function (d) {return (d["Peak Position"] === 1) })
@@ -103,7 +103,9 @@ class BubbleGraph {
             vis.song = row["Song"];
             vis.performer = row["Performer"];
             vis.weeks = row["Weeks on Chart"];
-            // console.log(vis.song);
+            vis.url = row["url"].substr(row["url"].length - 10, 4);
+            vis.url = +vis.url;
+
 
             vis.audioFeatures.forEach(row => {
                 if (row["Song"] === vis.song){
@@ -118,9 +120,10 @@ class BubbleGraph {
                     performer: vis.performer,
                     weeks: vis.weeks,
                     genre: vis.genre,
-
+                    date: vis.url
                 })
         })
+
 
         console.log(vis.displayData);
 
@@ -131,23 +134,43 @@ class BubbleGraph {
         let vis = this;
         console.log(selectedCategory);
 
+        console.log(selectedTimeRange);
+
+        if (selectedTimeRange.length !== 0) {
+            console.log("Yes")
+
+            vis.timeData = [];
+
+            // iterate over all rows the csv (dataFill)
+            vis.displayData.forEach(row => {
+                // and push rows with proper dates into filteredData
+                if (selectedTimeRange[0] <= row.date && row.date <= selectedTimeRange[1]) {
+                    vis.timeData.push(row);
+                }
+            });
+        } else {
+            vis.timeData = vis.displayData;
+        }
+
+        console.log(vis.timeData);
+
         // sort by user selected category
         if (selectedCategory === "default") {
-            vis.filteredData = vis.displayData.slice(0, 100);
+            vis.filteredData = vis.timeData.slice(0, 100);
         }
         else {
-            vis.temp = vis.displayData.filter(function (d) {return (d["genre"] === selectedCategory) })
+            vis.temp = vis.timeData.filter(function (d) {return (d["genre"] === selectedCategory) })
             vis.filteredData = vis.temp.slice(0, 100);
         }
 
-        console.log(vis.filteredData);
+        // console.log(vis.filteredData);
 
         let numNodes = vis.filteredData.length
         vis.nodes = d3.range(numNodes).map(function(d) {
             return {radius: vis.filteredData[d].weeks * 0.4}
         })
 
-        console.log(vis.nodes);
+        // console.log(vis.nodes);
 
         d3.forceSimulation(vis.nodes)
             .force('x', d3.forceX().strength(-0.015))

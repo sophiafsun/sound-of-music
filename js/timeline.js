@@ -24,29 +24,13 @@ class Timeline {
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", 350)
-            .attr("height", 150)
+            .attr("height", 190)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
 
         vis.svg.append("g")
             .attr("transform",
                 "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-        // clip path
-        vis.svg.append("defs")
-            .append("clipPath")
-            .attr("id", "clip")
-            .append("rect")
-            .attr("width", vis.width)
-            .attr("height", vis.height);
-
-        // add title
-        vis.svg.append('g')
-            .attr('class', 'axistitle')
-            .append('text')
-            .text('Top Songs')
-            .attr('x', 24)
-            .attr('y', 12)
-            .attr('text-anchor', 'front');
 
         // init scales
         vis.x = d3.scaleLinear().range([0, vis.width]);
@@ -55,15 +39,15 @@ class Timeline {
         // init x & y axis
         vis.xAxis = vis.svg.append("g")
             .attr("class", "axis axis--x")
-            .attr("transform", "translate(" + 20 + "," + vis.height + ")");
+            .attr("transform", "translate(" + 20 + "," + 150 + ")");
         vis.yAxis = vis.svg.append("g")
             .attr("class", "axis axis--y")
-            .attr("transform", "translate(" + 20 + " ," + 0 + ")");
+            .attr("transform", "translate(" + 20 + " ," + 20 + ")");
 
         // init pathGroup
         vis.pathGroup = vis.svg.append('g')
             .attr('class','pathGroup')
-            .attr("transform", "translate(" + 20 + " ," + 0 + ")");
+            .attr("transform", "translate(" + 20 + " ," + 20 + ")");
 
         // init path generator
         vis.area = d3.area()
@@ -78,14 +62,21 @@ class Timeline {
 
         // init brush
         vis.brush = d3.brushX()
-            .extent([[20, 0], [vis.width+20, vis.height]]);
-            // .on("brush end", function(event){
-            //     selectedTimeRange = [vis.x.invert(event.selection[0]), vis.x.invert(event.selection[1])];
-            //     myDataTable.wrangleData();
-            //     myMapVis.wrangleData();
-            //     myBarVisOne.wrangleData();
-            //     myBarVisTwo.wrangleData();
-            // });
+            .extent([[20, 20], [vis.width+20, vis.height+20]])
+            .on("brush end", function(event){
+                selectedTimeRange =
+                    [Math.trunc(vis.x.invert(event.selection[0])), Math.trunc(vis.x.invert(event.selection[1]))];
+                myBubbleGraph.updateVis();
+            });
+
+        // add title
+        vis.svg.append('g')
+            .attr('class', 'axistitle')
+            .append('text')
+            .text('#1 Songs')
+            .attr('x', 0)
+            .attr('y', 10)
+            .attr('text-anchor', 'front');
 
 
         vis.wrangleData()
@@ -181,10 +172,23 @@ class Timeline {
         vis.pathGroup.append("path")
             .datum(vis.preProcessedData)
             .attr("class", "area")
-            .attr("d", vis.area)
-            .attr("fill", "#1f78b4")
-            .attr("stroke", "#134c72")
-            .attr("clip-path", "url(#clip)");
+            .attr("d", vis.area);
+            // .attr("fill", "#1f78b4")
+            // .attr("stroke", "#134c72")
+
+        vis.svg.append("linearGradient")
+            .attr("id", "area-gradient")
+            .attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", 0).attr("y1", vis.y(35))
+            .attr("x2", 0).attr("y2", vis.y(20))
+            .selectAll("stop")
+            .data([
+                {offset: "0%", color: "#b41f1f"},
+                {offset: "100%", color: "#1f78b4"}
+            ])
+            .enter().append("stop")
+            .attr("offset", function(d) { return d.offset; })
+            .attr("stop-color", function(d) { return d.color; });
 
         vis.brushGroup
             .call(vis.brush);

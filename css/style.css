@@ -40,3 +40,8 @@
 .axistitle {
     font-size: 12px;
 }
+
+.area {
+    fill: url(#area-gradient);
+    stroke-width: 05px;
+}
