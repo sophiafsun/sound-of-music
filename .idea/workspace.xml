@@ -25,7 +25,6 @@
       <change beforePath="$PROJECT_DIR$/css/scroll.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/css/scroll.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/scroll.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/scroll.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/scroll.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/scroll.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +62,7 @@
       <updated>1605405946414</updated>
       <workItem from="1605405947437" duration="6227000" />
       <workItem from="1605412524087" duration="731000" />
-      <workItem from="1605413558483" duration="30774000" />
+      <workItem from="1605413558483" duration="31919000" />
     </task>
     <servers />
   </component>

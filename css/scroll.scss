@@ -43,7 +43,17 @@ section {
     display: flex;
   }
   &#two {
-    background-color: #F3FBF1;
+    color: #4a6767;
+    font-family: 'Montserrat', serif;
+    background-color: #08090a;
+    background-image: linear-gradient(335deg, black 23px, transparent 23px),
+    linear-gradient(155deg, black 23px, transparent 23px),
+    linear-gradient(335deg, black 23px, transparent 23px),
+    linear-gradient(155deg, black 23px, transparent 23px);
+    background-size: 58px 58px;
+    background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+
+
     justify-content: center;
     text-align: center;
     align-items: center;
@@ -165,6 +175,8 @@ nav.nav {
 }
 
 
+
+
 .sign {
   position: absolute;
   display: flex;
@@ -172,7 +184,8 @@ nav.nav {
   align-items: center;
   width: 50%;
   height: 50%;
-  font-family: 'Codystar', cursive;
+  font-family:"neon tubes 2", cursive;
+  //font-family: 'Codystar', cursive;
   background-image: radial-gradient(
                   ellipse 50% 35% at 50% 50%,
                   darkcyan,
@@ -186,7 +199,7 @@ nav.nav {
   text-shadow: 0 0 1.6rem lightcyan, 0 0 2.5rem cyan,
   -1.2rem 1.1rem 2rem cyan, 1.2rem 1.1rem 2rem darkcyan,
   0 -1.5rem 3rem darkcyan, 0 1.5rem 4rem #017373;
-  animation: shine 2s forwards, flicker 3s infinite;
+  animation: shine 1.2s forwards, flicker 3s infinite;
 }
 
 @keyframes blink {
@@ -212,11 +225,11 @@ nav.nav {
 }
 
 .flicker {
-  animation: shine 2s forwards, blink 3s 2s infinite;
+  animation: shine 1.4s forwards, blink 4s 4s infinite;
 }
 
 .fast-flicker {
-  animation: shine 2s forwards, blink 10s 1s infinite;
+  animation: shine 1.3s forwards, blink 2s 5s infinite;
 }
 
 @keyframes shine {
