@@ -62,14 +62,20 @@
         </div>
     </section>
     <section id="three" class="section">
-        <div id="bubbleViz"></div>
-        <div id="timeline" style="margin-top: 200px; margin-left: 100px"></div>
-        <div style="margin-left: -250px; margin-bottom: 200px">
+        <div id="bubbleViz" style="margin-left: 30px"></div>
+        <div id="timeline" style="margin-top: 300px; margin-left: 150px"></div>
+        <div style="margin-left: -270px; margin-bottom: 200px">
             <h4>Top 100 Songs that Hit #1</h4>
-            <h6 style="margin-bottom: 30px">Text description about the visualization <br>
-                and narrative. Something super catchy of <br>
-                course. Really important stuff here. This is<br>
-                going to be the hook!
+            <h6 style="margin-bottom: 30px">
+                Let's take a look at the songs over the past <br>
+                six decades that have reached the #1 spot <br>
+                on the Billboard Top 100 chart. Songs are <br>
+                sized by the number of weeks they've been <br>
+                on the chart, then 100 longest have been <br>
+                selected for each category. <br>
+                <br>
+                Clearly, each of these top songs must be <br>
+                doing something right.
             </h6>
             <select id='categorySelector' class="text-dark" style="padding:3px; font-size: 15px;" onChange="categoryChange()">
                 <option value="default" selected>Top 100 Overall</option>
@@ -87,16 +93,41 @@
         </div>
     </section>
     <section id="four" class="section">
-        <div id="parallelCoordinatesViz"></div>
+        <h4>User will be able to brush a timeline.</h4>
+        <img src="img/draft.png" alt="Vis Draft" style="width:600px;height:400px;">
     </section>
     <section id="five" class="section">
-        <h4>Text</h4>
+        <h4>
+            [Longer text description] We can see the trends behind popular music <br>
+            genres, now what is it about these songs that makes them so popular? <br>
+            Let's look at the common audio and stylistic features top songs share.
+        </h4>
     </section>
-    <section id="six" class="section"><h4>Vis 3</h4></section>
-    <section id="seven" class="section"><h4>Vis 4</h4></section>
-    <section id="eight" class="section"><h4>Audio Vis</h4></section>
-    <section id="nine" class="section"><h4>Conclusion</h4></section>
-    <section id="ten" class="section"><h4>About Us</h4></section>
+    <section id="six" class="section">
+        <h4>User will be able to brush a timeline and the parallel bars.</h4>
+        <div id="parallelCoordinatesViz"></div>
+    </section>
+    <section id="seven" class="section">
+        <h4>[Vis 4] Our last vis will go here, it will be a radar graph <br>
+            showing the features of the average popular song. The user will <br>
+            then be able to compare this radar to the radars of other songs <br>
+            and see different "ideal" radars per genre.
+        </h4>
+    </section>
+    <section id="eight" class="section">
+        <h4>[Audio Vis] Ideally, we would want to do an audio visualization <br>
+            of a few top songs that the user can select from.
+        </h4>
+    </section>
+    <section id="nine" class="section">
+        <h4>Conclusion section will go here. Take away is the audio features <br>
+            that have defined popular music in the recent decades. Will there <br>
+            be a song soon that matches these features?
+        </h4>
+    </section>
+    <section id="ten" class="section">
+        <h4>About us info and the data we used will go here.</h4>
+    </section>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

@@ -167,7 +167,7 @@ class BubbleGraph {
 
         let numNodes = vis.filteredData.length
         vis.nodes = d3.range(numNodes).map(function(d) {
-            return {radius: vis.filteredData[d].weeks * 0.4}
+            return {radius: vis.filteredData[d].weeks * 0.31}
         })
 
         // console.log(vis.nodes);
@@ -210,7 +210,8 @@ class BubbleGraph {
 
                 // change color of hovered state
                 d3.select(this)
-                    .attr('opacity', 0.3);
+                    .attr('stroke', "gray")
+                    .attr('stroke-width', 3);
 
                 // append tooltip with hovered state data
                 vis.tooltip
@@ -227,7 +228,7 @@ class BubbleGraph {
                 .on('mouseout', function(event, object){
 
                     d3.select(this)
-                        .attr("opacity", 1);
+                        .attr("stroke", null);
 
                     vis.tooltip
                         .style("opacity", 0)
