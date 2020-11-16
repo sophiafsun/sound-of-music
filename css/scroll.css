@@ -26,29 +26,30 @@ section {
 section#one {
   color: #4a6767;
   font-family: "Montserrat", serif;
-  background-color: #0c0d0e;
+  background-color: #0f1213;
   background-image: linear-gradient(335deg, black 23px, transparent 23px), linear-gradient(155deg, black 23px, transparent 23px), linear-gradient(335deg, black 23px, transparent 23px), linear-gradient(155deg, black 23px, transparent 23px);
   background-size: 58px 58px;
   background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+  box-shadow: inset 0 0 900px black;
   justify-content: center;
   text-align: center;
   align-items: center;
   display: flex;
 }
 section#two {
-  background-color: mintcream;
-  align-items: center;
-  display: flex;
-}
-section#three {
   background-color: #F3FBF1;
   justify-content: center;
   text-align: center;
   align-items: center;
   display: flex;
 }
+section#three {
+  background-color: #f9fffb;
+  align-items: center;
+  display: flex;
+}
 section#four {
-  background-color: lightskyblue;
+  background-color: mintcream;
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -70,6 +71,27 @@ section#six {
 }
 section#seven {
   background-color: pink;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
+}
+section#eight {
+  background-color: greenyellow;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
+}
+section#nine {
+  background-color: aquamarine;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
+}
+section#ten {
+  background-color: lavender;
   justify-content: center;
   text-align: center;
   align-items: center;
