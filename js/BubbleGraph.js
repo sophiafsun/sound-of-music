@@ -41,7 +41,7 @@ class BubbleGraph {
         vis.genres = ["rap", "rock", "edm", "rb", "latin", "jazz", "country", "pop", "misc", "unclassified"]
         vis.colorScale = d3.scaleOrdinal()
             .domain(vis.genres)
-            .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "black"]);
+            .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "gray"]);
 
 
         // //legend
@@ -210,7 +210,7 @@ class BubbleGraph {
 
                 // change color of hovered state
                 d3.select(this)
-                    .attr('stroke', "gray")
+                    .attr('stroke', "white")
                     .attr('stroke-width', 3);
 
                 // append tooltip with hovered state data
