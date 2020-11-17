@@ -39,10 +39,14 @@
 
 .axistitle {
     font-size: 12px;
-    fill: #4a6767;
+    fill: #65666e;
 }
 
 .area {
     fill: url(#area-gradient);
     stroke-width: 05px;
+}
+
+.axis {
+    color: #65666e;
 }

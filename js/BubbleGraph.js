@@ -210,8 +210,8 @@ class BubbleGraph {
 
                 // change color of hovered state
                 d3.select(this)
-                    .attr('stroke', "white")
-                    .attr('stroke-width', 3);
+                    .attr('stroke', "#08090a")
+                    .attr('stroke-width', 5);
 
                 // append tooltip with hovered state data
                 vis.tooltip

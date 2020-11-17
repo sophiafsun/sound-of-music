@@ -48,10 +48,11 @@ section#two {
   display: flex;
 }
 section#three {
-  color: #52575d;
-  background-color: mintcream;
+  color: #a0a3ae;
+  background-color: #08090a;
   align-items: center;
   display: flex;
+  box-shadow: inset 0px 100px 200px black;
 }
 section#four {
   background-color: mintcream;
