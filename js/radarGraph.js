@@ -81,6 +81,17 @@ class RadarGraph {
             vis.audioFeatures.forEach(row => {
                 if (row["Song"] === vis.song){
                     vis.genre = row["genre"];
+                    vis.album = row["spotify_track_album"];
+                    vis.acousticness = row["acousticness"];
+                    vis.danceability = row["danceability"];
+                    vis.energy = row["energy"];
+                    vis.speechiness = row["speechiness"];
+                    vis.instrumentalness = row["instrumentalness"]
+                    vis.liveness = row["liveness"];
+                    vis.key = row["key"];
+                    vis.spotify_track_id = row["spotify_track_id"];
+                    vis.valence = row["valence"];
+                    vis.tempo = row["tempo"];
                 }
             })
 
@@ -91,7 +102,18 @@ class RadarGraph {
                     performer: vis.performer,
                     weeks: vis.weeks,
                     genre: vis.genre,
-                    date: vis.url
+                    date: vis.url,
+                    spotify_track_album: vis.album,
+                    acousticness: vis.acousticness,
+                    danceability: vis.danceability,
+                    energy: vis.energy,
+                    speechiness: vis.speechiness,
+                    instrumentalness: vis.instrumentalness,
+                    liveness: vis.liveness,
+                    valence: vis.valence,
+                    tempo: vis.tempo,
+                    key: vis.key,
+                    spotify_track_id: vis.spotify_track_id
                 })
         })
 
@@ -101,10 +123,14 @@ class RadarGraph {
         vis.updateVis()
     }
 
-    updateVis(){
+    updateVis() {
         let vis = this;
 
-        console.log("radar viz class ran")
-    }
+
+
+
+
+            console.log("radar viz class ran")
+        }
 
 }
