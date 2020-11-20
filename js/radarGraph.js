@@ -194,7 +194,6 @@ class RadarGraph {
             .attr("stroke-width", "2px");
 
         axis.append("text")
-            .attr("class", "line")
             .style("fill", "black")
             .style("stroke", "black")
             .attr("text-anchor", "middle")
