@@ -18,7 +18,7 @@ class RadarGraph {
 
         // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 10, bottom: 30, left: 150};
-        vis.width = 700 - vis.margin.left - vis.margin.right;
+        vis.width = 900 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
@@ -31,14 +31,11 @@ class RadarGraph {
             .attr("transform",
                 "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-        // return a color based on genre
-        vis.genres = ["rap", "rock", "edm", "rb", "latin", "jazz", "country", "pop", "misc", "unclassified"]
-        vis.colorScale = d3.scaleOrdinal()
-            .domain(vis.genres)
-            .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "gray"]);
-
-
-
+        //Wrapper for the grid & axes
+        vis.axisGrid = vis.svg.append("g")
+            .attr("class", "axisWrapper")
+            .attr("transform",
+                "translate(" + vis.width/2 + "," + vis.height/2 + ")");
 
         vis.wrangleData()
     }
@@ -117,7 +114,6 @@ class RadarGraph {
                 })
         })
 
-
         console.log(vis.displayData);
 
         vis.updateVis()
@@ -126,11 +122,88 @@ class RadarGraph {
     updateVis() {
         let vis = this;
 
+        var cfg = {
+            w: 400,				//Width of the circle
+            h: 400,				//Height of the circle
+            margin: {top: 20, right: 20, bottom: 20, left: 20}, //The margins of the SVG
+            levels: 5,				//How many levels or inner circles should there be drawn
+            maxValue: 0, 			//What is the value that the biggest circle will represent
+            labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
+            wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
+            opacityArea: 0.35, 	//The opacity of the area of the blob
+            dotRadius: 4, 			//The size of the colored circles of each blog
+            opacityCircles: 0.1, 	//The opacity of the circles of each blob
+            strokeWidth: 2, 		//The width of the stroke around each blob
+            roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
+        };
+
+        var radius = Math.min(cfg.w/2, cfg.h/2);	//Radius of the outermost circle
+        vis.format = d3.format(".0%");
+
+        //Draw the background circles
+        vis.axisGrid.selectAll(".levels")
+            .data(d3.range(1,(cfg.levels+1)).reverse())
+            .enter()
+            .append("circle")
+            .attr("class", "gridCircle")
+            .attr("r", function(d, i){return radius/cfg.levels*d;})
+            .attr("fill", "#969696")
+            .attr("stroke", "#949494")
+            .attr("stroke-width", 2)
+            .attr("fill-opacity", 0.2);
+
+        //Text indicating at what % each level is
+        vis.axisGrid.selectAll(".axisLabel")
+            .data(d3.range(1,(cfg.levels+1)).reverse())
+            .enter().append("text")
+            .attr("class", "axisLabel")
+            .attr("x", 4)
+            .attr("y", function(d){return -d*radius/cfg.levels;})
+            .attr("dy", "0.4em")
+            .style("font-size", "10px")
+            .attr("fill", "#737373")
+            .text(function(d,i) { return vis.format((d/cfg.levels)); });
+
+        let total = 7;
+        let angleSlice = Math.PI * 2 / total;
+        let allAxis = [
+            "VALENCE",
+            "ACOUSTICNESS",
+            "DANCEABILITY",
+            "ENERGY",
+            "INSTRUMENTALNESS",
+            "LIVENESS",
+            "SPEECHINESS"
+        ];
+
+        console.log(allAxis);
+
+        //Create the straight lines radiating outward from the center
+        let axis = vis.axisGrid.selectAll(".axis")
+            .data(allAxis)
+            .enter()
+            .append("g")
+            .attr("class", "axis");
+
+        axis.append("line")
+            .attr("x1", 0)
+            .attr("y1", 0)
+            .attr("x2", function(d, i){ return (radius) * Math.cos(angleSlice*i - Math.PI/2); })
+            .attr("y2", function(d, i){ return (radius) * Math.sin(angleSlice*i - Math.PI/2); })
+            .attr("stroke", "white")
+            .attr("stroke-width", "2px");
+
+        axis.append("text")
+            .attr("class", "line")
+            .attr("fill", "black")
+            .attr("text-anchor", "middle")
+            .attr("text-size", 6)
+            .attr("x", function(d, i){ return (230 * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
+            .attr("y", function(d, i){ return ((200 * cfg.labelFactor) * Math.sin(angleSlice*i - Math.PI/2)) + 10; })
+            .text(function(d){console.log(d); return d});
 
 
-
-
-            console.log("radar viz class ran")
-        }
+        console.log("radar viz class ran")
+    }
 
 }
