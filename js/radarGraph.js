@@ -195,7 +195,8 @@ class RadarGraph {
 
         axis.append("text")
             .attr("class", "line")
-            .attr("fill", "black")
+            .style("fill", "black")
+            .style("stroke", "black")
             .attr("text-anchor", "middle")
             .attr("text-size", 6)
             .attr("x", function(d, i){ return (230 * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
