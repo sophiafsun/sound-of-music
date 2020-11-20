@@ -43,7 +43,7 @@ class ParallelCoordinates {
             .domain(vis.genres)
             .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "black"]);
 
-        //legend
+        /*//legend
         vis.svg.selectAll("parallel-coord-legend-dots")
             .data(vis.genres)
             .enter()
@@ -52,7 +52,7 @@ class ParallelCoordinates {
             .attr("cx", vis.width-100)
             .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
             .attr("r", 7)
-            .style("fill", function(d){ return vis.colorScale(d)})
+            .style("fill", function(d){ return vis.colorScale(d)})*/
         vis.svg.selectAll("parallel-coord-legend-labels")
             .data(vis.genres)
             .enter()
@@ -190,6 +190,24 @@ class ParallelCoordinates {
     updateVis(){
         let vis = this;
 
+        if (selectedTimeRange.length !== 0) {
+            vis.timeData = [];
+
+            // iterate over all rows the csv (dataFill)
+            vis.displayData.forEach(row => {
+                // and push rows with proper dates into filteredData
+                if (selectedTimeRange[0] <= row.date && row.date <= selectedTimeRange[1]) {
+                    vis.timeData.push(row);
+                }
+            });
+        } else {
+            vis.timeData = vis.displayData;
+        }
+        vis.filteredData = vis.timeData.filter(function(d,i){ return i < 100 })
+
+        console.log("time display data", vis.filteredData)
+
+
         // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
         function path(d) {
             return d3.line()(vis.dimensions.map(function(p) {
@@ -198,13 +216,16 @@ class ParallelCoordinates {
         }
 
         // Draw the lines
-        vis.svg
+        let lines = vis.svg
             .selectAll("myPath")
-            // First 500 songs in audio features
-            .data(vis.displayData.filter(function(d,i){ return i < 100 }))
-            .enter().append("path")
+            // First 100 songs
+            .data(vis.filteredData)
+        lines.enter()
+            .append("path")
             .attr("d",  path)
-            .attr("class", d => {return "line " + d.genre + " A" + d.spotify_track_id})
+            .attr("class", d => {
+                console.log("draw a song")
+                return "myPath line " + d.genre + " A" + d.spotify_track_id})
             .attr("id", d => {return d.spotify_track_id})
             .style("fill", "none")
             .style("stroke", d => {return vis.colorScale(d.genre)})
@@ -234,7 +255,7 @@ class ParallelCoordinates {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                         <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                         <div style="border-radius: 5px; background: mintcream; padding: 10px">
                              <h4 id="tooltip-title">${d.Song}<h4>
                              <h4>Artist: ${d.Performer}</h4>  
                              <h4>Album: ${d.spotify_track_album}</h4>  
@@ -286,6 +307,52 @@ class ParallelCoordinates {
 
                 console.log("click!")
             })
+
+        lines.exit().remove()
+
+
+
+        vis.svg.selectAll("parallel-coord-legend-dots")
+            .data(vis.genres)
+            .enter()
+            .append("circle")
+            .attr("class", "legend-dots")
+            .attr("cx", vis.width-100)
+            .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("r", 7)
+            .style("fill", function(d){ return vis.colorScale(d)})
+            .on("mouseover", (event, d) => {
+                console.log("legend mouseover")
+                vis.selectedGenre = d
+                // first every group turns grey
+                d3.selectAll(".line")
+                    .transition().duration(200)
+                    .style("stroke", "lightgrey")
+                    .style("opacity", "0.2")
+                    .style("stroke-width", "1.5px")
+                // second the hovered genre takes its color
+                d3.selectAll("." + vis.selectedGenre)
+                    .transition().duration(200)
+                    .style("stroke", vis.colorScale(vis.selectedGenre))
+                    .style("opacity", "1")
+            })
+            .on("click", (event, d) => {
+
+                d3.selectAll(".line")
+                    .transition().duration(200)
+                    .style("stroke", "lightgrey")
+                    .style("opacity", "0.1")
+                    .style("stroke-width", "1.5px")
+                // Second the clicked genre takes its color
+                d3.selectAll("." + vis.selectedGenre)
+                    .transition().duration(200)
+                    .style("stroke", vis.colorScale(vis.selectedGenre))
+                    .style("opacity", "1")
+                    .style("stroke-width", "2px")
+
+                console.log("click!")
+            })
+
 
         console.log("parallel coordinates class ran")
     }

@@ -67,6 +67,7 @@ class Timeline {
                 selectedTimeRange =
                     [Math.trunc(vis.x.invert(event.selection[0])), Math.trunc(vis.x.invert(event.selection[1]))];
                 myBubbleGraph.updateVis();
+                myParallelCoordinates.updateVis();
             });
 
         // add title
