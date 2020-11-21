@@ -38,10 +38,10 @@ class ParallelCoordinates {
 
 
         // return a color based on genre
-        vis.genres = ["rap", "rock", "edm", "rb", "latin", "jazz", "country", "pop", "misc", "unclassified"]
+        vis.genres = ["rap", "rock", "edm", "rb", "latin", "jazz", "country", "pop", "misc", "unclassified", "top100"]
         vis.colorScale = d3.scaleOrdinal()
             .domain(vis.genres)
-            .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "black"]);
+            .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "white", "lightgrey"]);
 
         /*//legend
         vis.svg.selectAll("parallel-coord-legend-dots")
@@ -53,14 +53,16 @@ class ParallelCoordinates {
             .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
             .attr("r", 7)
             .style("fill", function(d){ return vis.colorScale(d)})*/
+
+        let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassified", "Reset"]
         vis.svg.selectAll("parallel-coord-legend-labels")
-            .data(vis.genres)
+            .data(legendLabels)
             .enter()
             .append("text")
             .attr("class", "parallel-coord-legend-labels")
             .attr("x", vis.width-80)
             .attr("y", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-            .style("fill", "black")
+            .style("fill", "white")
             .text(function(d){ return d})
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
@@ -105,7 +107,7 @@ class ParallelCoordinates {
             .style("text-anchor", "middle")
             .attr("y", 90)
             .text(function(d) { return d; })
-            .style("fill", "black")
+            .style("fill", "white")
 
         vis.wrangleData()
     }
@@ -215,6 +217,10 @@ class ParallelCoordinates {
             }));
         }
 
+        vis.svg.selectAll("line").remove();
+
+        // Set boolean to if a song is clicked or not
+        vis.songClicked = false
         // Draw the lines
         let lines = vis.svg
             .selectAll("myPath")
@@ -222,39 +228,38 @@ class ParallelCoordinates {
             .data(vis.filteredData)
         lines.enter()
             .append("path")
-            .attr("d",  path)
+            .attr("d",  d => path(d))
             .attr("class", d => {
                 console.log("draw a song")
                 return "myPath line " + d.genre + " A" + d.spotify_track_id})
             .attr("id", d => {return d.spotify_track_id})
             .style("fill", "none")
-            .style("stroke", d => {return vis.colorScale(d.genre)})
+            .style("stroke", "lightgrey")
             .style("stroke-width", "1.5px")
             .style("opacity", 0.5)
             .on("mouseover", (event, d) => {
                 vis.selectedGenre = d.genre
                 vis.selectedSong = d.spotify_track_id
 
-                // first every group turns grey
-                d3.selectAll(".line")
-                    .transition().duration(200)
-                    .style("stroke", "lightgrey")
-                    .style("opacity", "0.2")
-                    .style("stroke-width", "1.5px")
-                // second the hovered genre takes its color
-                d3.selectAll("." + vis.selectedGenre)
-                    .transition().duration(200)
-                    .style("stroke", vis.colorScale(vis.selectedGenre))
-                    .style("opacity", "1")
+                if (vis.songClicked === false && vis.legendClicked === false) {
+                    // first every group turns grey
+                    d3.selectAll(".line")
+                        .transition().duration(200)
+                        .style("stroke", "lightgrey")
+                        .style("opacity", "0.2")
+                        .style("stroke-width", "1.5px")
+                    // second the hovered genre takes its color
+                    d3.selectAll("." + vis.selectedGenre)
+                        .transition().duration(200)
+                        .style("stroke", vis.colorScale(vis.selectedGenre))
+                        .style("opacity", "1")
 
-                console.log("tooltip", d)
-
-                //tooltip
-                vis.tooltip
-                    .style("opacity", 1)
-                    .style("left", event.pageX + 20 + "px")
-                    .style("top", event.pageY + "px")
-                    .html(`
+                    //tooltip
+                    vis.tooltip
+                        .style("opacity", 1)
+                        .style("left", event.pageX + 20 + "px")
+                        .style("top", event.pageY + "px")
+                        .html(`
                          <div style="border-radius: 5px; background: mintcream; padding: 10px">
                              <h4 id="tooltip-title">${d.Song}<h4>
                              <h4>Artist: ${d.Performer}</h4>  
@@ -271,14 +276,68 @@ class ParallelCoordinates {
                              <h4>Valence: ${d.valence}</h4>  
                              <h4>Key: ${d.key}</h4>  
                          </div>`);
+                } else if (vis.legendClicked === true) {
+                    if (d.genre === vis.genreClicked) {
+                        //tooltip
+                        vis.tooltip
+                            .style("opacity", 1)
+                            .style("left", event.pageX + 20 + "px")
+                            .style("top", event.pageY + "px")
+                            .html(`
+                         <div style="border-radius: 5px; background: mintcream; padding: 10px">
+                             <h4 id="tooltip-title">${d.Song}<h4>
+                             <h4>Artist: ${d.Performer}</h4>  
+                             <h4>Album: ${d.spotify_track_album}</h4>  
+                             <h4>Year: ${d.date}</h4>
+                             <h4>Weeks on Chart: ${d.weeks}</h4>
+                             <h4>Genre: ${d.genre}</h4>
+                             <h4>Acousticness: ${d.acousticness}</h4>  
+                             <h4>Danceability: ${d.danceability}</h4>  
+                             <h4>Energy: ${d.energy}</h4>  
+                             <h4>Speechiness: ${d.speechiness}</h4>  
+                             <h4>Instrumentalness: ${d.instrumentalness}</h4>  
+                             <h4>Liveness: ${d.liveness}</h4>  
+                             <h4>Valence: ${d.valence}</h4>  
+                             <h4>Key: ${d.key}</h4>  
+                         </div>`);
+                    }
+                } else if (vis.songClicked === true) {
+                    if (vis.songIDClicked === vis.selectedSong) {
+                        //tooltip
+                        vis.tooltip
+                            .style("opacity", 1)
+                            .style("left", event.pageX + 20 + "px")
+                            .style("top", event.pageY + "px")
+                            .html(`
+                         <div style="border-radius: 5px; background: mintcream; padding: 10px">
+                             <h4 id="tooltip-title">${d.Song}<h4>
+                             <h4>Artist: ${d.Performer}</h4>  
+                             <h4>Album: ${d.spotify_track_album}</h4>  
+                             <h4>Year: ${d.date}</h4>
+                             <h4>Weeks on Chart: ${d.weeks}</h4>
+                             <h4>Genre: ${d.genre}</h4>
+                             <h4>Acousticness: ${d.acousticness}</h4>  
+                             <h4>Danceability: ${d.danceability}</h4>  
+                             <h4>Energy: ${d.energy}</h4>  
+                             <h4>Speechiness: ${d.speechiness}</h4>  
+                             <h4>Instrumentalness: ${d.instrumentalness}</h4>  
+                             <h4>Liveness: ${d.liveness}</h4>  
+                             <h4>Valence: ${d.valence}</h4>  
+                             <h4>Key: ${d.key}</h4>  
+                         </div>`);
+                    }
+                }
+                console.log("tooltip", d)
             })
             .on("mouseout", (event, d) => {
-                //return lines to original color
-                d3.selectAll(".line")
-                    .transition().duration(200)
-                    .style("stroke", function(d){ return( vis.colorScale(d.genre))} )
-                    .style("opacity", "1")
-                    .style("stroke-width", "1.5px")
+                if (vis.songClicked === false && vis.legendClicked === false) {
+                    //return lines to original color
+                    d3.selectAll(".line")
+                        .transition().duration(200)
+                        .style("stroke", "lightgrey")
+                        .style("opacity", "0.5")
+                        .style("stroke-width", "1.5px")
+                }
 
                 //remove tooltip
                 vis.tooltip
@@ -286,8 +345,11 @@ class ParallelCoordinates {
                     .style("left", 0)
                     .style("top", 0)
                     .html(``);
+
             })
             .on("click", (event, d) => {
+                vis.songClicked = true;
+                vis.songIDClicked = d.spotify_track_id;
 
                 d3.selectAll(".line")
                     .transition().duration(200)
@@ -306,49 +368,99 @@ class ParallelCoordinates {
 
 
                 console.log("click!")
-            })
+            });
 
-        lines.exit().remove()
+        lines.exit().remove();
 
 
+        // Set boolean for clicked genre
+        vis.legendClicked = false;
 
         vis.svg.selectAll("parallel-coord-legend-dots")
             .data(vis.genres)
             .enter()
             .append("circle")
-            .attr("class", "legend-dots")
+            .attr("class", "parallel-coord-legend-dots")
+            .attr("id", d => {return "dot-" + d})
             .attr("cx", vis.width-100)
             .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
             .attr("r", 7)
             .style("fill", function(d){ return vis.colorScale(d)})
+            .style("cursor", function(d){
+                if (vis.legendClicked === false) {
+                    return "pointer";
+                } else {
+                    return "default";
+                }
+            })
             .on("mouseover", (event, d) => {
                 console.log("legend mouseover")
                 vis.selectedGenre = d
-                // first every group turns grey
-                d3.selectAll(".line")
-                    .transition().duration(200)
-                    .style("stroke", "lightgrey")
-                    .style("opacity", "0.2")
-                    .style("stroke-width", "1.5px")
-                // second the hovered genre takes its color
-                d3.selectAll("." + vis.selectedGenre)
-                    .transition().duration(200)
-                    .style("stroke", vis.colorScale(vis.selectedGenre))
-                    .style("opacity", "1")
+                if (vis.legendClicked === false && vis.songClicked === false) {
+                    // first every group turns grey
+                    d3.selectAll(".line")
+                        .transition().duration(200)
+                        .style("stroke", "lightgrey")
+                        .style("opacity", "0.2")
+                        .style("stroke-width", "1.5px")
+                    // second the hovered genre takes its color
+                    d3.selectAll("." + vis.selectedGenre)
+                        .transition().duration(200)
+                        .style("stroke", vis.colorScale(vis.selectedGenre))
+                        .style("opacity", "1")
+                    //d3.select(this).style("cursor", "pointer");
+                    if (d === "top100") {
+                        //return lines to original color
+                        d3.selectAll(".line")
+                            .transition().duration(200)
+                            .style("stroke", "lightgrey")
+                            .style("opacity", "0.5")
+                            .style("stroke-width", "1.5px")
+                    }
+                }
+            })
+            .on("mouseout", (event, d) => {
+                //d3.select(this).style("cursor", "default");
+
+                if (vis.legendClicked === false && vis.songClicked === false) {
+                    //return lines to original color
+                    d3.selectAll(".line")
+                        .transition().duration(200)
+                        .style("stroke", "lightgrey")
+                        .style("opacity", "0.5")
+                        .style("stroke-width", "1.5px")
+                }
+
             })
             .on("click", (event, d) => {
+                vis.legendClicked = true;
+                vis.genreClicked = d;
+                console.log("clicked d", d)
 
-                d3.selectAll(".line")
-                    .transition().duration(200)
-                    .style("stroke", "lightgrey")
-                    .style("opacity", "0.1")
-                    .style("stroke-width", "1.5px")
-                // Second the clicked genre takes its color
-                d3.selectAll("." + vis.selectedGenre)
-                    .transition().duration(200)
-                    .style("stroke", vis.colorScale(vis.selectedGenre))
-                    .style("opacity", "1")
-                    .style("stroke-width", "2px")
+                if (d === "top100") {
+                    //return lines to original color
+                    d3.selectAll(".line")
+                        .transition().duration(200)
+                        .style("stroke", "lightgrey")
+                        .style("opacity", "0.5")
+                        .style("stroke-width", "1.5px")
+
+                    //reset
+                    vis.legendClicked = false;
+                    vis.songClicked = false;
+                } else {
+                    d3.selectAll(".line")
+                        .transition().duration(200)
+                        .style("stroke", "lightgrey")
+                        .style("opacity", "0.3")
+                        .style("stroke-width", "1.5px")
+                    // Second the clicked genre takes its color
+                    d3.selectAll("." + vis.selectedGenre)
+                        .transition().duration(200)
+                        .style("stroke", vis.colorScale(vis.selectedGenre))
+                        .style("opacity", "1")
+                        .style("stroke-width", "2px")
+                }
 
                 console.log("click!")
             })

@@ -93,11 +93,12 @@ section {
     display: flex;
   }
   &#six{
-    background-color: mintcream;
-    justify-content: center;
-    text-align: center;
+    color: #a0a3ae;
+    background-color: #08090a;
     align-items: center;
     display: flex;
+
+    box-shadow: inset 0px 100px 200px black;
   }
   &#seven{
     background-color: mintcream;

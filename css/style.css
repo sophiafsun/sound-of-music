@@ -1,14 +1,18 @@
 /* styles for parallel coordinate graph */
-.parallel-coord-axis {
+/*.parallel-coord-axis {
     opacity: 0.4;
 }
 .parallel-coord-axis:hover {
     opacity: 1;
-}
+}*/
 
 .parallel-coord-legend-labels {
     font-size: 15px;
 }
+
+/*.parallel-coord-legend-dots {
+    cursor: pointer;
+}*/
 
 .tooltip {
     position: absolute;
