@@ -18,12 +18,12 @@ class Timeline {
 
         // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 10, bottom: 50, left: 0};
-        vis.width = 400 - vis.margin.left - vis.margin.right;
+        vis.width = 500 - vis.margin.left - vis.margin.right;
         vis.height = 200 - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
-            .attr("width", 350)
+            .attr("width", vis.width)
             .attr("height", 190)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
 
@@ -33,7 +33,7 @@ class Timeline {
 
 
         // init scales
-        vis.x = d3.scaleLinear().range([0, vis.width]);
+        vis.x = d3.scaleLinear().range([0, vis.width/1.1]);
         vis.y = d3.scaleLinear().range([vis.height, 0]);
 
         // init x & y axis
@@ -62,7 +62,7 @@ class Timeline {
 
         // init brush
         vis.brush = d3.brushX()
-            .extent([[20, 20], [vis.width+20, vis.height+20]])
+            .extent([[20, 20], [vis.width/1.1+20, vis.height+20]])
             .on("brush end", function(event){
                 selectedTimeRange =
                     [Math.trunc(vis.x.invert(event.selection[0])), Math.trunc(vis.x.invert(event.selection[1]))];
@@ -175,22 +175,44 @@ class Timeline {
             .datum(vis.preProcessedData)
             .attr("class", "area")
             .attr("d", vis.area);
-            // .attr("fill", "#1f78b4")
-            // .attr("stroke", "#134c72")
+
+        // Add the line
+        vis.svg.append("path")
+            .datum(vis.preProcessedData)
+            .attr("fill", "none")
+            .attr("stroke", "#e31a1c")
+            .attr("stroke-dasharray", 5.5)
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+                .x(d => vis.x(d.date)+20)
+                .y(vis.y(12))
+            );
 
         vis.svg.append("linearGradient")
             .attr("id", "area-gradient")
             .attr("gradientUnits", "userSpaceOnUse")
             .attr("x1", 0).attr("y1", vis.y(35))
-            .attr("x2", 0).attr("y2", vis.y(20))
+            .attr("x2", 0).attr("y2", vis.y(-1))
             .selectAll("stop")
             .data([
-                {offset: "0%", color: "#b41f1f"},
-                {offset: "100%", color: "#1f78b4"}
+                {offset: "0%", color: "#a0a3ae"},
+                {offset: "49%", color: "#a0a3ae"},
+                {offset: "50%", color: "#6b6d75"},
+                {offset: "100%", color: "#6b6d75"}
             ])
             .enter().append("stop")
             .attr("offset", function(d) { return d.offset; })
             .attr("stop-color", function(d) { return d.color; });
+
+        // Draw the title
+        vis.svg.append("text")
+            .attr("class", "average")
+            .attr('text-anchor', 'end')
+            .attr('fill', '#e31a1c')
+            .attr('font-size', '12')
+            .attr("x", vis.width-25)
+            .attr("y", vis.height/1.5)
+            .text("Avg. Amount of #1 Songs");
 
         vis.brushGroup
             .call(vis.brush);

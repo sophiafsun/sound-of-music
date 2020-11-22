@@ -44,7 +44,7 @@ class BubbleGraph {
             .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "gray"]);
 
 
-        let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassified"]
+        let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassif."]
         vis.svg.selectAll("stacked-legend-labels")
             .data(legendLabels)
             .enter()
@@ -54,6 +54,7 @@ class BubbleGraph {
             .attr("y", function(d,i){ return vis.height/4 + 7 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
             .style("fill", "darkgrey")
             .text(function(d){ return d})
+            .attr('font-size', 14)
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
 
@@ -168,14 +169,14 @@ class BubbleGraph {
 
         let numNodes = vis.filteredData.length
         vis.nodes = d3.range(numNodes).map(function(d) {
-            return {radius: vis.filteredData[d].weeks * 0.20}
+            return {radius: vis.filteredData[d].weeks * 0.25}
         })
 
         // console.log(vis.nodes);
 
         d3.forceSimulation(vis.nodes)
-            .force('x', d3.forceX().strength(-0.01))
-            .force('y', d3.forceY().strength(-0.01))
+            .force('x', d3.forceX().strength(-0.013))
+            .force('y', d3.forceY().strength(-0.013))
             .force('collide', d3.forceCollide(-1))
             .force('center', d3.forceCenter(vis.width / 8, vis.height / 4))
             .on('tick', ticked);
@@ -201,7 +202,7 @@ class BubbleGraph {
                 .attr("fill", function(d) {
                    return vis.colorScale(vis.filteredData[d.index].genre)
                 })
-                .attr("transform", "translate(" + vis.width/4.5 + "," + vis.height/4 + ")")
+                .attr("transform", "translate(" + vis.width/5 + "," + vis.height/4 + ")")
                 .on('mouseover', function(event, object){
 
                      // grab hovered state
