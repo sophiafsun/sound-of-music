@@ -11,6 +11,7 @@ let myBubbleGraph,
 
 let dateParser = d3.timeParse("%m-%d-%Y");
 let selectedCategory = d3.select("#categorySelector").property("value");
+let selectedCategory2 = d3.select("#categorySelector2").property("value")
 let selectedTimeRange = [];
 
 // load data using promises
@@ -75,5 +76,16 @@ function categoryChange() {
     // console.log(selectedCategory);
 
     myBubbleGraph.updateVis();
+
+}
+
+// update vis on category change
+function categoryChange2() {
+
+    selectedCategory2 = d3.select("#categorySelector2").property("value");
+
+    console.log(selectedCategory2);
+
+    myRadarGraph.wrangleData();
 
 }

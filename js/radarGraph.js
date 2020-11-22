@@ -27,15 +27,17 @@ class RadarGraph {
             .attr("height", vis.height)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
 
-        vis.svg.append("g")
-            .attr("transform",
-                "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+        // //Wrapper for the grid & axes
+        // vis.axisGrid = vis.svg.append("g")
+        //   .attr("class", "axisWrapper")
+        //   .attr("transform",
+        //     "translate(" + vis.width/2 + "," + vis.height/2 + ")");
 
-        //Wrapper for the grid & axes
-        vis.axisGrid = vis.svg.append("g")
-            .attr("class", "axisWrapper")
-            .attr("transform",
-                "translate(" + vis.width/2 + "," + vis.height/2 + ")");
+        vis.radialScale = d3.scaleLinear()
+            .domain([0,10])
+            .range([0,250]);
+
+        vis.ticks = [2,4,6,8];
 
         vis.wrangleData()
     }
@@ -45,6 +47,8 @@ class RadarGraph {
 
         // console.log(vis.billboard);
         // console.log(vis.audioFeatures);
+
+        console.log(selectedTimeRange);
 
         vis.filtered = []
 
@@ -116,57 +120,106 @@ class RadarGraph {
 
         console.log(vis.displayData);
 
+        if (selectedTimeRange.length !== 0) {
+            console.log("Yes")
+
+            vis.timeData = [];
+
+            // iterate over all rows the csv (dataFill)
+            vis.displayData.forEach(row => {
+                // and push rows with proper dates into filteredData
+                if (selectedTimeRange[0] <= row.date && row.date <= selectedTimeRange[1]) {
+                    vis.timeData.push(row);
+                }
+            });
+        } else {
+            vis.timeData = vis.displayData;
+        }
+
+        console.log(vis.timeData)
+
         vis.updateVis()
     }
 
     updateVis() {
         let vis = this;
 
-        var cfg = {
-            w: 400,				//Width of the circle
-            h: 400,				//Height of the circle
-            margin: {top: 20, right: 20, bottom: 20, left: 20}, //The margins of the SVG
-            levels: 5,				//How many levels or inner circles should there be drawn
-            maxValue: 0, 			//What is the value that the biggest circle will represent
-            labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
-            wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
-            opacityArea: 0.35, 	//The opacity of the area of the blob
-            dotRadius: 4, 			//The size of the colored circles of each blog
-            opacityCircles: 0.1, 	//The opacity of the circles of each blob
-            strokeWidth: 2, 		//The width of the stroke around each blob
-            roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
-        };
+        vis.pickedGenre = selectedCategory2;
 
-        var radius = Math.min(cfg.w/2, cfg.h/2);	//Radius of the outermost circle
-        vis.format = d3.format(".0%");
 
-        //Draw the background circles
-        vis.axisGrid.selectAll(".levels")
-            .data(d3.range(1,(cfg.levels+1)).reverse())
-            .enter()
-            .append("circle")
-            .attr("class", "gridCircle")
-            .attr("r", function(d, i){return radius/cfg.levels*d;})
-            .attr("fill", "#969696")
-            .attr("stroke", "#949494")
-            .attr("stroke-width", 2)
-            .attr("fill-opacity", 0.2);
+        if (vis.pickedGenre === "default") {
 
-        //Text indicating at what % each level is
-        vis.axisGrid.selectAll(".axisLabel")
-            .data(d3.range(1,(cfg.levels+1)).reverse())
-            .enter().append("text")
-            .attr("class", "axisLabel")
-            .attr("x", 4)
-            .attr("y", function(d){return -d*radius/cfg.levels;})
-            .attr("dy", "0.4em")
-            .style("font-size", "10px")
-            .attr("fill", "#737373")
-            .text(function(d,i) { return vis.format((d/cfg.levels)); });
+            vis.averageData = []
+            vis.averageData.push(
+                {
+                    valence: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.valence)) / v.length),
+                    acousticness: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.acousticness)) / v.length),
+                    danceability: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.danceability)) / v.length),
+                    energy: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.energy)) / v.length),
+                    instrumentalness: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.instrumentalness)) / v.length),
+                    liveness: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.liveness)) / v.length),
+                    speechiness: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.speechiness)) / v.length)
+                })
 
-        let total = 7;
-        let angleSlice = Math.PI * 2 / total;
-        let allAxis = [
+            console.log(vis.averageData);
+        }
+        else if (vis.pickedGenre !== "default") {
+            vis.filteredData = vis.displayData.filter(function (d) {return (d.genre === vis.pickedGenre) })
+            vis.averageData = []
+            vis.averageData.push(
+                {
+                    valence: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.valence)) / v.length),
+                    acousticness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.acousticness)) / v.length),
+                    danceability: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.danceability)) / v.length),
+                    energy: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.energy)) / v.length),
+                    instrumentalness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.instrumentalness)) / v.length),
+                    liveness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.liveness)) / v.length),
+                    speechiness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.speechiness)) / v.length)
+                })
+            console.log(vis.averageData);
+        }
+
+        console.log(vis.averageData);
+
+        // d3.selectAll("svg > *").remove();
+
+        //draw grid lines (circles)
+        vis.ticks.forEach(t =>
+            vis.svg.append("circle")
+                .attr("cx", 300)
+                .attr("cy", 300)
+                .attr("fill", "none")
+                .attr("opacity", 1)
+                .attr("stroke", "black")
+                .attr("r", vis.radialScale(t))
+        );
+
+        //draw tick labels
+        vis.ticks.forEach(t =>
+            vis.svg.append("text")
+                .attr("x", 305)
+                .attr("y", 300 - vis.radialScale(t))
+                .text(t.toString())
+        );
+
+        //draw axis for each feature
+        function angleToCoordinate(angle, value){
+            let x = Math.cos(angle) * vis.radialScale(value);
+            let y = Math.sin(angle) * vis.radialScale(value);
+            return {"x": 300 + x, "y": 300 - y};
+        }
+
+        vis.features =  [
+            "valence",
+            "acousticness",
+            "danceability",
+            "energy",
+            "instrumentalness",
+            "liveness",
+            "speechiness"
+        ];
+
+        vis.allAxis = [
             "VALENCE",
             "ACOUSTICNESS",
             "DANCEABILITY",
@@ -176,31 +229,76 @@ class RadarGraph {
             "SPEECHINESS"
         ];
 
-        console.log(allAxis);
+        for (var i = 0; i < vis.allAxis.length; i++) {
+            let ft_name = vis.allAxis[i];
+            let angle = (Math.PI / 2) + (2 * Math.PI * i / vis.allAxis.length);
+            let line_coordinate = angleToCoordinate(angle, 8);
+            let label_coordinate = angleToCoordinate(angle, 10.5);
+            vis.svg.append("line")
+                .attr("x1", 300)
+                .attr("y1", 300)
+                .attr("x2", line_coordinate.x)
+                .attr("y2", line_coordinate.y)
+                .attr("stroke","black");
+            vis.svg.append("text")
+                .attr("x", label_coordinate.x)
+                .attr("y", label_coordinate.y+20)
+                .attr("text-anchor", "middle")
+                .attr("font-size", 14)
+                .style("fill", "black")
+                .style("stroke", "black")
+                .text(ft_name);
+        }
 
-        //Create the straight lines radiating outward from the center
-        let axis = vis.axisGrid.selectAll(".axis")
-            .data(allAxis)
-            .enter()
-            .append("g")
-            .attr("class", "axis");
+        //draw line for the radar chart
+        let line = d3.line()
+            .x(d => d.x)
+            .y(d => d.y);
 
-        axis.append("line")
-            .attr("x1", 0)
-            .attr("y1", 0)
-            .attr("x2", function(d, i){ return (radius) * Math.cos(angleSlice*i - Math.PI/2); })
-            .attr("y2", function(d, i){ return (radius) * Math.sin(angleSlice*i - Math.PI/2); })
-            .attr("stroke", "white")
-            .attr("stroke-width", "2px");
+        //get coordinates for a data point
+        function getPathCoordinates(d){
+            let coordinates = [];
+            for (var i = 0; i < vis.features.length; i++){
+                let ft = vis.features[i];
+                let angle = (Math.PI / 2) + (2 * Math.PI * i / vis.features.length);
+                coordinates.push(angleToCoordinate(angle, (d[ft] * 10)));
+            }
+            console.log(coordinates)
+            return coordinates;
+        }
 
-        axis.append("text")
-            .style("fill", "black")
-            .style("stroke", "black")
-            .attr("text-anchor", "middle")
-            .attr("text-size", 6)
-            .attr("x", function(d, i){ return (230 * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
-            .attr("y", function(d, i){ return ((200 * cfg.labelFactor) * Math.sin(angleSlice*i - Math.PI/2)) + 10; })
-            .text(function(d){console.log(d); return d});
+        console.log(vis.displayData[0])
+        console.log(vis.averageData[0])
+
+        // for (var i = 0; i < vis.averageData.length; i ++) {
+        let d = vis.averageData[0];
+        let coordinates = getPathCoordinates(d);
+
+        // This is not working
+        // vis.svg.selectAll(".path")
+        //   .datum(coordinates)
+        //   .enter()
+        //   .append("path")
+        //   .attr("d", line)
+        //   .attr("stroke-width", 3)
+        //   .attr("stroke", "blue")
+        //   .attr("fill", "blue")
+        //   .transition()
+        //   .attr("stroke-opacity", 1)
+        //   .attr("opacity", 0.5);
+
+        // This is
+        vis.svg.append("path")
+            .datum(coordinates)
+            .attr("d", line)
+            .attr("stroke-width", 3)
+            .attr("stroke", "blue")
+            .attr("fill", "blue")
+            .transition()
+            .attr("stroke-opacity", 1)
+            .attr("opacity", 0.5);
+
+        // }
 
 
         console.log("radar viz class ran")
