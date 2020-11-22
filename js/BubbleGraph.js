@@ -18,8 +18,8 @@ class BubbleGraph {
         let vis = this;
 
         // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 10, bottom: 30, left: 150};
-        vis.width = 700 - vis.margin.left - vis.margin.right;
+        vis.margin = {top: 20, right: 30, bottom: 30, left: 80};
+        vis.width = 850 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
@@ -44,29 +44,30 @@ class BubbleGraph {
             .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "gray"]);
 
 
-        // //legend
-        // vis.svg.selectAll("bubble-legend-dots")
-        //     .data(vis.genres)
-        //     .enter()
-        //     .append("rect")
-        //     .attr("class", "legend-squares")
-        //     .attr("x", vis.width-175)
-        //     .attr("y", function(d,i){ return vis.width/5 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-        //     .attr("width", 10)
-        //     .attr("height", 10)
-        //     .style("fill", function(d){ return vis.colorScale(d)})
-        //
-        // vis.svg.selectAll("bubble-legend-labels")
-        //     .data(vis.genres)
-        //     .enter()
-        //     .append("text")
-        //     .attr("class", "bubble-legend-labels")
-        //     .attr("x", vis.width-155)
-        //     .attr("y", function(d,i){ return vis.width/5+ 5 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-        //     .style("fill", "black")
-        //     .text(function(d){ return d})
-        //     .attr("text-anchor", "left")
-        //     .style("alignment-baseline", "middle")
+        let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassified"]
+        vis.svg.selectAll("stacked-legend-labels")
+            .data(legendLabels)
+            .enter()
+            .append("text")
+            .attr("class", "stacked-legend-labels")
+            .attr("x", vis.width/1.4)
+            .attr("y", function(d,i){ return vis.height/4 + 7 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .style("fill", "darkgrey")
+            .text(function(d){ return d})
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle")
+
+        vis.svg.selectAll("stacked-legend-dots")
+            .data(vis.genres)
+            .enter()
+            .append("rect")
+            .attr("class", "stacked-legend-dots")
+            .attr("id", d => {return "dot-" + d})
+            .attr("x", vis.width/1.45)
+            .attr("y", function(d,i){ return vis.height/4 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("width", 12)
+            .attr("height", 12)
+            .style("fill", function(d){ return vis.colorScale(d)})
 
 
         vis.wrangleData()
@@ -167,16 +168,16 @@ class BubbleGraph {
 
         let numNodes = vis.filteredData.length
         vis.nodes = d3.range(numNodes).map(function(d) {
-            return {radius: vis.filteredData[d].weeks * 0.31}
+            return {radius: vis.filteredData[d].weeks * 0.20}
         })
 
         // console.log(vis.nodes);
 
         d3.forceSimulation(vis.nodes)
-            .force('x', d3.forceX().strength(-0.015))
-            .force('y', d3.forceY().strength(-0.015))
+            .force('x', d3.forceX().strength(-0.01))
+            .force('y', d3.forceY().strength(-0.01))
             .force('collide', d3.forceCollide(-1))
-            .force('center', d3.forceCenter(vis.width / 7, vis.height / 4))
+            .force('center', d3.forceCenter(vis.width / 8, vis.height / 4))
             .on('tick', ticked);
 
 
@@ -200,7 +201,7 @@ class BubbleGraph {
                 .attr("fill", function(d) {
                    return vis.colorScale(vis.filteredData[d.index].genre)
                 })
-                .attr("transform", "translate(" + vis.width/2.9 + "," + vis.height/4 + ")")
+                .attr("transform", "translate(" + vis.width/4.5 + "," + vis.height/4 + ")")
                 .on('mouseover', function(event, object){
 
                      // grab hovered state

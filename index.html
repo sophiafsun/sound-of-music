@@ -63,36 +63,44 @@
         </div>
     </section>
     <section id="three" class="section">
-        <div id="bubbleViz" style="margin-left: 30px"></div>
-        <div id="timeline" style="margin-top: 300px; margin-left: 150px"></div>
-        <div style="margin-left: -270px; margin-bottom: 200px">
-            <h3>Top 100 Songs that Hit #1</h3>
-            <div style="color:#65666e;">
-            <h6 style="margin-bottom: 30px; padding-top: 20px; padding-right: 130px">
-                Let's take a look at the songs over the past six
-                decades that have reached the #1 spot on the
-                Billboard Top 100 chart. Songs are sized by the
-                number of weeks they've been on the chart,
-                then the 100 longest running have been selected
-                for each category.
-                <br><br>
-                Clearly, each of these top songs must be doing
-                something right.
-            </h6>
+        <div class="col-7">
+            <div id="bubbleViz" style="margin-left: 30px"></div>
+        </div>
+        <div class="col-5">
+            <div class="row">
+                    <h3>Top 100 Songs that Hit #1</h3>
+                    <div style="color:#65666e;">
+                        <h6 style="margin-bottom: 30px; padding-top: 20px; padding-right: 130px">
+                                Let's take a look at the songs over the past six
+                                decades that have reached the #1 spot on the
+                                Billboard Top 100 chart. Songs are sized by the
+                                number of weeks they've been on the chart,
+                                then the 100 longest running have been selected
+                                for each category.
+                                <br><br>
+                                Clearly, each of these top songs must be doing
+                                something right.
+                        </h6>
+                    </div>
             </div>
-            <select id='categorySelector' style="padding:3px; font-size: 15px; background-color: #a0a3ae; fill: #dae0e5; border-radius: 5px;" onChange="categoryChange()">
-                <option value="default" selected>Top 100 Overall</option>
-                <option value="pop">Pop</option>
-                <option value="rap">Rap</option>
-                <option value="rock">Rock</option>
-                <option value="rb">R&B</option>
-                <option value="edm">EDM</option>
-                <option value="latin">Latin</option>
-                <option value="jazz">Jazz</option>
-                <option value="country">Country</option>
-                <option value="misc">Miscellaneous</option>
-                <option value="unclassified">Unclassified</option>
-            </select>
+            <div class="row">
+                <select id='categorySelector' style="padding:3px; font-size: 15px; background-color: #a0a3ae; fill: #dae0e5; border-radius: 5px;" onChange="categoryChange()">
+                    <option value="default" selected>Top 100 Overall</option>
+                    <option value="pop">Pop</option>
+                    <option value="rap">Rap</option>
+                    <option value="rock">Rock</option>
+                    <option value="rb">R&B</option>
+                    <option value="edm">EDM</option>
+                    <option value="latin">Latin</option>
+                    <option value="jazz">Jazz</option>
+                    <option value="country">Country</option>
+                    <option value="misc">Miscellaneous</option>
+                    <option value="unclassified">Unclassified</option>
+                </select>
+            </div>
+            <div class="row">
+                <div id="timeline"></div>
+            </div>
         </div>
     </section>
     <section id="four" class="section">
@@ -165,9 +173,6 @@
         </h4>
     </section>
     <section id="ten" class="section">
-<!--        <div class="col-4">-->
-<!--            <h3 class="sign" style="font-size: 6em; text-align: left; margin-top: -100px; margin-left: 30px">About Us</h3>-->
-<!--        </div>-->
         <div class="col">
             <h3 class="sign pink" style="font-size: 4em;">Band Members</h3>
         </div>

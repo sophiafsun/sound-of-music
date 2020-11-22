@@ -17,7 +17,7 @@ class Timeline {
         let vis = this;
 
         // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 10, bottom: 50, left: 90};
+        vis.margin = {top: 20, right: 10, bottom: 50, left: 0};
         vis.width = 400 - vis.margin.left - vis.margin.right;
         vis.height = 200 - vis.margin.top - vis.margin.bottom;
 
