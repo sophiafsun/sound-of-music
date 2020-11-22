@@ -21,8 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="7a12649e-735f-4b96-92fe-0989c3504acb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/stackedAreaChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/stackedAreaChart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/timeline.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/timeline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testViz.html" beforeDir="false" afterPath="$PROJECT_DIR$/testViz.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +110,10 @@
       <screen x="0" y="23" width="1280" height="719" />
     </state>
     <state x="483" y="231" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.719@0.23.1280.719" timestamp="1605544041924" />
+    <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606011212143">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1606011212143" />
     <state x="436" y="93" key="RollbackChangesDialog" timestamp="1605479820108">
       <screen x="0" y="23" width="1280" height="719" />
     </state>

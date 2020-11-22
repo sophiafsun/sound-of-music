@@ -64,6 +64,30 @@ class StackedAreaChart {
             .attr("x",20)
             .attr("y", 10);
 
+        let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassified"]
+        vis.svg.selectAll("stacked-legend-labels")
+            .data(legendLabels)
+            .enter()
+            .append("text")
+            .attr("class", "stacked-legend-labels")
+            .attr("x", vis.width-50)
+            .attr("y", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .style("fill", "darkgrey")
+            .text(function(d){ return d})
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle")
+
+        vis.svg.selectAll("stacked-legend-dots")
+            .data(vis.genres)
+            .enter()
+            .append("circle")
+            .attr("class", "stacked-legend-dots")
+            .attr("id", d => {return "dot-" + d})
+            .attr("cx", vis.width - 100)
+            .attr("cy", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("r", 7)
+            .style("fill", function(d){ return vis.colorScale(d)})
+
 
         // TO-DO: (Filter, aggregate, modify data)
         vis.wrangleData();
@@ -214,12 +238,34 @@ class StackedAreaChart {
         let vis = this;
 
 
+        console.log("selected time range", selectedTimeRange[0]);
+
+        if (selectedTimeRange.length !== 0) {
+            console.log("user has selected a time range")
+
+            vis.rangeData = [];
+
+            // iterate over all rows the csv (dataFill)
+            vis.displayData.forEach(row => {
+                // and push rows with proper dates into filteredData
+                if (selectedTimeRange[0] <= row.year && row.year <= selectedTimeRange[1]) {
+                    vis.rangeData.push(row);
+                }
+            });
+        } else {
+            vis.rangeData = vis.displayData;
+            console.log("user has NOT selected a time range");
+        }
+
+        console.log("rangeData", vis.rangeData);
+
+
         // Scales and axes
         vis.x = d3.scaleTime()
             .range([0, vis.width])
-            .domain(d3.extent(vis.displayData, d=> d.year));
+            .domain(d3.extent(vis.rangeData, d=> d.year));
 
-        console.log("extent", d3.extent(vis.displayData, d=> d.year));
+        console.log("extent", d3.extent(vis.rangeData, d=> d.year));
 
         vis.y = d3.scaleLinear()
             .range([vis.height, 0]);
@@ -242,10 +288,10 @@ class StackedAreaChart {
             .keys(vis.genres);
 
         // TO-DO (Activity II) Stack data
-        vis.stackedData = stack(vis.displayData);
+        vis.stackedData = stack(vis.rangeData);
 
         console.log("Stacked data", vis.stackedData);
-        
+
         // TO-DO (Activity II) Stacked area layout
         vis.area = d3.area()
             .x(d => vis.x(d.data.year))
@@ -256,8 +302,8 @@ class StackedAreaChart {
 
         // Update domain
         // Get the maximum of the multi-dimensional array or in other words, get the highest peak of the uppermost layer
-        vis.y.domain([0, d3.max(vis.stackedData, function(d) {
-            return d3.max(d, function(e) {
+        vis.y.domain([0, d3.max(vis.stackedData, function (d) {
+            return d3.max(d, function (e) {
                 return e[1];
             });
         })
