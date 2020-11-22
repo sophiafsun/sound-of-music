@@ -58,11 +58,11 @@ function initMainPage(dataArray) {
     console.log('check out the data', dataArray);
 
     // init table
-    myParallelCoordinates = new ParallelCoordinates('parallelCoordinatesViz', dataArray[0], dataArray[1]);
-    myBubbleGraph = new BubbleGraph('bubbleViz', dataArray[0], dataArray[1]);
-    myTimeline = new Timeline('timeline', dataArray[0], dataArray[1]);
-    myTimelineParCoord = new Timeline('timeline-par-coord', dataArray[0], dataArray[1]);
-    myRadarGraph = new RadarGraph('radarGraph', dataArray[0], dataArray[1]);
+    // myParallelCoordinates = new ParallelCoordinates('parallelCoordinatesViz', dataArray[0], dataArray[1]);
+    // myBubbleGraph = new BubbleGraph('bubbleViz', dataArray[0], dataArray[1]);
+    // myTimeline = new Timeline('timeline', dataArray[0], dataArray[1]);
+    // myTimelineParCoord = new Timeline('timeline-par-coord', dataArray[0], dataArray[1]);
+    // myRadarGraph = new RadarGraph('radarGraph', dataArray[0], dataArray[1]);
     myStackedAreaChart = new StackedAreaChart('stackedAreaChart', dataArray[0], dataArray[1]);
 }
 

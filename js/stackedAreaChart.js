@@ -27,17 +27,20 @@ class StackedAreaChart {
         // vis.height = $('#' + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
 
+        // // set the dimensions and margins of the graph
+        // vis.margin = {top: 30, right: 50, bottom: 10, left: 50};
+        // //vis.width = 1000 - vis.margin.left - vis.margin.right;
+        // vis.height = 700 - vis.margin.top - vis.margin.bottom;
+        //
+        // // Sophia keeps getting negative values for height, so I hard coded it in above.
+        // // vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        // vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
+        // // vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
+
         // set the dimensions and margins of the graph
-        vis.margin = {top: 30, right: 50, bottom: 10, left: 50};
-        //vis.width = 1000 - vis.margin.left - vis.margin.right;
+        vis.margin = {top: 20, right: 10, bottom: 30, left: 150};
+        vis.width = 700 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
-
-        // Sophia keeps getting negative values for height, so I hard coded it in above.
-        // vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-        vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-        // vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
-
-        console.log("data:", vis.data);
 
         // SVG drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -54,6 +57,12 @@ class StackedAreaChart {
             .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "gray"]);
 
 
+        // TO-DO (Activity IV): Add Tooltip placeholder
+        vis.svg.append("text")
+            .attr("class","tip")
+            .attr("fill","black")
+            .attr("x",20)
+            .attr("y", 10);
 
 
         // TO-DO: (Filter, aggregate, modify data)
@@ -67,33 +76,29 @@ class StackedAreaChart {
     wrangleData(){
         let vis = this;
 
+        // Songs that have hit the #1 Billboard chart
         vis.filtered = []
 
         vis.filtered = vis.billboard.filter(function (d) {return (d["Peak Position"] === 1) })
 
-        vis.sortedData = vis.filtered.sort((a,b) => d3.descending(a["Weeks on Chart"], b["Weeks on Chart"]));
-
         vis.names = [];
         vis.result = [];
         let indx = -1;
-        for(let i=0; i< vis.sortedData.length; i++){
-            indx = vis.names.indexOf(vis.sortedData[i]["SongID"]);
+        for(let i=0; i< vis.filtered.length; i++){
+            indx = vis.names.indexOf(vis.filtered[i]["SongID"]);
             if(indx === -1){
-                vis.names.push(vis.sortedData[i]["SongID"]);
-                vis.result.push(vis.sortedData[i]);
-
+                vis.names.push(vis.filtered[i]["SongID"]);
+                vis.result.push(vis.filtered[i]);
             }
         }
         vis.topData = vis.result;
 
-
-        console.log("topData", vis.topData);
+        // Number of songs per genre
+        vis.categories = [];
 
         vis.topData.forEach( row => {
 
             vis.song = row["Song"];
-            vis.performer = row["Performer"];
-            vis.weeks = row["Weeks on Chart"];
             vis.url = row["url"].substr(row["url"].length - 10, 4);
             vis.url = +vis.url;
 
@@ -104,30 +109,98 @@ class StackedAreaChart {
             })
 
             // populate final array
-            vis.displayData.push(
+            vis.categories.push(
                 {
-                    song: vis.song,
-                    performer: vis.performer,
-                    weeks: vis.weeks,
+                   // song: vis.song,
+                    //performer: vis.performer,
+                    // weeks: vis.weeks,
                     genre: vis.genre,
                     date: vis.url
                 })
         })
 
 
-        console.log("stacked display data", vis.displayData);
+        console.log("stacked data", vis.categories);
 
-        //vis.hello = d3.groups(vis.displayData, d => d['date'], d => d['genre']);
+        // Count number of songs per genre
+        vis.grouped = d3.rollups(vis.categories, v => v.length, d => d['date'], d => d['genre'])
+        vis.grouped = Array.from(vis.grouped, ([key, value]) => ({key, value}))
 
-        vis.hello = d3.rollups(vis.displayData, v => v.length, d => d['date'], d => d['genre'])
-        // vis.hello = d3.rollup(vis.displayData, leaves => leaves.length, d => d['date'])
-        vis.hello = Array.from(vis.hello, ([key, value]) => ({key, value}))
-
-        vis.hello.sort(function(x, y){
+        vis.grouped.sort(function(x, y){
             return d3.ascending(x.key, y.key);
         })
 
-        console.log("hello", vis.hello);
+        console.log("grouped", vis.grouped);
+
+        // Rearrange data
+        vis.grouped.forEach( row => {
+            vis.year = row['key']
+
+            vis.rap = 0
+            vis.rock = 0
+            vis.edm = 0
+            vis.rb = 0
+            vis.latin = 0
+            vis.jazz = 0
+            vis.country = 0
+            vis.pop = 0
+            vis.misc = 0
+            vis.unclassified = 0
+
+            row['value'].forEach(genre => {
+                // console.log(genre[0]);
+
+                if (genre[0] == "rap") {
+                    vis.rap = genre[1];
+                }
+                if (genre[0] == "rock") {
+                    vis.rock = genre[1];
+                }
+                if (genre[0] == "edm") {
+                    vis.edm = genre[1];
+                }
+                if (genre[0] == "rb") {
+                    vis.rb = genre[1];
+                }
+                if (genre[0] == "latin") {
+                    vis.latin = genre[1];
+                }
+                if (genre[0] == "jazz") {
+                    vis.jazz = genre[1];
+                }
+                if (genre[0] == "country") {
+                    vis.country = genre[1];
+                }
+                if (genre[0] == "pop") {
+                    vis.pop = genre[1];
+                }
+                if (genre[0] == "misc") {
+                    vis.misc = genre[1];
+                }
+                if (genre[0] == "unclassified") {
+                    vis.unclassified = genre[1];
+                }
+            })
+
+            // populate final array
+            vis.displayData.push(
+                {
+                    year: vis.year,
+                    rap: vis.rap,
+                    rock: vis.rock,
+                    edm: vis.edm,
+                    rb: vis.rb,
+                    latin: vis.latin,
+                    jazz: vis.jazz,
+                    country: vis.country,
+                    pop: vis.pop,
+                    misc: vis.misc,
+                    unclassified: vis.unclassified
+                })
+
+        })
+
+        console.log("display data", vis.displayData);
 
         // Update the visualization
         vis.updateVis();
@@ -140,6 +213,83 @@ class StackedAreaChart {
     updateVis(){
         let vis = this;
 
+
+        // Scales and axes
+        vis.x = d3.scaleTime()
+            .range([0, vis.width])
+            .domain(d3.extent(vis.displayData, d=> d.year));
+
+        console.log("extent", d3.extent(vis.displayData, d=> d.year));
+
+        vis.y = d3.scaleLinear()
+            .range([vis.height, 0]);
+
+        vis.xAxis = d3.axisBottom()
+            .scale(vis.x);
+
+        vis.yAxis = d3.axisLeft()
+            .scale(vis.y);
+
+        vis.svg.append("g")
+            .attr("class", "x-axis axis")
+            .attr("transform", "translate(0," + vis.height + ")");
+
+        vis.svg.append("g")
+            .attr("class", "y-axis axis");
+
+        // TO-DO (Activity II): Initialize stack layout
+        let stack = d3.stack()
+            .keys(vis.genres);
+
+        // TO-DO (Activity II) Stack data
+        vis.stackedData = stack(vis.displayData);
+
+        console.log("Stacked data", vis.stackedData);
+        
+        // TO-DO (Activity II) Stacked area layout
+        vis.area = d3.area()
+            .x(d => vis.x(d.data.year))
+            .y0(d => vis.y(d[0]))
+            .y1(d => vis.y(d[1]));
+
+        ///////////
+
+        // Update domain
+        // Get the maximum of the multi-dimensional array or in other words, get the highest peak of the uppermost layer
+        vis.y.domain([0, d3.max(vis.stackedData, function(d) {
+            return d3.max(d, function(e) {
+                return e[1];
+            });
+        })
+        ]);
+
+        // Draw the layers
+        let categories = vis.svg.selectAll(".area")
+            .data(vis.stackedData);
+
+        categories.enter().append("path")
+            .attr("class", "area")
+            .merge(categories)
+            .style("fill", d => {
+                return vis.colorScale(d)
+            })
+            .attr("d", d => vis.area(d))
+
+
+            // TO-DO (Activity IV): update tooltip text on hover
+            .on("mouseover", function(event, d) {
+
+                vis.svg.selectAll(".tip")
+                    .text(d.key)
+            })
+
+        categories.exit().remove();
+
+        // Call axis functions with the new domain
+        vis.svg.select(".x-axis").call(vis.xAxis);
+        vis.svg.select(".y-axis").call(vis.yAxis);
+
+        ///////////
 
         console.log("in update vis for area chart")
 
