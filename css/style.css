@@ -54,3 +54,11 @@
 .axis {
     color: #65666e;
 }
+
+.spacer {
+    margin-bottom: 20px;
+}
+
+.leftspacer {
+    margin-left: 20px;
+}
