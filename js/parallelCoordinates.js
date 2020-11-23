@@ -117,7 +117,9 @@ class ParallelCoordinates {
 
         vis.filtered = []
 
-        vis.filtered = vis.billboard.filter(function (d) {return (d["Peak Position"] === 1) })
+        vis.filtered = vis.billboard.filter(function (d) {return (d["Peak Position"] === 1)})
+        //console.log("audioFeatures[1]", vis.audioFeatures[1]["spotify_track_preview_url"])
+        vis.filtered = vis.audioFeatures.filter(function (d) {return (!!d["spotify_track_preview_url"])})
 
         vis.sortedData = vis.filtered.sort((a,b) => d3.descending(a["Weeks on Chart"], b["Weeks on Chart"]));
 
@@ -140,8 +142,8 @@ class ParallelCoordinates {
             vis.song = row["Song"];
             vis.performer = row["Performer"];
             vis.weeks = row["Weeks on Chart"];
-            vis.url = row["url"].substr(row["url"].length - 10, 4);
-            vis.url = +vis.url;
+            // vis.url = row["url"].substr(row["url"].length - 10, 4);
+            // vis.url = +vis.url;
 
 
             vis.audioFeatures.forEach(row => {
@@ -273,7 +275,6 @@ class ParallelCoordinates {
                              <h4 id="tooltip-title">${d.Song}<h4>
                              <h4>Artist: ${d.Performer}</h4>  
                              <h4>Album: ${d.spotify_track_album}</h4>  
-                             <h4>Year: ${d.date}</h4>
                              <h4>Weeks on Chart: ${d.weeks}</h4>
                              <h4>Genre: ${d.genre}</h4>
                              <h4>Acousticness: ${d.acousticness}</h4>  
@@ -297,7 +298,6 @@ class ParallelCoordinates {
                              <h4 id="tooltip-title">${d.Song}<h4>
                              <h4>Artist: ${d.Performer}</h4>  
                              <h4>Album: ${d.spotify_track_album}</h4>  
-                             <h4>Year: ${d.date}</h4>
                              <h4>Weeks on Chart: ${d.weeks}</h4>
                              <h4>Genre: ${d.genre}</h4>
                              <h4>Acousticness: ${d.acousticness}</h4>  
@@ -322,7 +322,6 @@ class ParallelCoordinates {
                              <h4 id="tooltip-title">${d.Song}<h4>
                              <h4>Artist: ${d.Performer}</h4>  
                              <h4>Album: ${d.spotify_track_album}</h4>  
-                             <h4>Year: ${d.date}</h4>
                              <h4>Weeks on Chart: ${d.weeks}</h4>
                              <h4>Genre: ${d.genre}</h4>
                              <h4>Acousticness: ${d.acousticness}</h4>  
