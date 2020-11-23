@@ -158,6 +158,7 @@ class ParallelCoordinates {
                     vis.spotify_track_id = row["spotify_track_id"];
                     vis.valence = row["valence"];
                     vis.tempo = row["tempo"];
+                    vis.spotify_track_preview_url = row["spotify_track_preview_url"];
                 }
             })
 
@@ -179,7 +180,8 @@ class ParallelCoordinates {
                     valence: vis.valence,
                     tempo: vis.tempo,
                     key: vis.key,
-                    spotify_track_id: vis.spotify_track_id
+                    spotify_track_id: vis.spotify_track_id,
+                    spotify_track_preview_url: vis.spotify_track_preview_url
                 })
         })
 
@@ -191,6 +193,11 @@ class ParallelCoordinates {
 
     updateVis(){
         let vis = this;
+
+        function startAudio() {
+            player.play();
+            //player.currentTime = 0;
+        }
 
         vis.timeData = vis.displayData //delete this when fixed
         //comment out timeline for now
@@ -368,8 +375,16 @@ class ParallelCoordinates {
                 console.log("clicked songID:", vis.selectedSong)
                 console.log("clicked color: ", vis.colorScale(vis.selectedGenre))
 
+                d3.select("#player")
+                    .attr("src", d.spotify_track_preview_url)
 
                 console.log("click!")
+            })
+            .on("mousedown", (event, d) => {
+                d3.select("#player")
+                    .attr("src", d.spotify_track_preview_url)
+
+                startAudio()
             });
 
         lines.exit().remove();
