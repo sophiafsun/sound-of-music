@@ -169,11 +169,12 @@
     </section>
 
     <section id="seven" class="section">
+        <div class="col5">
         <select id='categorySelector2'
                 style="padding:3px; font-size: 15px; background-color: #a0a3ae; fill: #dae0e5; border-radius: 5px;"
                 onChange="categoryChange2()">
-            <option value="default" >Top 100 Overall</option>
-            <option value="pop" selected>Pop</option>
+            <option value="default"selected>All Genres</option>
+            <option value="pop">Pop</option>
             <option value="rap">Rap</option>
             <option value="rock">Rock</option>
             <option value="rb">R&B</option>
@@ -184,7 +185,10 @@
             <option value="misc">Miscellaneous</option>
             <option value="unclassified">Unclassified</option>
         </select>
-        <div id ='radarGraph'></div>
+        </div>
+        <div class="col7">
+            <div id ='radarGraph'></div>
+        </div>
     </section>
 
     <section id="eight" class="section">

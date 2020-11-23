@@ -17,7 +17,7 @@ class RadarGraph {
         let vis = this;
 
         // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 10, bottom: 30, left: 150};
+        vis.margin = {top: 20, right: 10, bottom: 30, left: 50};
         vis.width = 900 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
 
@@ -27,11 +27,11 @@ class RadarGraph {
             .attr("height", vis.height)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
 
-        // //Wrapper for the grid & axes
-        // vis.axisGrid = vis.svg.append("g")
-        //   .attr("class", "axisWrapper")
-        //   .attr("transform",
-        //     "translate(" + vis.width/2 + "," + vis.height/2 + ")");
+        //Wrapper for the grid & axes
+        vis.axisGrid = vis.svg.append("g")
+          .attr("class", "axisWrapper")
+          .attr("transform",
+            "translate(" + vis.width/2 + "," + vis.height/2 + ")");
 
         vis.radialScale = d3.scaleLinear()
             .domain([0,10])
@@ -183,6 +183,13 @@ class RadarGraph {
 
         // d3.selectAll("svg > *").remove();
 
+        vis.svg.append("circle")
+            .attr("cx", 300)
+            .attr("cy", 300)
+            .attr("fill", "black")
+            .attr("opacity", 1)
+            .attr("r", vis.radialScale(8))
+
         //draw grid lines (circles)
         vis.ticks.forEach(t =>
             vis.svg.append("circle")
@@ -190,16 +197,18 @@ class RadarGraph {
                 .attr("cy", 300)
                 .attr("fill", "none")
                 .attr("opacity", 1)
-                .attr("stroke", "black")
+                .attr("stroke", "white")
                 .attr("r", vis.radialScale(t))
         );
 
         //draw tick labels
         vis.ticks.forEach(t =>
             vis.svg.append("text")
+                .attr("fill", "white")
+                .attr("text-size", 12)
                 .attr("x", 305)
                 .attr("y", 300 - vis.radialScale(t))
-                .text(t.toString())
+                .text(t.toString()+"0%")
         );
 
         //draw axis for each feature
@@ -239,14 +248,13 @@ class RadarGraph {
                 .attr("y1", 300)
                 .attr("x2", line_coordinate.x)
                 .attr("y2", line_coordinate.y)
-                .attr("stroke","black");
+                .attr("stroke","white");
             vis.svg.append("text")
                 .attr("x", label_coordinate.x)
                 .attr("y", label_coordinate.y+20)
                 .attr("text-anchor", "middle")
                 .attr("font-size", 14)
-                .style("fill", "black")
-                .style("stroke", "black")
+                .style("fill", "white")
                 .text(ft_name);
         }
 
@@ -288,7 +296,8 @@ class RadarGraph {
         //   .attr("opacity", 0.5);
 
         // This is
-        vis.svg.append("path")
+        vis.svg
+            .append("path")
             .datum(coordinates)
             .attr("d", line)
             .attr("stroke-width", 3)
@@ -296,7 +305,7 @@ class RadarGraph {
             .attr("fill", "blue")
             .transition()
             .attr("stroke-opacity", 1)
-            .attr("opacity", 0.5);
+            .attr("opacity", 0.7);
 
         // }
 
