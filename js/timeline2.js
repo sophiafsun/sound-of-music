@@ -18,12 +18,12 @@ class Timeline2 {
 
         // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 10, bottom: 50, left: 90};
-        vis.width = 600 - vis.margin.left - vis.margin.right;
-        vis.height = 100 - vis.margin.top - vis.margin.bottom;
+        vis.width = 400 - vis.margin.left - vis.margin.right;
+        vis.height = 200 - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
-            .attr("width", 550)
+            .attr("width", 350)
             .attr("height", 190)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
 
@@ -34,17 +34,17 @@ class Timeline2 {
 
         // init scales
         vis.x = d3.scaleLinear().range([0, vis.width]);
-        //vis.y = d3.scaleLinear().range([vis.height, 0]);
+        vis.y = d3.scaleLinear().range([vis.height, 0]);
 
         // init x & y axis
         vis.xAxis = vis.svg.append("g")
             .attr("class", "axis axis--x")
-            .attr("transform", "translate(" + 20 + "," + 50 + ")");
-        /*vis.yAxis = vis.svg.append("g")
+            .attr("transform", "translate(" + 20 + "," + 150 + ")");
+        vis.yAxis = vis.svg.append("g")
             .attr("class", "axis axis--y")
-            .attr("transform", "translate(" + 20 + " ," + 20 + ")");*/
+            .attr("transform", "translate(" + 20 + " ," + 20 + ")");
 
-        /*// init pathGroup
+        // init pathGroup
         vis.pathGroup = vis.svg.append('g')
             .attr('class','pathGroup')
             .attr("transform", "translate(" + 20 + " ," + 20 + ")");
@@ -54,7 +54,7 @@ class Timeline2 {
             .curve(d3.curveMonotoneX)
             .x(function(d) { return vis.x(d.date); })
             .y0(vis.y(0))
-            .y1(function(d) { return vis.y(d.amount); });*/
+            .y1(function(d) { return vis.y(d.amount); });
 
         // init brushGroup:
         vis.brushGroup = vis.svg.append("g")
@@ -66,7 +66,6 @@ class Timeline2 {
             .on("brush end", function(event){
                 selectedTimeRange =
                     [Math.trunc(vis.x.invert(event.selection[0])), Math.trunc(vis.x.invert(event.selection[1]))];
-                myBubbleGraph.updateVis();
                 myParallelCoordinates.updateVis();
             });
 
@@ -74,7 +73,7 @@ class Timeline2 {
         vis.svg.append('g')
             .attr('class', 'axistitle')
             .append('text')
-            .text('Click and Drag a Timeframe')
+            .text('#1 Songs')
             .attr('x', 0)
             .attr('y', 10)
             .attr('text-anchor', 'front');
@@ -163,21 +162,21 @@ class Timeline2 {
     updateVis(){
         let vis = this;
         vis.x.domain( d3.extent(vis.preProcessedData, function(d) { return d.date }) );
-        //vis.y.domain( d3.extent(vis.preProcessedData, function(d) { return d.amount }) );
+        vis.y.domain( d3.extent(vis.preProcessedData, function(d) { return d.amount }) );
 
         // draw x & y axis
         vis.xAxis.call(d3.axisBottom(vis.x).tickFormat(d3.format("d")));
-        //vis.yAxis.call(d3.axisLeft(vis.y).ticks(5));
+        vis.yAxis.call(d3.axisLeft(vis.y).ticks(5));
 
-        // // Draw the area
-        // vis.pathGroup.append("path")
-        //     .datum(vis.preProcessedData)
-        //     .attr("class", "area")
-        //     .attr("d", vis.area);
-        //     // .attr("fill", "#1f78b4")
-        //     // .attr("stroke", "#134c72")
+        // Draw the area
+        vis.pathGroup.append("path")
+            .datum(vis.preProcessedData)
+            .attr("class", "area")
+            .attr("d", vis.area);
+        // .attr("fill", "#1f78b4")
+        // .attr("stroke", "#134c72")
 
-        /*vis.svg.append("linearGradient")
+        vis.svg.append("linearGradient")
             .attr("id", "area-gradient")
             .attr("gradientUnits", "userSpaceOnUse")
             .attr("x1", 0).attr("y1", vis.y(35))
@@ -189,12 +188,12 @@ class Timeline2 {
             ])
             .enter().append("stop")
             .attr("offset", function(d) { return d.offset; })
-            .attr("stop-color", function(d) { return d.color; });*/
+            .attr("stop-color", function(d) { return d.color; });
 
         vis.brushGroup
             .call(vis.brush);
 
-        console.log("timeline2 viz class ran")
+        console.log("timeline viz class ran")
     }
 
 }
