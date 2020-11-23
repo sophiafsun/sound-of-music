@@ -64,29 +64,30 @@ class StackedAreaChart {
             .attr("x",20)
             .attr("y", 10);
 
-        let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassified"]
-        vis.svg.selectAll("stacked-legend-labels")
-            .data(legendLabels)
-            .enter()
-            .append("text")
-            .attr("class", "stacked-legend-labels")
-            .attr("x", vis.width-50)
-            .attr("y", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-            .style("fill", "darkgrey")
-            .text(function(d){ return d})
-            .attr("text-anchor", "left")
-            .style("alignment-baseline", "middle")
-
-        vis.svg.selectAll("stacked-legend-dots")
-            .data(vis.genres)
-            .enter()
-            .append("circle")
-            .attr("class", "stacked-legend-dots")
-            .attr("id", d => {return "dot-" + d})
-            .attr("cx", vis.width - 100)
-            .attr("cy", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-            .attr("r", 7)
-            .style("fill", function(d){ return vis.colorScale(d)})
+        // Soph's legend
+        // let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassified"]
+        // vis.svg.selectAll("stacked-legend-labels")
+        //     .data(legendLabels)
+        //     .enter()
+        //     .append("text")
+        //     .attr("class", "stacked-legend-labels")
+        //     .attr("x", vis.width-50)
+        //     .attr("y", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+        //     .style("fill", "darkgrey")
+        //     .text(function(d){ return d})
+        //     .attr("text-anchor", "left")
+        //     .style("alignment-baseline", "middle")
+        //
+        // vis.svg.selectAll("stacked-legend-dots")
+        //     .data(vis.genres)
+        //     .enter()
+        //     .append("circle")
+        //     .attr("class", "stacked-legend-dots")
+        //     .attr("id", d => {return "dot-" + d})
+        //     .attr("cx", vis.width - 100)
+        //     .attr("cy", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+        //     .attr("r", 7)
+        //     .style("fill", function(d){ return vis.colorScale(d)})
 
 
         // TO-DO: (Filter, aggregate, modify data)
@@ -135,7 +136,7 @@ class StackedAreaChart {
             // populate final array
             vis.categories.push(
                 {
-                   // song: vis.song,
+                    // song: vis.song,
                     //performer: vis.performer,
                     // weeks: vis.weeks,
                     genre: vis.genre,
@@ -259,11 +260,10 @@ class StackedAreaChart {
 
         console.log("rangeData", vis.rangeData);
 
-
         // Scales and axes
-        vis.x = d3.scaleTime()
+        vis.x = d3.scaleLinear()
             .range([0, vis.width])
-            .domain(d3.extent(vis.rangeData, d=> d.year));
+            .domain(d3.extent(vis.rangeData, function(d) { return d.year }));
 
         console.log("extent", d3.extent(vis.rangeData, d=> d.year));
 
@@ -271,7 +271,8 @@ class StackedAreaChart {
             .range([vis.height, 0]);
 
         vis.xAxis = d3.axisBottom()
-            .scale(vis.x);
+            .scale(vis.x)
+            .tickFormat(d3.format("d"));
 
         vis.yAxis = d3.axisLeft()
             .scale(vis.y);
