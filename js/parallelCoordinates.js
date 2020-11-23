@@ -17,7 +17,7 @@ class ParallelCoordinates {
         let vis = this;
 
         // set the dimensions and margins of the graph
-        vis.margin = {top: 30, right: 50, bottom: 10, left: 50};
+        vis.margin = {top: 30, right: 50, bottom: 10, left: 20};
         //vis.width = 1000 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
 
@@ -60,7 +60,7 @@ class ParallelCoordinates {
             .enter()
             .append("text")
             .attr("class", "parallel-coord-legend-labels")
-            .attr("x", vis.width-80)
+            .attr("x", vis.width-100)
             .attr("y", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
             .style("fill", "white")
             .text(function(d){ return d})
@@ -382,7 +382,7 @@ class ParallelCoordinates {
             .append("circle")
             .attr("class", "parallel-coord-legend-dots")
             .attr("id", d => {return "dot-" + d})
-            .attr("cx", vis.width-100)
+            .attr("cx", vis.width-120)
             .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
             .attr("r", 7)
             .style("fill", function(d){ return vis.colorScale(d)})
