@@ -18,14 +18,14 @@ class RadarGraph {
 
         // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 10, bottom: 30, left: 50};
-        vis.width = 900 - vis.margin.left - vis.margin.right;
+        vis.width = 700 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
-            .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
+            .attr('transform', `translate (0, ${vis.margin.top})`)
 
         //Wrapper for the grid & axes
         vis.axisGrid = vis.svg.append("g")
@@ -242,7 +242,7 @@ class RadarGraph {
             let ft_name = vis.allAxis[i];
             let angle = (Math.PI / 2) + (2 * Math.PI * i / vis.allAxis.length);
             let line_coordinate = angleToCoordinate(angle, 8);
-            let label_coordinate = angleToCoordinate(angle, 10.5);
+            let label_coordinate = angleToCoordinate(angle, 10.2);
             vis.svg.append("line")
                 .attr("x1", 300)
                 .attr("y1", 300)
@@ -282,7 +282,7 @@ class RadarGraph {
         let d = vis.averageData[0];
         let coordinates = getPathCoordinates(d);
 
-        // This is not working
+
         // vis.svg.selectAll(".path")
         //   .datum(coordinates)
         //   .enter()
@@ -295,7 +295,7 @@ class RadarGraph {
         //   .attr("stroke-opacity", 1)
         //   .attr("opacity", 0.5);
 
-        // This is
+
         vis.svg
             .append("path")
             .datum(coordinates)
@@ -308,7 +308,6 @@ class RadarGraph {
             .attr("opacity", 0.7);
 
         // }
-
 
         console.log("radar viz class ran")
     }

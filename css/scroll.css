@@ -78,7 +78,7 @@ section#six {
   background-color: #08090a;
   align-items: center;
   display: flex;
-  box-shadow: inset 0px 100px 200px black;
+  box-shadow: inset 0px 0px 200px black;
 }
 section#seven {
   background-color: #08090a;
@@ -86,6 +86,7 @@ section#seven {
   text-align: center;
   align-items: center;
   display: flex;
+  box-shadow: inset 0px 0px 200px black;
 }
 section#eight {
   background-color: mintcream;
