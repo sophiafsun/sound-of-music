@@ -60,7 +60,7 @@ class StackedAreaChart {
         // TO-DO (Activity IV): Add Tooltip placeholder
         vis.svg.append("text")
             .attr("class","tip")
-            .attr("fill","black")
+            .attr("fill","white")
             .attr("x",20)
             .attr("y", 10);
 
