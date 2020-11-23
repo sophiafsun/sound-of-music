@@ -21,9 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="46842f79-6547-4b31-960d-ac472d9aa2b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/scroll.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/scroll.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/parallelCoordinates.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/parallelCoordinates.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/scroll.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/scroll.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,9 +128,10 @@
       <screen x="0" y="23" width="1280" height="719" />
     </state>
     <state x="395" y="172" key="run.anything.popup/0.23.1280.719@0.23.1280.719" timestamp="1605463642224" />
-    <state x="290" y="66" width="670" height="676" key="search.everywhere.popup" timestamp="1605409770896">
-      <screen x="0" y="23" width="1280" height="719" />
+    <state x="387" y="56" width="894" height="874" key="search.everywhere.popup" timestamp="1606098323651">
+      <screen x="0" y="0" width="1707" height="929" />
     </state>
+    <state x="387" y="56" width="894" height="874" key="search.everywhere.popup/0.0.1707.929@0.0.1707.929" timestamp="1606098323651" />
     <state x="290" y="66" width="670" height="676" key="search.everywhere.popup/0.23.1280.719@0.23.1280.719" timestamp="1605409770896" />
   </component>
 </project>

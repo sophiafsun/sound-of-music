@@ -27,49 +27,49 @@ $(window).scroll(function(){
     if(scrollPosition >= one) {
         $('.active').removeClass('active');
         $('#nav1').addClass('active');
-        nav1.contents('li').text('Title');
+        nav1.contents('li').text('Home');
         nav1.siblings().contents('li').text('');
     }
     if(scrollPosition >= two) {
         $('.active').removeClass('active');
         $('#nav2').addClass('active');
-        nav2.contents('li').text('Text');
+        nav2.contents('li').text('Genres');
         nav2.siblings().contents('li').text('');
     }
     if(scrollPosition >= three) {
         $('.active').removeClass('active');
         $('#nav3').addClass('active');
-        nav3.contents('li').text('Vis 1');
+        nav3.contents('li').text('Bubbles');
         nav3.siblings().contents('li').text('');
     }
     if(scrollPosition >= four) {
         $('.active').removeClass('active');
         $('#nav4').addClass('active');
-        nav4.contents('li').text('Vis 2');
+        nav4.contents('li').text('Stacked Areas');
         nav4.siblings().contents('li').text('');
     }
     if(scrollPosition >= five) {
         $('.active').removeClass('active');
         $('#nav5').addClass('active');
-        nav5.contents('li').text('More text');
+        nav5.contents('li').text('Audio Features');
         nav5.siblings().contents('li').text('');
     }
     if(scrollPosition >= six) {
         $('.active').removeClass('active');
         $('#nav6').addClass('active');
-        nav6.contents('li').text('Vis 3');
+        nav6.contents('li').text('Par Coords');
         nav6.siblings().contents('li').text('');
     }
     if(scrollPosition >= seven) {
         $('.active').removeClass('active');
         $('#nav7').addClass('active');
-        nav7.contents('li').text('Vis 4');
+        nav7.contents('li').text('Radars');
         nav7.siblings().contents('li').text('');
     }
     if(scrollPosition >= eight) {
         $('.active').removeClass('active');
         $('#nav8').addClass('active');
-        nav8.contents('li').text('Audio Vis');
+        nav8.contents('li').text('Audio Player');
         nav8.siblings().contents('li').text('');
     }
     if(scrollPosition >= nine) {

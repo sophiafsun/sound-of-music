@@ -192,7 +192,9 @@ class ParallelCoordinates {
     updateVis(){
         let vis = this;
 
-        if (selectedTimeRange.length !== 0) {
+        vis.timeData = vis.displayData //delete this when fixed
+        //comment out timeline for now
+        /*if (selectedTimeRange.length !== 0) {
             vis.timeData = [];
 
             // iterate over all rows the csv (dataFill)
@@ -204,7 +206,7 @@ class ParallelCoordinates {
             });
         } else {
             vis.timeData = vis.displayData;
-        }
+        }*/
         vis.filteredData = vis.timeData.filter(function(d,i){ return i < 100 })
 
         console.log("time display data", vis.filteredData)
