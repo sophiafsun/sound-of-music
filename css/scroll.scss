@@ -69,11 +69,12 @@ section {
 
   }
   &#four{
-    background-color: mintcream;
-    justify-content: center;
-    text-align: center;
+    color: #a0a3ae;
+    background-color: #08090a;
     align-items: center;
     display: flex;
+
+    box-shadow: inset 0px 100px 200px black;
   }
   &#five{
     font-family: 'Montserrat', serif;
