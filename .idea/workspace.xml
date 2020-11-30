@@ -20,7 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46842f79-6547-4b31-960d-ac472d9aa2b1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/stackedAreaChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/stackedAreaChart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/timeline2.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/timeline2.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +55,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
@@ -63,7 +71,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7a12649e-735f-4b96-92fe-0989c3504acb" name="Default Changelist" comment="" />
+      <changelist id="46842f79-6547-4b31-960d-ac472d9aa2b1" name="Default Changelist" comment="" />
       <created>1605405946414</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -72,6 +80,8 @@
       <workItem from="1605412524087" duration="731000" />
       <workItem from="1605413558483" duration="54788000" />
       <workItem from="1605632032814" duration="6490000" />
+      <workItem from="1606145849104" duration="176000" />
+      <workItem from="1606680665202" duration="5325000" />
     </task>
     <servers />
   </component>

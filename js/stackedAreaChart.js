@@ -295,6 +295,7 @@ class StackedAreaChart {
 
         // TO-DO (Activity II) Stacked area layout
         vis.area = d3.area()
+            .curve(d3.curveMonotoneX)
             .x(d => vis.x(d.data.year))
             .y0(d => vis.y(d[0]))
             .y1(d => vis.y(d[1]));

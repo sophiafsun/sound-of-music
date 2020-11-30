@@ -65,7 +65,7 @@ function initMainPage(dataArray) {
     //myTimelineParCoord = new Timeline('timeline-par-coord', dataArray[0], dataArray[1]);
     myRadarGraph = new RadarGraph('radarGraph', dataArray[0], dataArray[1]);
     myStackedAreaChart = new StackedAreaChart('stackedAreaChart', dataArray[0], dataArray[1]);
-    myTimelineStacked = new Timeline('timeline-stacked', dataArray[0], dataArray[1]);
+    myTimelineStacked = new Timeline2('timeline-stacked', dataArray[0], dataArray[1]);
 }
 
 // update vis on category change

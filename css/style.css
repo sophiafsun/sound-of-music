@@ -62,3 +62,7 @@
 .leftspacer {
     margin-left: 20px;
 }
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}

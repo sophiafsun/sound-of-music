@@ -17,13 +17,13 @@ class Timeline2 {
         let vis = this;
 
         // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 10, bottom: 50, left: 90};
-        vis.width = 600 - vis.margin.left - vis.margin.right;
-        vis.height = 100 - vis.margin.top - vis.margin.bottom;
+        vis.margin = {top: 20, right: 10, bottom: 50, left: 0};
+        vis.width = 500 - vis.margin.left - vis.margin.right;
+        vis.height = 200 - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
-            .attr("width", 550)
+            .attr("width", vis.width)
             .attr("height", 190)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
 
@@ -33,18 +33,18 @@ class Timeline2 {
 
 
         // init scales
-        vis.x = d3.scaleLinear().range([0, vis.width]);
-        //vis.y = d3.scaleLinear().range([vis.height, 0]);
+        vis.x = d3.scaleLinear().range([0, vis.width/1.1]);
+        vis.y = d3.scaleLinear().range([vis.height, 0]);
 
         // init x & y axis
         vis.xAxis = vis.svg.append("g")
             .attr("class", "axis axis--x")
-            .attr("transform", "translate(" + 20 + "," + 50 + ")");
-        /*vis.yAxis = vis.svg.append("g")
+            .attr("transform", "translate(" + 20 + "," + 150 + ")");
+        vis.yAxis = vis.svg.append("g")
             .attr("class", "axis axis--y")
-            .attr("transform", "translate(" + 20 + " ," + 20 + ")");*/
+            .attr("transform", "translate(" + 20 + " ," + 20 + ")");
 
-        /*// init pathGroup
+        // init pathGroup
         vis.pathGroup = vis.svg.append('g')
             .attr('class','pathGroup')
             .attr("transform", "translate(" + 20 + " ," + 20 + ")");
@@ -54,7 +54,7 @@ class Timeline2 {
             .curve(d3.curveMonotoneX)
             .x(function(d) { return vis.x(d.date); })
             .y0(vis.y(0))
-            .y1(function(d) { return vis.y(d.amount); });*/
+            .y1(function(d) { return vis.y(d.amount); });
 
         // init brushGroup:
         vis.brushGroup = vis.svg.append("g")
@@ -62,19 +62,20 @@ class Timeline2 {
 
         // init brush
         vis.brush = d3.brushX()
-            .extent([[20, 20], [vis.width+20, vis.height+20]])
+            .extent([[20, 20], [vis.width/1.1+20, vis.height+20]])
             .on("brush end", function(event){
                 selectedTimeRange =
                     [Math.trunc(vis.x.invert(event.selection[0])), Math.trunc(vis.x.invert(event.selection[1]))];
-                myBubbleGraph.updateVis();
-                myParallelCoordinates.updateVis();
+                //myBubbleGraph.updateVis();
+                //myParallelCoordinates.updateVis();
+                myStackedAreaChart.updateVis();
             });
 
         // add title
         vis.svg.append('g')
             .attr('class', 'axistitle')
             .append('text')
-            .text('Click and Drag a Timeframe')
+            .text('#1 Songs')
             .attr('x', 0)
             .attr('y', 10)
             .attr('text-anchor', 'front');
@@ -163,38 +164,60 @@ class Timeline2 {
     updateVis(){
         let vis = this;
         vis.x.domain( d3.extent(vis.preProcessedData, function(d) { return d.date }) );
-        //vis.y.domain( d3.extent(vis.preProcessedData, function(d) { return d.amount }) );
+        vis.y.domain( d3.extent(vis.preProcessedData, function(d) { return d.amount }) );
 
         // draw x & y axis
         vis.xAxis.call(d3.axisBottom(vis.x).tickFormat(d3.format("d")));
-        //vis.yAxis.call(d3.axisLeft(vis.y).ticks(5));
+        vis.yAxis.call(d3.axisLeft(vis.y).ticks(5));
 
-        // // Draw the area
-        // vis.pathGroup.append("path")
-        //     .datum(vis.preProcessedData)
-        //     .attr("class", "area")
-        //     .attr("d", vis.area);
-        //     // .attr("fill", "#1f78b4")
-        //     // .attr("stroke", "#134c72")
+        // Draw the area
+        vis.pathGroup.append("path")
+            .datum(vis.preProcessedData)
+            .attr("class", "area")
+            .attr("d", vis.area);
 
-        /*vis.svg.append("linearGradient")
+        // Add the line
+        vis.svg.append("path")
+            .datum(vis.preProcessedData)
+            .attr("fill", "none")
+            .attr("stroke", "#e31a1c")
+            .attr("stroke-dasharray", 5.5)
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+                .x(d => vis.x(d.date)+20)
+                .y(vis.y(12))
+            );
+
+        vis.svg.append("linearGradient")
             .attr("id", "area-gradient")
             .attr("gradientUnits", "userSpaceOnUse")
             .attr("x1", 0).attr("y1", vis.y(35))
-            .attr("x2", 0).attr("y2", vis.y(20))
+            .attr("x2", 0).attr("y2", vis.y(-1))
             .selectAll("stop")
             .data([
-                {offset: "0%", color: "#b41f1f"},
-                {offset: "100%", color: "#1f78b4"}
+                {offset: "0%", color: "#a0a3ae"},
+                {offset: "49%", color: "#a0a3ae"},
+                {offset: "50%", color: "#6b6d75"},
+                {offset: "100%", color: "#6b6d75"}
             ])
             .enter().append("stop")
             .attr("offset", function(d) { return d.offset; })
-            .attr("stop-color", function(d) { return d.color; });*/
+            .attr("stop-color", function(d) { return d.color; });
+
+        // Draw the title
+        vis.svg.append("text")
+            .attr("class", "average")
+            .attr('text-anchor', 'end')
+            .attr('fill', '#e31a1c')
+            .attr('font-size', '12')
+            .attr("x", vis.width-25)
+            .attr("y", vis.height/1.5)
+            .text("Avg. Amount of #1 Songs");
 
         vis.brushGroup
             .call(vis.brush);
 
-        console.log("timeline2 viz class ran")
+        console.log("timeline viz class ran")
     }
 
 }
