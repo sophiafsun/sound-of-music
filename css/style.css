@@ -66,3 +66,28 @@
 body {
     font-family: 'Open Sans', sans-serif;
 }
+
+
+
+#thefile {
+    /*position: fixed;*/
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+}
+
+#canvas {
+    /*position: fixed;*/
+    left: 50px;
+    /*top: 50px;*/
+    right: 50px;
+    width: 90%;
+    height: 90%;
+}
+
+audio {
+    /*position: fixed;*/
+    left: 10px;
+    bottom: 10px;
+    width: calc(100% - 20px);
+}

@@ -210,11 +210,18 @@
         </div>
     </section>
 
-<!--    <section id="eight" class="section">-->
-<!--        <h4>[Audio Vis] Ideally, we would want to do an audio visualization <br>-->
-<!--            of a few top songs that the user can select from.-->
-<!--        </h4>-->
-<!--    </section>-->
+     <section id="eight" class="section">
+    <!--        <h4>[Audio Vis] Ideally, we would want to do an audio visualization <br>-->
+    <!--            of a few top songs that the user can select from.-->
+    <!--        </h4>-->
+
+         <div id="content">
+             <input type="file" id="thefile" accept="audio/*" />
+             <audio id="audio" controls></audio>
+             <canvas id="canvas"></canvas>
+         </div>
+
+    </section>-
 
     <section id="nine" class="section">
         <div class="col-5" style="padding-left: 250px;">
@@ -281,5 +288,6 @@
     <script src="js/radarGraph.js"></script>
     <script src="js/parallelCoordinates.js"></script>
     <script src="js/stackedAreaChart.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
