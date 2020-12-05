@@ -44,7 +44,7 @@ class ParallelCoordinates {
         //     .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "white", "lightgrey"]);
 
         // new genres - alpha
-        vis.genres = ["top 100", "country", "edm", "jazz", "latin", "pop", "rap", "rb", "rock"]
+        vis.genres = ["top100", "country", "edm", "jazz", "latin", "pop", "rap", "rb", "rock"]
         vis.colorScale = d3.scaleOrdinal()
             .domain(vis.genres)
             .range([ "lightgrey", "#fdbf6f", "#b2df8a", "#e31a1c", "#fb9a99", "#ff7f00", "#a6cee3", "#33a02c", "#1f78b4"]);
@@ -116,6 +116,7 @@ class ParallelCoordinates {
             .attr("y", 90)
             .text(function(d) { return d; })
             .style("fill", "white")
+            .style("font-size", "12px")
 
         vis.wrangleData()
     }
@@ -428,10 +429,16 @@ class ParallelCoordinates {
                         .style("opacity", "0.2")
                         .style("stroke-width", "1.5px")
                     // second the hovered genre takes its color
-                    d3.selectAll("." + vis.selectedGenre)
+                    // d3.selectAll("." + vis.selectedGenre)
+                    //     .transition().duration(200)
+                    //     .style("stroke", vis.colorScale(vis.selectedGenre))
+                    //     .style("opacity", "1")
+                    // Second the clicked song takes its color
+                    d3.selectAll(".A" + vis.selectedSong)
                         .transition().duration(200)
-                        .style("stroke", vis.colorScale(vis.selectedGenre))
+                        .style("stroke", d => vis.colorScale(vis.selectedGenre))
                         .style("opacity", "1")
+                        .style("stroke-width", "4px")
                     //d3.select(this).style("cursor", "pointer");
                     if (d === "top100") {
                         //return lines to original color
