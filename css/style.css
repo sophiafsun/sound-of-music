@@ -122,3 +122,9 @@ audio {
 .area {
     cursor: pointer;
 }
+
+.instruction {
+    border-radius: 25px;
+    background: gray;
+    padding: 20px;
+}
