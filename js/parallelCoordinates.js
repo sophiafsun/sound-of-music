@@ -257,6 +257,17 @@ class ParallelCoordinates {
             .style("stroke", "lightgrey")
             .style("stroke-width", "1.5px")
             .style("opacity", 0.5)
+            .style("cursor", function(d){
+                if (vis.songClicked === false) {
+                    return "pointer";
+                } else {
+                    if (vis.songIDClicked === vis.selectedSong) {
+                        return "pointer";
+                    } else {
+                        return "default";
+                    }
+                }
+            })
             .on("mouseover", (event, d) => {
                 vis.selectedGenre = d.genre
                 vis.selectedSong = d.spotify_track_id
@@ -269,10 +280,17 @@ class ParallelCoordinates {
                         .style("opacity", "0.2")
                         .style("stroke-width", "1.5px")
                     // second the hovered genre takes its color
-                    d3.selectAll("." + vis.selectedGenre)
+                    // d3.selectAll("." + vis.selectedGenre)
+                    //     .transition().duration(200)
+                    //     .style("stroke", vis.colorScale(vis.selectedGenre))
+                    //     .style("opacity", "1")
+                    // Second the clicked song takes its color
+                    d3.selectAll(".A" + vis.selectedSong)
                         .transition().duration(200)
-                        .style("stroke", vis.colorScale(vis.selectedGenre))
+                        .style("stroke", d => vis.colorScale(vis.selectedGenre))
                         .style("opacity", "1")
+                        .style("stroke-width", "4px")
+
 
                     //tooltip
                     vis.tooltip
@@ -429,16 +447,11 @@ class ParallelCoordinates {
                         .style("opacity", "0.2")
                         .style("stroke-width", "1.5px")
                     // second the hovered genre takes its color
-                    // d3.selectAll("." + vis.selectedGenre)
-                    //     .transition().duration(200)
-                    //     .style("stroke", vis.colorScale(vis.selectedGenre))
-                    //     .style("opacity", "1")
-                    // Second the clicked song takes its color
-                    d3.selectAll(".A" + vis.selectedSong)
+                    d3.selectAll("." + vis.selectedGenre)
                         .transition().duration(200)
-                        .style("stroke", d => vis.colorScale(vis.selectedGenre))
+                        .style("stroke", vis.colorScale(vis.selectedGenre))
                         .style("opacity", "1")
-                        .style("stroke-width", "4px")
+
                     //d3.select(this).style("cursor", "pointer");
                     if (d === "top100") {
                         //return lines to original color
