@@ -21,22 +21,6 @@ class StackedAreaChart {
     initVis(){
         let vis = this;
 
-        // vis.margin = {top: 40, right: 40, bottom: 60, left: 40};
-        //
-        // vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-        // vis.height = $('#' + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
-
-
-        // // set the dimensions and margins of the graph
-        // vis.margin = {top: 30, right: 50, bottom: 10, left: 50};
-        // //vis.width = 1000 - vis.margin.left - vis.margin.right;
-        // vis.height = 700 - vis.margin.top - vis.margin.bottom;
-        //
-        // // Sophia keeps getting negative values for height, so I hard coded it in above.
-        // // vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-        // vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-        // // vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
-
         // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 10, bottom: 30, left: 150};
         vis.width = 700 - vis.margin.left - vis.margin.right;
@@ -50,11 +34,17 @@ class StackedAreaChart {
             .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
         // return a color based on genre
-        vis.genres = ["rap", "rock", "edm", "rb", "latin", "jazz", "country", "pop", "misc", "unclassified"]
-
+        // new genres - alpha
+        vis.genres = ["country", "edm", "jazz", "latin", "pop", "rap", "rb", "rock"]
         vis.colorScale = d3.scaleOrdinal()
             .domain(vis.genres)
-            .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "gray"]);
+            .range(["#fdbf6f", "#b2df8a", "#e31a1c", "#fb9a99", "#ff7f00", "#a6cee3", "#33a02c", "#1f78b4"]);
+
+        // vis.genres = ["rap", "rock", "edm", "rb", "latin", "jazz", "country", "pop", "misc", "unclassified"]
+        //
+        // vis.colorScale = d3.scaleOrdinal()
+        //     .domain(vis.genres)
+        //     .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "gray"]);
 
 
         // TO-DO (Activity IV): Add Tooltip placeholder
@@ -64,14 +54,14 @@ class StackedAreaChart {
             .attr("x",20)
             .attr("y", 10);
 
-        // Soph's legend
+        // // Soph's OLD legend
         // let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassified"]
         // vis.svg.selectAll("stacked-legend-labels")
         //     .data(legendLabels)
         //     .enter()
         //     .append("text")
         //     .attr("class", "stacked-legend-labels")
-        //     .attr("x", vis.width-50)
+        //     .attr("x", -100)
         //     .attr("y", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
         //     .style("fill", "darkgrey")
         //     .text(function(d){ return d})
@@ -84,11 +74,40 @@ class StackedAreaChart {
         //     .append("circle")
         //     .attr("class", "stacked-legend-dots")
         //     .attr("id", d => {return "dot-" + d})
-        //     .attr("cx", vis.width - 100)
+        //     .attr("cx", -120)
         //     .attr("cy", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
         //     .attr("r", 7)
         //     .style("fill", function(d){ return vis.colorScale(d)})
 
+        let legendLabels =   ["Country", "EDM", "Jazz", "Latin", "Pop", "Rap", "R&B", "Rock"]
+
+        vis.svg.selectAll("stacked-legend-labels")
+            .data(legendLabels)
+            .enter()
+            .append("text")
+            .attr("class", "stacked-legend-labels")
+            .attr("x", -100)
+            .attr("y", function(d,i){ return 0 + i*25})
+            .style("fill", "white")
+            .text(function(d){ return d})
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle")
+
+        vis.svg.selectAll("stacked-legend-dots")
+            .data(vis.genres)
+            .enter()
+            .append("circle")
+            .attr("class", "stacked-legend-dots")
+            .attr("id", d => {return "dot-" + d})
+            .attr("cx", -120)
+            .attr("cy", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("r", 7)
+            .style("fill", function(d){ return vis.colorScale(d)})
+
+        // append tooltip
+        vis.tooltip = d3.select("body").append('div')
+            .attr('class', "tooltip")
+            .attr('id', 'stacked-area-tooltip')
 
         // TO-DO: (Filter, aggregate, modify data)
         vis.wrangleData();
@@ -199,12 +218,6 @@ class StackedAreaChart {
                 if (genre[0] == "pop") {
                     vis.pop = genre[1];
                 }
-                if (genre[0] == "misc") {
-                    vis.misc = genre[1];
-                }
-                if (genre[0] == "unclassified") {
-                    vis.unclassified = genre[1];
-                }
             })
 
             // populate final array
@@ -219,8 +232,6 @@ class StackedAreaChart {
                     jazz: vis.jazz,
                     country: vis.country,
                     pop: vis.pop,
-                    misc: vis.misc,
-                    unclassified: vis.unclassified
                 })
 
         })
@@ -284,6 +295,16 @@ class StackedAreaChart {
         vis.svg.append("g")
             .attr("class", "y-axis axis");
 
+        // add title
+        vis.svg.append('g')
+            .attr('class', 'y-axis axistitle')
+            .append('text')
+            .text('Number of Times a Genre Hit #1')
+            .attr('x', 0)
+            .attr('y', -10)
+            // .attr("transform", "rotate(-90)")
+            .attr('text-anchor', 'front');
+
         // TO-DO (Activity II): Initialize stack layout
         let stack = d3.stack()
             .keys(vis.genres);
@@ -319,7 +340,7 @@ class StackedAreaChart {
             .attr("class", "area")
             .merge(categories)
             .style("fill", d => {
-                return vis.colorScale(d)
+                return vis.colorScale(d.key)
             })
             .attr("d", d => vis.area(d))
 
@@ -327,9 +348,18 @@ class StackedAreaChart {
             // TO-DO (Activity IV): update tooltip text on hover
             .on("mouseover", function(event, d) {
 
-                vis.svg.selectAll(".tip")
-                    .text(d.key)
-            })
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                           <div style="border-radius: 5px; background: mintcream; padding: 10px">
+                                     <h5> Genre: ${d.key} <h5>
+                            </div>`);
+
+                // vis.svg.selectAll(".tip")
+                //     .text(d.key)
+            });
 
         categories.exit().remove();
 

@@ -57,6 +57,7 @@ a, a:hover, a:focus, a:active {
 }
 
 .axis {
+    font: 14px 'Open Sans', sans-serif;
     color: #65666e;
 }
 
@@ -116,4 +117,8 @@ audio {
 .fa-linkedin, .fa-github, .fa-envelope {
     color: #969696;
     background-color: transparent;
+}
+
+.area {
+    cursor: pointer;
 }
