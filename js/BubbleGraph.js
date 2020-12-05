@@ -175,10 +175,10 @@ class BubbleGraph {
         // console.log(vis.nodes);
 
         d3.forceSimulation(vis.nodes)
-            .force('x', d3.forceX().strength(-0.013))
-            .force('y', d3.forceY().strength(-0.013))
-            .force('collide', d3.forceCollide(-1))
-            .force('center', d3.forceCenter(vis.width / 8, vis.height / 4))
+            // .force('x', d3.forceX().strength(-0.013))
+            // .force('y', d3.forceY().strength(-0.013))
+            // .force('collide', d3.forceCollide(-1))
+            .force('center', d3.forceCenter(vis.width / 8, vis.height / 7))
             .on('tick', ticked);
 
 
@@ -194,10 +194,10 @@ class BubbleGraph {
                     return d.radius
                 })
                 .attr('cx', function(d) {
-                    return d.x
+                    return d.x*2
                 })
                 .attr('cy', function(d) {
-                    return d.y
+                    return d.y*2
                 })
                 .attr("fill", function(d) {
                    return vis.colorScale(vis.filteredData[d.index].genre)
