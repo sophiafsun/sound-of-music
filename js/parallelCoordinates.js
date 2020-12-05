@@ -509,6 +509,17 @@ class ParallelCoordinates {
                 console.log("click!")
             })
 
+        vis.resetButton = vis.svg.append("rect")
+            .attr("style", "fill:lightgray")
+            .attr("x", vis.width-120)
+            .attr("y", 325)
+            .attr("rx", 5)
+            .attr("ry", 5)
+            .attr("width", 80)
+            .attr("height", 30)
+            .text("Reset")
+
+
 
         console.log("parallel coordinates class ran")
     }
