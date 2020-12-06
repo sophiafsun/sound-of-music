@@ -305,7 +305,6 @@ class ParallelCoordinates {
                              <h4 id="tooltip-title">${d.Song}<h4>
                              <h4>Artist: ${d.Performer}</h4>  
                              <h4>Album: ${d.spotify_track_album}</h4>  
-                             <h4>Weeks on Chart: ${d.weeks}</h4>
                              <h4>Genre: ${d.genre}</h4>
                              <h4>Acousticness: ${d.acousticness}</h4>  
                              <h4>Danceability: ${d.danceability}</h4>  
@@ -316,6 +315,29 @@ class ParallelCoordinates {
                              <h4>Valence: ${d.valence}</h4>  
                              <h4>Key: ${d.key}</h4>  
                          </div>`);
+                }  else if (vis.songClicked === true) {
+                    if (vis.songIDClicked === vis.selectedSong) {
+                        //tooltip
+                        vis.tooltip
+                            .style("opacity", 1)
+                            .style("left", event.pageX + 20 + "px")
+                            .style("top", event.pageY + "px")
+                            .html(`
+                         <div style="border-radius: 5px; background: mintcream; padding: 10px">
+                             <h4 id="tooltip-title">${d.Song}<h4>
+                             <h4>Artist: ${d.Performer}</h4>  
+                             <h4>Album: ${d.spotify_track_album}</h4>  
+                             <h4>Genre: ${d.genre}</h4>
+                             <h4>Acousticness: ${d.acousticness}</h4>  
+                             <h4>Danceability: ${d.danceability}</h4>  
+                             <h4>Energy: ${d.energy}</h4>  
+                             <h4>Speechiness: ${d.speechiness}</h4>  
+                             <h4>Instrumentalness: ${d.instrumentalness}</h4>  
+                             <h4>Liveness: ${d.liveness}</h4>  
+                             <h4>Valence: ${d.valence}</h4>  
+                             <h4>Key: ${d.key}</h4>  
+                         </div>`);
+                    }
                 } else if (vis.legendClicked === true) {
                     if (d.genre === vis.genreClicked) {
                         //tooltip
@@ -328,31 +350,6 @@ class ParallelCoordinates {
                              <h4 id="tooltip-title">${d.Song}<h4>
                              <h4>Artist: ${d.Performer}</h4>  
                              <h4>Album: ${d.spotify_track_album}</h4>  
-                             <h4>Weeks on Chart: ${d.weeks}</h4>
-                             <h4>Genre: ${d.genre}</h4>
-                             <h4>Acousticness: ${d.acousticness}</h4>  
-                             <h4>Danceability: ${d.danceability}</h4>  
-                             <h4>Energy: ${d.energy}</h4>  
-                             <h4>Speechiness: ${d.speechiness}</h4>  
-                             <h4>Instrumentalness: ${d.instrumentalness}</h4>  
-                             <h4>Liveness: ${d.liveness}</h4>  
-                             <h4>Valence: ${d.valence}</h4>  
-                             <h4>Key: ${d.key}</h4>  
-                         </div>`);
-                    }
-                } else if (vis.songClicked === true) {
-                    if (vis.songIDClicked === vis.selectedSong) {
-                        //tooltip
-                        vis.tooltip
-                            .style("opacity", 1)
-                            .style("left", event.pageX + 20 + "px")
-                            .style("top", event.pageY + "px")
-                            .html(`
-                         <div style="border-radius: 5px; background: mintcream; padding: 10px">
-                             <h4 id="tooltip-title">${d.Song}<h4>
-                             <h4>Artist: ${d.Performer}</h4>  
-                             <h4>Album: ${d.spotify_track_album}</h4>  
-                             <h4>Weeks on Chart: ${d.weeks}</h4>
                              <h4>Genre: ${d.genre}</h4>
                              <h4>Acousticness: ${d.acousticness}</h4>  
                              <h4>Danceability: ${d.danceability}</h4>  
