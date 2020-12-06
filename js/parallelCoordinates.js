@@ -17,7 +17,7 @@ class ParallelCoordinates {
         let vis = this;
 
         // set the dimensions and margins of the graph
-        vis.margin = {top: 30, right: 50, bottom: 10, left: 20};
+        vis.margin = {top: 30, right: 50, bottom: 10, left: 0};
         //vis.width = 700 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
 
