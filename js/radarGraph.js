@@ -205,7 +205,7 @@ class RadarGraph {
         vis.ticks.forEach(t =>
             vis.svg.append("text")
                 .attr("fill", "white")
-                .attr("text-size", 12)
+                .attr("text-size", 10)
                 .attr("x", 305)
                 .attr("y", 200 - vis.radialScale(t))
                 .text(t.toString()+"0%")
