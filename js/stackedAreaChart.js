@@ -40,44 +40,12 @@ class StackedAreaChart {
             .domain(vis.genres)
             .range(["#fdbf6f", "#b2df8a", "#e31a1c", "#fb9a99", "#ff7f00", "#a6cee3", "#33a02c", "#1f78b4"]);
 
-        // vis.genres = ["rap", "rock", "edm", "rb", "latin", "jazz", "country", "pop", "misc", "unclassified"]
-        //
-        // vis.colorScale = d3.scaleOrdinal()
-        //     .domain(vis.genres)
-        //     .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "gray"]);
-
-
         // TO-DO (Activity IV): Add Tooltip placeholder
         vis.svg.append("text")
             .attr("class","tip")
             .attr("fill","white")
             .attr("x",20)
             .attr("y", 10);
-
-        // // Soph's OLD legend
-        // let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassified"]
-        // vis.svg.selectAll("stacked-legend-labels")
-        //     .data(legendLabels)
-        //     .enter()
-        //     .append("text")
-        //     .attr("class", "stacked-legend-labels")
-        //     .attr("x", -100)
-        //     .attr("y", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-        //     .style("fill", "darkgrey")
-        //     .text(function(d){ return d})
-        //     .attr("text-anchor", "left")
-        //     .style("alignment-baseline", "middle")
-        //
-        // vis.svg.selectAll("stacked-legend-dots")
-        //     .data(vis.genres)
-        //     .enter()
-        //     .append("circle")
-        //     .attr("class", "stacked-legend-dots")
-        //     .attr("id", d => {return "dot-" + d})
-        //     .attr("cx", -120)
-        //     .attr("cy", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-        //     .attr("r", 7)
-        //     .style("fill", function(d){ return vis.colorScale(d)})
 
         let legendLabels =   ["Country", "EDM", "Jazz", "Latin", "Pop", "Rap", "R&B", "Rock"]
 
@@ -87,7 +55,7 @@ class StackedAreaChart {
             .append("text")
             .attr("class", "stacked-legend-labels")
             .attr("x", -100)
-            .attr("y", function(d,i){ return 0 + i*25})
+            .attr("y", function(d,i){ return 10 + i*25})
             .style("fill", "white")
             .text(function(d){ return d})
             .attr("text-anchor", "left")
@@ -100,7 +68,7 @@ class StackedAreaChart {
             .attr("class", "stacked-legend-dots")
             .attr("id", d => {return "dot-" + d})
             .attr("cx", -120)
-            .attr("cy", function(d,i){ return 0 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("cy", function(d,i){ return 10 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
             .attr("r", 7)
             .style("fill", function(d){ return vis.colorScale(d)})
 
@@ -359,7 +327,17 @@ class StackedAreaChart {
 
                 // vis.svg.selectAll(".tip")
                 //     .text(d.key)
-            });
+            })
+
+            .on("mouseout", function(event, d) {
+                //remove tooltip
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+
+            })
 
         categories.exit().remove();
 
