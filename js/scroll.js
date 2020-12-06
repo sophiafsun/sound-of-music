@@ -11,7 +11,8 @@ $(window).scroll(function(){
         seven = $('#seven').offset().top,
         eight = $('#eight').offset().top,
         nine = $('#nine').offset().top,
-        ten = $('#ten').offset().top;
+        ten = $('#ten').offset().top,
+        eleven = $('#eleven').offset().top;
 
     var nav1 = $('a[href="#one"]'),
         nav2 = $('a[href="#two"]'),
@@ -22,7 +23,8 @@ $(window).scroll(function(){
         nav7 = $('a[href="#seven"]'),
         nav8 = $('a[href="#eight"]'),
         nav9 = $('a[href="#nine"]'),
-        nav10 = $('a[href="#ten"]');
+        nav10 = $('a[href="#ten"]'),
+        nav11 = $('a[href="#eleven"]');
 
     if(scrollPosition >= one) {
         $('.active').removeClass('active');
@@ -83,5 +85,11 @@ $(window).scroll(function(){
         $('#nav10').addClass('active');
         nav10.contents('li').text('About Us');
         nav10.siblings().contents('li').text('');
+    }
+    if(scrollPosition >= eleven) {
+        $('.active').removeClass('active');
+        $('#nav11').addClass('active');
+        nav11.contents('li').text('Data');
+        nav11.siblings().contents('li').text('');
     }
 });
