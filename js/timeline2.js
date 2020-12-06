@@ -39,10 +39,12 @@ class Timeline2 {
         // init x & y axis
         vis.xAxis = vis.svg.append("g")
             .attr("class", "axis axis--x")
-            .attr("transform", "translate(" + 20 + "," + 150 + ")");
+            .attr("transform", "translate(" + 20 + "," + 150 + ")")
+            .style("font-size", "11px");
         vis.yAxis = vis.svg.append("g")
             .attr("class", "axis axis--y")
-            .attr("transform", "translate(" + 20 + " ," + 20 + ")");
+            .attr("transform", "translate(" + 20 + " ," + 20 + ")")
+            .style("font-size", "11px");
 
         // init pathGroup
         vis.pathGroup = vis.svg.append('g')
