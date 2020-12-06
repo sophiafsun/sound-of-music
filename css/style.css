@@ -134,3 +134,12 @@ audio {
     z-index: 8;
     position: absolute;
 }
+
+.links, .links:hover {
+    color: #5ff65f;
+    font-weight: bold;
+}
+
+.links:hover {
+    text-decoration: underline;
+}
