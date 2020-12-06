@@ -182,6 +182,61 @@
     </section>
 
     <section id="seven" class="section">
+
+        <div class="row">
+            <div class="col-12">
+                <div style="text-align: center; padding-left: 30px; padding-right: 30px;">
+
+                    <h3 style = "color: lightgrey;">Average Audio Feature Breakdown by Genre</h3>
+                    <h6 style="margin-bottom: 30px; color:darkgray;">
+                        These are the audio features that each genre is made up of.
+                        <br><br>
+                        Choose a genre from the dropdown to view the average makeup of songs in each genre grouping.
+                    </h6>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-6">
+                        <div id ='radarGraph' ></div>
+
+                        <select id='categorySelector2'
+                                style="padding:3px; font-size: 15px; background-color: #a0a3ae; fill: #dae0e5; border-radius: 5px;"
+                                onChange="categoryChange2()">
+                            <option value="default"selected>All Genres</option>
+                            <option value="country">Country</option>
+                            <option value="edm">EDM</option>
+                            <option value="jazz">Jazz</option>
+                            <option value="latin">Latin</option>
+                            <option value="pop">Pop</option>
+                            <option value="rap">Rap</option>
+                            <option value="rb">R&B</option>
+                            <option value="rock">Rock</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <div id ='radarGraph2'></div>
+
+                        <select id='categorySelector3'
+                                style="padding:3px; font-size: 15px; background-color: #a0a3ae; fill: #dae0e5; border-radius: 5px;"
+                                onChange="categoryChange3()">
+                            <option value="default"selected>All Genres</option>
+                            <option value="country">Country</option>
+                            <option value="edm">EDM</option>
+                            <option value="jazz">Jazz</option>
+                            <option value="latin">Latin</option>
+                            <option value="pop">Pop</option>
+                            <option value="rap">Rap</option>
+                            <option value="rb">R&B</option>
+                            <option value="rock">Rock</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
         <!--<div class="col5">
             <div style="text-align: left; padding-left: 150px; padding-right: 30px;">
 
@@ -191,26 +246,10 @@
                     <br><br>
                     Choose a genre from the dropdown to view the average makeup of songs in each genre grouping.
                 </h6>
-
-                <select id='categorySelector2'
-                        style="padding:3px; font-size: 15px; background-color: #a0a3ae; fill: #dae0e5; border-radius: 5px;"
-                        onChange="categoryChange2()">
-                    <option value="default"selected>All Genres</option>
-                    <option value="pop">Pop</option>
-                    <option value="rap">Rap</option>
-                    <option value="rock">Rock</option>
-                    <option value="rb">R&B</option>
-                    <option value="edm">EDM</option>
-                    <option value="latin">Latin</option>
-                    <option value="jazz">Jazz</option>
-                    <option value="country">Country</option>
-                    <option value="misc">Miscellaneous</option>
-                    <option value="unclassified">Unclassified</option>
-                </select>
             </div>
 
         </div>-->
-        <div class="col7">
+        <!--<div class="col7">
             <div id ='radarGraph'></div>
 
             <select id='categorySelector2'
@@ -243,7 +282,7 @@
                 <option value="rb">R&B</option>
                 <option value="rock">Rock</option>
             </select>
-        </div>
+        </div>-->
     </section>
 
      <section id="eight" class="section">

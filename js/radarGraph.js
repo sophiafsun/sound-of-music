@@ -18,8 +18,8 @@ class RadarGraph {
 
         // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 10, bottom: 30, left: 50};
-        vis.width = 700 - vis.margin.left - vis.margin.right;
-        vis.height = 700 - vis.margin.top - vis.margin.bottom;
+        vis.width = 660 - vis.margin.left - vis.margin.right;
+        vis.height = 480 - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -35,7 +35,7 @@ class RadarGraph {
 
         vis.radialScale = d3.scaleLinear()
             .domain([0,10])
-            .range([0,250]);
+            .range([0,150]);
 
         vis.ticks = [2,4,6,8,10];
 
@@ -185,7 +185,7 @@ class RadarGraph {
 
         vis.svg.append("circle")
             .attr("cx", 300)
-            .attr("cy", 300)
+            .attr("cy", 200)
             .attr("fill", "black")
             .attr("opacity", 1)
             .attr("r", vis.radialScale(10))
@@ -194,7 +194,7 @@ class RadarGraph {
         vis.ticks.forEach(t =>
             vis.svg.append("circle")
                 .attr("cx", 300)
-                .attr("cy", 300)
+                .attr("cy", 200)
                 .attr("fill", "none")
                 .attr("opacity", 1)
                 .attr("stroke", "white")
@@ -207,7 +207,7 @@ class RadarGraph {
                 .attr("fill", "white")
                 .attr("text-size", 12)
                 .attr("x", 305)
-                .attr("y", 300 - vis.radialScale(t))
+                .attr("y", 200 - vis.radialScale(t))
                 .text(t.toString()+"0%")
         );
 
@@ -215,7 +215,7 @@ class RadarGraph {
         function angleToCoordinate(angle, value){
             let x = Math.cos(angle) * vis.radialScale(value);
             let y = Math.sin(angle) * vis.radialScale(value);
-            return {"x": 300 + x, "y": 300 - y};
+            return {"x": 300 + x, "y": 200 - y};
         }
 
         vis.features =  [
@@ -245,7 +245,7 @@ class RadarGraph {
             let label_coordinate = angleToCoordinate(angle, 12.2);
             vis.svg.append("line")
                 .attr("x1", 300)
-                .attr("y1", 300)
+                .attr("y1", 200)
                 .attr("x2", line_coordinate.x)
                 .attr("y2", line_coordinate.y)
                 .attr("stroke","white");
