@@ -203,6 +203,7 @@ class BubbleGraph {
                    return vis.colorScale(vis.filteredData[d.index].genre)
                 })
                 .attr("transform", "translate(" + vis.width/3 + "," + vis.height/3 + ")")
+                .style("cursor", "pointer")
                 .on('mouseover', function(event, object){
 
                      // grab hovered state
