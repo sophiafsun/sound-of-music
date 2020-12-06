@@ -178,7 +178,7 @@ class BubbleGraph {
             // .force('x', d3.forceX().strength(-0.013))
             // .force('y', d3.forceY().strength(-0.013))
             // .force('collide', d3.forceCollide(-1))
-            .force('center', d3.forceCenter(vis.width / 8, vis.height / 7))
+            // .force('center', d3.forceCenter(vis.width, vis.height))
             .on('tick', ticked);
 
 

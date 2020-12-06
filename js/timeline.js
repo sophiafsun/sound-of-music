@@ -13,7 +13,7 @@ class Timeline {
         this.initVis()
     }
 
-    initVis(){
+    initVis() {
         let vis = this;
 
         // set the dimensions and margins of the graph
@@ -34,12 +34,12 @@ class Timeline {
         // init scales
         vis.x = d3.scaleLinear()
             .domain([1950, 2020])
-            .range([0, vis.width/1.1]);
+            .range([0, vis.width / 1.1]);
 
         // init x & y axis
         vis.xAxis = vis.svg.append("g")
             .attr("class", "axis axis--x")
-            .attr("transform", "translate(" + 20 + "," + vis.height/2 + ")");
+            .attr("transform", "translate(" + 20 + "," + vis.height / 3 + ")");
 
         // init brushGroup:
         vis.brushGroup = vis.svg.append("g")
@@ -47,8 +47,8 @@ class Timeline {
 
         // init brush
         vis.brush = d3.brushX()
-            .extent([[20, 20], [vis.width/1.1+20, vis.height/2]])
-            .on("brush end", function(event){
+            .extent([[20, 20], [vis.width / 1.1 + 20, vis.height / 3]])
+            .on("brush end", function (event) {
                 selectedTimeRange =
                     [Math.trunc(vis.x.invert(event.selection[0])), Math.trunc(vis.x.invert(event.selection[1]))];
                 myBubbleGraph.updateVis();
@@ -60,12 +60,12 @@ class Timeline {
         vis.wrangleData()
     }
 
-    wrangleData(){
+    wrangleData() {
         let vis = this;
         vis.updateVis()
     }
 
-    updateVis(){
+    updateVis() {
         let vis = this;
 
         // draw axis
@@ -73,7 +73,10 @@ class Timeline {
 
         vis.brushGroup.call(vis.brush);
 
-        console.log("timeline viz class ran")
+        vis.brushGroup.selectAll('rect')
+            .style('fill', '#ccc')
+            .style('fill-opacity', .3)
+            .style('stroke', '#999')
+            .style('stroke-width', .5)
     }
-
 }
