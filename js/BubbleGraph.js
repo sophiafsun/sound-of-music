@@ -38,13 +38,13 @@ class BubbleGraph {
             .style('opacity', 0);
 
         // return a color based on genre
-        vis.genres = ["rap", "rock", "edm", "rb", "latin", "jazz", "country", "pop", "misc", "unclassified"]
+        vis.genres = ["country", "edm", "jazz", "latin", "pop", "rap", "rb", "rock"]
         vis.colorScale = d3.scaleOrdinal()
             .domain(vis.genres)
-            .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "gray"]);
+            .range(["#fdbf6f", "#b2df8a", "#e31a1c", "#fb9a99", "#ff7f00", "#a6cee3", "#33a02c", "#1f78b4"]);
 
 
-        let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassif."]
+        let legendLabels = ["Country", "EDM", "Jazz", "Latin", "Pop", "Rap", "R&B", "Rock"]
         vis.svg.selectAll("stacked-legend-labels")
             .data(legendLabels)
             .enter()
@@ -202,7 +202,7 @@ class BubbleGraph {
                 .attr("fill", function(d) {
                    return vis.colorScale(vis.filteredData[d.index].genre)
                 })
-                .attr("transform", "translate(" + vis.width/5 + "," + vis.height/4 + ")")
+                .attr("transform", "translate(" + vis.width/3 + "," + vis.height/3 + ")")
                 .on('mouseover', function(event, object){
 
                      // grab hovered state
