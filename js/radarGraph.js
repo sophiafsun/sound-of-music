@@ -1,10 +1,11 @@
 
 class RadarGraph {
 
-    constructor(parentElement, billboard, audioFeatures) {
+    constructor(parentElement, billboard, audioFeatures, whichRadar) {
         this.parentElement = parentElement;
         this.billboard = billboard;
         this.audioFeatures = audioFeatures;
+        this.whichRadar = whichRadar;
         this.displayData = [];
 
         // parse date method
@@ -144,7 +145,11 @@ class RadarGraph {
     updateVis() {
         let vis = this;
 
-        vis.pickedGenre = selectedCategory2;
+        if (vis.whichRadar === 1) {
+            vis.pickedGenre = selectedCategory2;
+        } else if (vis.whichRadar === 2) {
+            vis.pickedGenre = selectedCategory3;
+        }
 
 
         if (vis.pickedGenre === "default") {
@@ -205,9 +210,9 @@ class RadarGraph {
         vis.ticks.forEach(t =>
             vis.svg.append("text")
                 .attr("fill", "white")
-                .attr("text-size", 10)
+                .attr("text-size", 8)
                 .attr("x", 305)
-                .attr("y", 200 - vis.radialScale(t))
+                .attr("y", 195 - vis.radialScale(t))
                 .text(t.toString()+"0%")
         );
 
@@ -242,7 +247,7 @@ class RadarGraph {
             let ft_name = vis.allAxis[i];
             let angle = (Math.PI / 2) + (2 * Math.PI * i / vis.allAxis.length);
             let line_coordinate = angleToCoordinate(angle, 10);
-            let label_coordinate = angleToCoordinate(angle, 12.2);
+            let label_coordinate = angleToCoordinate(angle, 13.2);
             vis.svg.append("line")
                 .attr("x1", 300)
                 .attr("y1", 200)
@@ -251,7 +256,7 @@ class RadarGraph {
                 .attr("stroke","white");
             vis.svg.append("text")
                 .attr("x", label_coordinate.x)
-                .attr("y", label_coordinate.y+20)
+                .attr("y", label_coordinate.y+10)
                 .attr("text-anchor", "middle")
                 .attr("font-size", 14)
                 .style("fill", "white")
@@ -272,6 +277,7 @@ class RadarGraph {
                 coordinates.push(angleToCoordinate(angle, (d[ft] * 10)));
             }
             console.log(coordinates)
+
             return coordinates;
         }
 
@@ -316,9 +322,10 @@ class RadarGraph {
             .attr("stroke-opacity", 1)
             .attr("opacity", 0.7);
 
+
         // }
 
-        console.log("radar viz class ran")
+        console.log("radar viz class ran and coordinates: ", coordinates)
     }
 
 }

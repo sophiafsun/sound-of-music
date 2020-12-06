@@ -12,6 +12,7 @@ let myBubbleGraph,
 let dateParser = d3.timeParse("%m-%d-%Y");
 let selectedCategory = d3.select("#categorySelector").property("value");
 let selectedCategory2 = d3.select("#categorySelector2").property("value")
+let selectedCategory3 = d3.select("#categorySelector3").property("value")
 let selectedTimeRange = [];
 
 // load data using promises
@@ -63,8 +64,8 @@ function initMainPage(dataArray) {
     myBubbleGraph = new BubbleGraph('bubbleViz', dataArray[0], dataArray[1]);
     myTimeline = new Timeline('timeline', dataArray[0], dataArray[1]);
     //myTimelineParCoord = new Timeline('timeline-par-coord', dataArray[0], dataArray[1]);
-    myRadarGraph = new RadarGraph('radarGraph', dataArray[0], dataArray[1]);
-    myRadarGraph2 = new RadarGraph('radarGraph2', dataArray[0], dataArray[1]);
+    myRadarGraph = new RadarGraph('radarGraph', dataArray[0], dataArray[1], 1);
+    myRadarGraph2 = new RadarGraph('radarGraph2', dataArray[0], dataArray[1], 2);
     myStackedAreaChart = new StackedAreaChart('stackedAreaChart', dataArray[0], dataArray[1]);
     myTimelineStacked = new Timeline2('timeline-stacked', dataArray[0], dataArray[1]);
 }
@@ -85,6 +86,9 @@ function categoryChange2() {
 
     selectedCategory2 = d3.select("#categorySelector2").property("value");
 
+    d3.select("#categorySelector3").selectAll(".option3").attr("disabled", null)
+    d3.select("#categorySelector3").select("#"+selectedCategory2+"3").attr("disabled", "disabled")
+
     console.log(selectedCategory2);
 
     myRadarGraph.wrangleData();
@@ -94,9 +98,12 @@ function categoryChange2() {
 // update vis on category change
 function categoryChange3() {
 
-    selectedCategory2 = d3.select("#categorySelector3").property("value");
+    selectedCategory3 = d3.select("#categorySelector3").property("value");
 
-    console.log(selectedCategory2);
+    d3.select("#categorySelector2").selectAll(".option2").attr("disabled", null)
+    d3.select("#categorySelector2").select("#"+selectedCategory3+"2").attr("disabled", "disabled")
+
+    console.log(selectedCategory3);
 
     myRadarGraph2.wrangleData();
 
