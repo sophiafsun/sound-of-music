@@ -23,7 +23,7 @@
             <a href="#four"><li id="nav4">Top Genres</li></a>
             <a href="#five"><li id="nav5">Shared Features</li></a>
             <a href="#six"><li id="nav6">Top Audio Features</li></a>
-            <a href="#seven"><li id="nav7">More Audio Features</li></a>
+            <a href="#seven"><li id="nav7">Audio Features by Genre</li></a>
             <a href="#eight"><li id="nav8">Audio Player</li></a>
             <a href="#nine"><li id="nav9">Conclusion</li></a>
             <a href="#ten"><li id="nav10">About Us</li></a>
@@ -77,9 +77,9 @@
         </div>
         <div class="col-5">
             <div class="row">
-                    <h3 style = "color: lightgrey;">Top 100 Songs that Hit #1</h3>
-                <div style="color: darkgray;">
-                        <h6 style="margin-bottom: 30px; padding-top: 20px; padding-right: 50px">
+                <h3 style = "color: lightgrey;">Top 100 Songs that Hit #1</h3>
+                <div style="color: darkgray; padding-top: 20px; padding-right: 50px">
+                        <h6 style="margin-bottom: 20px;">
                                 Let's take a look at the songs over the past six
                                 decades that have reached the #1 spot on the
                                 Billboard Top 100 chart. Songs are sized by the
@@ -87,17 +87,18 @@
                                 then the 100 longest running have been selected
                                 for each category.
                                 <br><br>
-                                Hover over a circle to see info about a song.<br>
-                                Click the drop down to filter by genre.<br>
-                                Brush the timeline to filter by year.
-                                <br><br>
                                 Clearly, each of these top songs must be doing
                                 something right.
                         </h6>
+                            <h6 style="margin-bottom: 20px;" class="instruction">
+                                Hover over a circle to see info about a song.<br>
+                                Click the drop down to filter by genre.<br>
+                                Brush the timeline to filter by year.
+                            </h6>
                     </div>
             </div>
             <div class="row">
-                <select id='categorySelector' style="padding:3px; font-size: 15px; background-color: #a0a3ae; fill: #dae0e5; border-radius: 5px;" onChange="categoryChange()">
+                <select id='categorySelector' style="padding:3px; font-size: 15px; background-color: gray; fill: #dae0e5; border-radius: 5px;" onChange="categoryChange()">
                     <option value="default" selected>Top 100 Overall</option>
                     <option value="pop">Pop</option>
                     <option value="rap">Rap</option>
