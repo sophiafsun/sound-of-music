@@ -64,6 +64,7 @@ function initMainPage(dataArray) {
     myTimeline = new Timeline('timeline', dataArray[0], dataArray[1]);
     //myTimelineParCoord = new Timeline('timeline-par-coord', dataArray[0], dataArray[1]);
     myRadarGraph = new RadarGraph('radarGraph', dataArray[0], dataArray[1]);
+    myRadarGraph2 = new RadarGraph('radarGraph2', dataArray[0], dataArray[1]);
     myStackedAreaChart = new StackedAreaChart('stackedAreaChart', dataArray[0], dataArray[1]);
     myTimelineStacked = new Timeline2('timeline-stacked', dataArray[0], dataArray[1]);
 }
@@ -87,5 +88,16 @@ function categoryChange2() {
     console.log(selectedCategory2);
 
     myRadarGraph.wrangleData();
+
+}
+
+// update vis on category change
+function categoryChange3() {
+
+    selectedCategory2 = d3.select("#categorySelector3").property("value");
+
+    console.log(selectedCategory2);
+
+    myRadarGraph2.wrangleData();
 
 }

@@ -37,7 +37,7 @@ class RadarGraph {
             .domain([0,10])
             .range([0,250]);
 
-        vis.ticks = [2,4,6,8];
+        vis.ticks = [2,4,6,8,10];
 
         vis.wrangleData()
     }
@@ -188,7 +188,7 @@ class RadarGraph {
             .attr("cy", 300)
             .attr("fill", "black")
             .attr("opacity", 1)
-            .attr("r", vis.radialScale(8))
+            .attr("r", vis.radialScale(10))
 
         //draw grid lines (circles)
         vis.ticks.forEach(t =>
@@ -241,8 +241,8 @@ class RadarGraph {
         for (var i = 0; i < vis.allAxis.length; i++) {
             let ft_name = vis.allAxis[i];
             let angle = (Math.PI / 2) + (2 * Math.PI * i / vis.allAxis.length);
-            let line_coordinate = angleToCoordinate(angle, 8);
-            let label_coordinate = angleToCoordinate(angle, 10.2);
+            let line_coordinate = angleToCoordinate(angle, 10);
+            let label_coordinate = angleToCoordinate(angle, 12.2);
             vis.svg.append("line")
                 .attr("x1", 300)
                 .attr("y1", 300)
@@ -295,14 +295,23 @@ class RadarGraph {
         //   .attr("stroke-opacity", 1)
         //   .attr("opacity", 0.5);
 
+        // new genres - alpha
+        vis.genres = ["top100", "country", "edm", "jazz", "latin", "pop", "rap", "rb", "rock"]
+        vis.colorScale = d3.scaleOrdinal()
+            .domain(vis.genres)
+            .range([ "lightgrey", "#fdbf6f", "#b2df8a", "#e31a1c", "#fb9a99", "#ff7f00", "#a6cee3", "#33a02c", "#1f78b4"]);
 
         vis.svg
             .append("path")
             .datum(coordinates)
             .attr("d", line)
             .attr("stroke-width", 3)
-            .attr("stroke", "blue")
-            .attr("fill", "blue")
+            .attr("stroke", d => {
+                return vis.colorScale(vis.pickedGenre)
+            })
+            .attr("fill", d => {
+                return vis.colorScale(vis.pickedGenre)
+            })
             .transition()
             .attr("stroke-opacity", 1)
             .attr("opacity", 0.7);
