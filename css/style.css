@@ -129,3 +129,8 @@ audio {
     padding: 20px;
     color: white;
 }
+
+.nav {
+    z-index: 8;
+    position: absolute;
+}

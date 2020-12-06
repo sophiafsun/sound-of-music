@@ -33,37 +33,37 @@ $(window).scroll(function(){
     if(scrollPosition >= two) {
         $('.active').removeClass('active');
         $('#nav2').addClass('active');
-        nav2.contents('li').text('Genres');
+        nav2.contents('li').text('Song Popularity');
         nav2.siblings().contents('li').text('');
     }
     if(scrollPosition >= three) {
         $('.active').removeClass('active');
         $('#nav3').addClass('active');
-        nav3.contents('li').text('Bubbles');
+        nav3.contents('li').text('Top Songs');
         nav3.siblings().contents('li').text('');
     }
     if(scrollPosition >= four) {
         $('.active').removeClass('active');
         $('#nav4').addClass('active');
-        nav4.contents('li').text('Stacked Areas');
+        nav4.contents('li').text('Top Genres');
         nav4.siblings().contents('li').text('');
     }
     if(scrollPosition >= five) {
         $('.active').removeClass('active');
         $('#nav5').addClass('active');
-        nav5.contents('li').text('Audio Features');
+        nav5.contents('li').text('Shared Features');
         nav5.siblings().contents('li').text('');
     }
     if(scrollPosition >= six) {
         $('.active').removeClass('active');
         $('#nav6').addClass('active');
-        nav6.contents('li').text('Par Coords');
+        nav6.contents('li').text('Top Audio Features');
         nav6.siblings().contents('li').text('');
     }
     if(scrollPosition >= seven) {
         $('.active').removeClass('active');
         $('#nav7').addClass('active');
-        nav7.contents('li').text('Radars');
+        nav7.contents('li').text('Audio Features by Genre');
         nav7.siblings().contents('li').text('');
     }
     if(scrollPosition >= eight) {
