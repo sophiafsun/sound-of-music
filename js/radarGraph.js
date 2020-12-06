@@ -191,7 +191,7 @@ class RadarGraph {
         vis.svg.append("circle")
             .attr("cx", 300)
             .attr("cy", 200)
-            .attr("fill", "black")
+            .attr("fill", "#08090a")
             .attr("opacity", 1)
             .attr("r", vis.radialScale(10))
 
@@ -342,6 +342,7 @@ class RadarGraph {
             .attr("r", vis.radialScale(10))
             .attr('fill', 'none')
             .attr('pointer-events', 'all')
+            .attr('cursor', 'pointer')
             .on('mouseover', function(event) {
                 // append tooltip with category data
                 vis.tooltip
@@ -349,14 +350,14 @@ class RadarGraph {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                           <div style="border-radius: 5px; background: mintcream; padding: 10px">
-                                     <h6>Valence: ${((vis.averageData[0].valence)*100).toFixed(0)}%<h6>
-                                     <h6>Speechiness: ${((vis.averageData[0].speechiness)*100).toFixed(0)}%<h6>
-                                     <h6>Liveness: ${((vis.averageData[0].liveness)*100).toFixed(0)}%<h6>
-                                     <h6>Instrumentalness: ${((vis.averageData[0].instrumentalness)*100).toFixed(0)}%<h6>
-                                     <h6>Energy: ${((vis.averageData[0].energy)*100).toFixed(0)}%<h6>
-                                     <h6>Danceability: ${((vis.averageData[0].danceability)*100).toFixed(0)}%<h6>
-                                     <h6>Acousticness: ${((vis.averageData[0].acousticness)*100).toFixed(0)}%<h6>
+                           <div>
+                                 <h6>Valence: ${((vis.averageData[0].valence)*100).toFixed(0)}%<h6>
+                                 <h6>Speechiness: ${((vis.averageData[0].speechiness)*100).toFixed(0)}%<h6>
+                                 <h6>Liveness: ${((vis.averageData[0].liveness)*100).toFixed(0)}%<h6>
+                                 <h6>Instrumentalness: ${((vis.averageData[0].instrumentalness)*100).toFixed(0)}%<h6>
+                                 <h6>Energy: ${((vis.averageData[0].energy)*100).toFixed(0)}%<h6>
+                                 <h6>Danceability: ${((vis.averageData[0].danceability)*100).toFixed(0)}%<h6>
+                                 <h6>Acousticness: ${((vis.averageData[0].acousticness)*100).toFixed(0)}%<h6>
                             </div>`);
             })
             .on('mouseout', function(){

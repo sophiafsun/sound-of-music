@@ -222,7 +222,7 @@ class BubbleGraph {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                           <div style="border-radius: 5px; background: mintcream; padding: 10px">
+                           <div>
                                      <h5>${hoveredState.song}<h5>
                                      <h6>${hoveredState.performer}
                                      <br>Weeks on Top Chart: ${hoveredState.weeks}<h6>

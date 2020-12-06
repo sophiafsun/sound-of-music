@@ -22,12 +22,10 @@ a, a:hover, a:focus, a:active {
 .tooltip {
     position: absolute;
     text-align: center;
-    width: 200px;
-    height: 28px;
-    padding: 2px;
     font: 12px sans-serif;
-    background: lightsteelblue;
-    border-radius: 8px;
+    border-radius: 5px;
+    background: mintcream;
+    padding: 10px
 }
 .tooltip h3,h4 {
     text-align: left;
