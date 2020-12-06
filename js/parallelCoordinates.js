@@ -517,7 +517,12 @@ class ParallelCoordinates {
             .attr("ry", 5)
             .attr("width", 80)
             .attr("height", 30)
+
+        vis.svg.append("text")
+            .attr("x", vis.width-120)
+            .attr("y", 325)
             .text("Reset")
+
 
 
 
