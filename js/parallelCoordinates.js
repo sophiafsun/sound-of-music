@@ -18,7 +18,7 @@ class ParallelCoordinates {
 
         // set the dimensions and margins of the graph
         vis.margin = {top: 30, right: 50, bottom: 10, left: 20};
-        //vis.width = 1000 - vis.margin.left - vis.margin.right;
+        //vis.width = 700 - vis.margin.left - vis.margin.right;
         vis.height = 700 - vis.margin.top - vis.margin.bottom;
 
         // Sophia keeps getting negative values for height, so I hard coded it in above.
@@ -101,7 +101,7 @@ class ParallelCoordinates {
             .domain(vis.dimensions);
 
         // Draw the axis:
-        vis.svg.selectAll("myAxis")
+        vis.axis = vis.svg.selectAll("myAxis")
             // For each dimension of the dataset I add a 'g' element:
             .data(vis.dimensions).enter()
             .append("g")
@@ -111,9 +111,12 @@ class ParallelCoordinates {
             // And I build the axis with the call function
             .each(function(d) { d3.select(this).call(d3.axisLeft().scale(vis.y[d])); })
             // Add axis title
+            //.data(vis.dimensions).enter()
             .append("text")
-            .style("text-anchor", "middle")
-            .attr("y", 90)
+            .style("text-anchor", "left")
+            .attr("y", 15)
+            .attr("x", -100)
+            .attr("transform", "rotate(-90)")
             .text(function(d) { return d; })
             .style("fill", "white")
             .style("font-size", "12px")
@@ -503,7 +506,7 @@ class ParallelCoordinates {
                         .transition().duration(200)
                         .style("stroke", vis.colorScale(vis.selectedGenre))
                         .style("opacity", "1")
-                        .style("stroke-width", "2px")
+                        .style("stroke-width", "4px")
                 }
 
                 console.log("click!")
