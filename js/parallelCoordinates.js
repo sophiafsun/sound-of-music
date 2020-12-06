@@ -509,7 +509,20 @@ class ParallelCoordinates {
                 console.log("click!")
             })
 
-        vis.resetButton = vis.svg.append("rect")
+        vis.resetButton = vis.svg.append("g")
+            .style("cursor", "pointer")
+            .on("click", (event, d) => {
+                //return lines to original color
+                d3.selectAll(".line")
+                    .transition().duration(200)
+                    .style("stroke", "lightgrey")
+                    .style("opacity", "0.5")
+                    .style("stroke-width", "1.5px")
+                //reset
+                vis.legendClicked = false
+                vis.songClicked = false
+            })
+        vis.resetButton.append("rect")
             .attr("style", "fill:lightgray")
             .attr("x", vis.width-120)
             .attr("y", 325)
@@ -518,9 +531,10 @@ class ParallelCoordinates {
             .attr("width", 80)
             .attr("height", 30)
 
-        vis.svg.append("text")
-            .attr("x", vis.width-120)
-            .attr("y", 325)
+
+        vis.resetButton.append("text")
+            .attr("x", vis.width-100)
+            .attr("y", 345)
             .text("Reset")
 
 
