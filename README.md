@@ -13,31 +13,31 @@ We borrowed the scrolling webpage layout from some examples we found online, but
 ### Files
 
 \sound-of-music <br>
-  \css <br>
-    \font <br>
-      NeonTubes2.otf <br>
-      NeonTubes2.ttf <br>
-    scroll.scss <br>
-    style.css <br>
-  \data <br>
-    Hot_100_Audio_Features.csv <br>
-    Hot_Stuff.csv <br>
-  \img <br>
-    amanda.jpeg <br>
-    rucha.jpeg <br>
-    sophia.jpeg <br>
-  \js <br>
-    BubbleGraph.js <br>
-    main.js <br>
-    parallelCoordinates.js <br>
-    radarGraph.js <br>
-    script.js <br>
-    scroll.js <br>
-    stackedAreaChart.js <br>
-    timeline.js <br>
-    timeline2.js <br>
-  index.html <br>
-  README.md <br>
+  &nbsp;&nbsp;\css <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;\font <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NeonTubes2.otf <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NeonTubes2.ttf <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;scroll.scss <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;style.css <br>
+  &nbsp;&nbsp;\data <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hot_100_Audio_Features.csv <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hot_Stuff.csv <br>
+  &nbsp;&nbsp;\img <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;amanda.jpeg <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;rucha.jpeg <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;sophia.jpeg <br>
+  &nbsp;&nbsp;\js <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;BubbleGraph.js <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;main.js <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;parallelCoordinates.js <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;radarGraph.js <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;script.js <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;scroll.js <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;stackedAreaChart.js <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;timeline.js <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;timeline2.js <br>
+  &nbsp;&nbsp;index.html <br>
+  &nbsp;&nbsp;README.md <br>
 
 ### Features
 
