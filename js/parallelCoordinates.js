@@ -44,10 +44,10 @@ class ParallelCoordinates {
         //     .range([ "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "white", "lightgrey"]);
 
         // new genres - alpha
-        vis.genres = ["top100", "country", "edm", "jazz", "latin", "pop", "rap", "rb", "rock"]
+        vis.genres = ["country", "edm", "jazz", "latin", "pop", "rap", "rb", "rock"]
         vis.colorScale = d3.scaleOrdinal()
             .domain(vis.genres)
-            .range([ "lightgrey", "#fdbf6f", "#b2df8a", "#e31a1c", "#fb9a99", "#ff7f00", "#a6cee3", "#33a02c", "#1f78b4"]);
+            .range(["#fdbf6f", "#b2df8a", "#e31a1c", "#fb9a99", "#ff7f00", "#a6cee3", "#33a02c", "#1f78b4"]);
 
         /*//legend
         vis.svg.selectAll("parallel-coord-legend-dots")
@@ -60,7 +60,7 @@ class ParallelCoordinates {
             .attr("r", 7)
             .style("fill", function(d){ return vis.colorScale(d)})*/
 
-        let legendLabels =   ["ALL", "Country", "EDM", "Jazz", "Latin", "Pop", "Rap", "R&B", "Rock"]
+        let legendLabels =   ["Country", "EDM", "Jazz", "Latin", "Pop", "Rap", "R&B", "Rock"]
 
         //let legendLabels =   ["Rap", "Rock", "EDM", "R&B", "Latin", "Jazz", "Country", "Pop", "Misc", "Unclassified", "Reset"]
         vis.svg.selectAll("parallel-coord-legend-labels")
