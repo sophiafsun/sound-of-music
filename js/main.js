@@ -108,3 +108,10 @@ function categoryChange3() {
     myRadarGraph2.wrangleData();
 
 }
+
+// input correct song
+function songSelector() {
+
+    console.log("Selected a song");
+
+}
