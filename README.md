@@ -62,7 +62,7 @@ In addition to viewing one single song, the user can also explore trends in enti
 These radar charts give the user a way to compare the average audio feature makeup of different genres. The default view shows the spread of All Genres on the left, and the dropdown on the right encourages the user to choose a different genre to compare it to. Note that the user cannot select the same genre that is already depicted in the other radar chart, since the purpose of this visualization is to compare different genres. The user can mouseover the radar chart shape to see more specifically the numerical statistics of the average audio features for each genre.
 
 ### Supplemental Links
-You can find our website here:
+You can find our website here: https://sophiafsun.github.io/sound-of-music/
 
 You can find our walkthrough video here: https://drive.google.com/file/d/10rIXYTGYzodMOKXaDECvmoOp3h9evB9m/view?usp=sharing
 
