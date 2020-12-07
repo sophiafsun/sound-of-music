@@ -165,6 +165,9 @@ class BubbleGraph {
             vis.filteredData = vis.temp.slice(0, 100);
         }
 
+        vis.filteredData = vis.filteredData.sort((a,b) => d3.ascending(a["genre"], b["genre"]));
+
+
         // console.log(vis.filteredData);
 
         let numNodes = vis.filteredData.length
@@ -173,12 +176,19 @@ class BubbleGraph {
         })
 
         // console.log(vis.nodes);
+        let x = d3.scaleLinear()
+            .domain([1,100])
+            .range([200, 0]);
+        let y = d3.scaleLinear()
+            .domain([1,100])
+            .range([0, 200]);
 
         d3.forceSimulation(vis.nodes)
-            // .force('x', d3.forceX().strength(-0.013))
-            // .force('y', d3.forceY().strength(-0.013))
-            // .force('collide', d3.forceCollide(-1))
-            // .force('center', d3.forceCenter(vis.width, vis.height))
+            //.force("x", d3.forceX(d => x(d.index)))
+            //.force("y", d3.forceY(10)
+            //.force("y",  d3.forceY(10))
+            //.force('collide', d3.forceCollide().radius(d=> d.size*10))
+            //.force('center', d3.forceCenter(vis.width, vis.height))
             .on('tick', ticked);
 
 
