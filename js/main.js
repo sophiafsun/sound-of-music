@@ -7,6 +7,7 @@ let myBubbleGraph,
     myRadarGraph,
     myStackedAreaChart,
     myTimeline,
+    myRadarSong,
     myTimelineParCoord;
 
 let dateParser = d3.timeParse("%m-%d-%Y");
@@ -66,6 +67,7 @@ function initMainPage(dataArray) {
     //myTimelineParCoord = new Timeline('timeline-par-coord', dataArray[0], dataArray[1]);
     myRadarGraph = new RadarGraph('radarGraph', dataArray[0], dataArray[1], 1);
     myRadarGraph2 = new RadarGraph('radarGraph2', dataArray[0], dataArray[1], 2);
+    myRadarSong = new RadarGraph('radarSong', dataArray[0], dataArray[1]);
     myStackedAreaChart = new StackedAreaChart('stackedAreaChart', dataArray[0], dataArray[1]);
     myTimelineStacked = new Timeline2('timeline-stacked', dataArray[0], dataArray[1]);
 }
@@ -112,6 +114,9 @@ function categoryChange3() {
 // input correct song
 function songSelector() {
 
-    console.log("Selected a song");
+    selectedSong = d3.select("#songSelector").property("value");
+    console.log("Selected a song", songSelector);
+
+    myRadarSong.updateVis();
 
 }

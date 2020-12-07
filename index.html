@@ -307,33 +307,33 @@
         </div>
     </section>
 
-     <section id="eight" class="section">
-    <!--        <h4>[Audio Vis] Ideally, we would want to do an audio visualization <br>-->
-    <!--            of a few top songs that the user can select from.-->
-    <!--        </h4>-->
+    <section id="eight" class="section">
+        <!--        <h4>[Audio Vis] Ideally, we would want to do an audio visualization <br>-->
+        <!--            of a few top songs that the user can select from.-->
+        <!--        </h4>-->
 
-         <div class="col-5" style="padding-left: 100px;">
-             <h6 style="margin-bottom: 30px; color:darkgray;">
-                 We hear you. After reading these audio features we want to see them in action, too!
-                 We've got a few songs lined up for you to choose from to now "see" the song.
-                 <h6 style="margin-bottom: 30px; color:white" class="instruction">
-                     Choose a song from the choices to the right to see the valence and amplitude of the song.
-                 </h6>
-             </h6>
+        <div class="col-5" style="padding-left: 100px;">
+            <h6 style="margin-bottom: 30px; color:darkgray;">
+                We hear you. After reading these audio features we want to see them in action, too!
+                We've got a few songs lined up for you to choose from to now "see" the song.
+                <h6 style="margin-bottom: 30px; color:white" class="instruction">
+                    Choose a song from the choices to the right to see the valence and amplitude of the song.
+                </h6>
+            </h6>
 
-             <select id='songSelector' style="padding:3px; font-size: 15px; background-color: gray; fill: #dae0e5; border-radius: 5px;" onChange="categoryChange()">
-                 <option value="song1" selected>Song 1</option>
-                 <option value="song2">Song 2</option>
-                 <option value="song3">Song 3</option>
-                 <option value="song4">Song 4</option>
-             </select>
-         </div>
+            <audio id="player2"></audio>
+            <select id='songSelector' style="padding:3px; font-size: 15px; background-color: gray; fill: #dae0e5; border-radius: 5px;"
+                    onChange="songSelector()">
+                <option value="Fear Inoculum" selected>High Instrumentalness</option>
+                <option value="Lil Baby">High Danceability</option>
+                <option value="Don't Check On Me">High Acousticness</option>
+                <option value="Rescue Me">High Valence</option>
+                <option value="HIGHEST IN THE ROOM">Low Valence</option>
+            </select>
 
-         <div id="content">
-             <input type="file" id="thefile" accept="audio/*" />
-             <audio id="audio" controls></audio>
-             <canvas id="canvas"></canvas>
-         </div>
+        </div>
+
+        <div id ='radarSong' ></div>
 
     </section>-
 
@@ -481,8 +481,9 @@
     <script src="js/timeline.js"></script>
     <script src="js/timeline2.js"></script>
     <script src="js/radarGraph.js"></script>
+    <script src="js/radarSong.js"></script>
     <script src="js/parallelCoordinates.js"></script>
     <script src="js/stackedAreaChart.js"></script>
-    <script src="js/script.js"></script>
+<!--    <script src="js/script.js"></script>-->
 </body>
 </html>
