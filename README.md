@@ -12,32 +12,32 @@ We borrowed the scrolling webpage layout from some examples we found online, but
 
 ### Files
 
-\sound-of-music
-  \css
-    \font
-      NeonTubes2.otf
-      NeonTubes2.ttf
-    scroll.scss
-    style.css
-  \data
-    Hot_100_Audio_Features.csv
-    Hot_Stuff.csv
-  \img
-    amanda.jpeg
-    rucha.jpeg
-    sophia.jpeg
-  \js
-    BubbleGraph.js
-    main.js
-    parallelCoordinates.js
-    radarGraph.js
-    script.js
-    scroll.js
-    stackedAreaChart.js
-    timeline.js
-    timeline2.js
-  index.html
-  README.md
+\sound-of-music <br>
+  \css <br>
+    \font <br>
+      NeonTubes2.otf <br>
+      NeonTubes2.ttf <br>
+    scroll.scss <br>
+    style.css <br>
+  \data <br>
+    Hot_100_Audio_Features.csv <br>
+    Hot_Stuff.csv <br>
+  \img <br>
+    amanda.jpeg <br>
+    rucha.jpeg <br>
+    sophia.jpeg <br>
+  \js <br>
+    BubbleGraph.js <br>
+    main.js <br>
+    parallelCoordinates.js <br>
+    radarGraph.js <br>
+    script.js <br>
+    scroll.js <br>
+    stackedAreaChart.js <br>
+    timeline.js <br>
+    timeline2.js <br>
+  index.html <br>
+  README.md <br>
 
 ### Features
 
