@@ -315,22 +315,55 @@
         <!--        </h4>-->
 
         <div class="col-5" style="padding-left: 100px;">
+            <h3 style = "color: lightgrey;">Play Your Favorite Audio Features</h3>
             <h6 style="margin-bottom: 30px; color:darkgray;">
-                We hear you. After reading these audio features we want to see them in action, too!
-                We've got a few songs lined up for you to choose from to now "see" the song.
-                <h6 style="margin-bottom: 30px; color:white" class="instruction">
-                    Choose a song from the choices to the right to see the valence and amplitude of the song.
-                </h6>
+                We hear you. After reading about these audio features we want to hear them too.
+                Pick an audio feature you think is cool and hear it for yourself!
+                Do you agree with Spotify's classification for this song and feature?
             </h6>
+
+            <div class="dropdown">
+                <span class="instruction">How to read this</span>
+                <div class="dropdown-content">
+                    <h6 style="text-align: left">
+                        <li> Use the dropdown to select a cool audio feature.</li>
+                        <li> Hover over the radar graph to hear a song with this audio feature.</li>
+                        <li> Hover over the radar graph to see the song title and values of its various audio features.</li>
+                    </h6>
+                </div>
+            </div>
+            <div class="dropdown">
+                <span class="instruction">Features</span>
+                <div class="dropdown-content">
+                    <h6>
+                        <span class="feature">Valence</span> is a measure of how positive, happy, cheerful, and euphoric a song is.<br><br>
+                        <span class="feature">Speechiness</span> explains how much of a song is composed of spoken words.<br><br>
+                        <span class="feature">Liveness</span> measures the probability that a song was performed live.<br><br>
+                        <span class="feature">Instrumentalness</span> is a metric for whether or not a song includes vocals.<br><br>
+                        <span class="feature">Energy</span> is a measurement of intensity, activity, and noisiness.<br><br>
+                        <span class="feature">Danceability</span> is a combination of tempo, rhythm stability, beat strength, and regularity.<br><br>
+                        <span class="feature">Acousticness</span> is a measurement of how likely the song does not involve electrical amplification.
+                    </h6>
+                </div>
+            </div>
 
             <audio id="player2"></audio>
             <select id='songSelector' style="padding:3px; font-size: 15px; background-color: gray; fill: #dae0e5; border-radius: 5px;"
                     onChange="songSelector()">
-                <option value="Fear Inoculum" selected>High Instrumentalness</option>
+                <option value="Fear Inoculum" >High Instrumentalness</option>
+                <option value="My Oh My" >Low Instrumentalness</option>
                 <option value="Lil Baby">High Danceability</option>
+                <option value="It's The Most Wonderful Time Of The Year" selected>Low Danceability</option>
                 <option value="Don't Check On Me">High Acousticness</option>
+                <option value="Talk">Low Acousticness</option>
                 <option value="Rescue Me">High Valence</option>
                 <option value="HIGHEST IN THE ROOM">Low Valence</option>
+                <option value="Hot Now">High Speechiness</option>
+                <option value="Falling" >Low Speechiness</option>
+                <option value="Good As Hell">High Energy</option>
+                <option value="Better Together">Low Energy</option>
+                <option value="Earfquake">High Liveliness</option>
+                <option value="La La Land">Low Liveliness</option>
             </select>
 
         </div>

@@ -151,7 +151,6 @@ class RadarSong {
 
         function startAudio() {
             player2.play();
-            //player.currentTime = 0;
         }
 
         function pauseAudio() {
@@ -163,8 +162,6 @@ class RadarSong {
 
         let singleSong = vis.timeData.filter(function (d) {return (d["song"] === vis.pickedSong) })
 
-        console.log("singleSong", singleSong['0'].acousticness);
-
         vis.averageData = []
         vis.averageData.push(
             {
@@ -175,45 +172,9 @@ class RadarSong {
                 instrumentalness: singleSong['0'].instrumentalness,
                 liveness: singleSong['0'].liveness,
                 speechiness: singleSong['0'].speechiness,
-                url: singleSong['0'].spotify_track_preview_url
+                url: singleSong['0'].spotify_track_preview_url,
+                name: singleSong['0'].song
             })
-
-
-        // if (vis.pickedSong === "Party Rock Anthem") {
-        //
-        //     vis.averageData = []
-        //     vis.averageData.push(
-        //         {
-        //             valence: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.acousticness)) / v.length),
-        //             acousticness: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.acousticness)) / v.length),
-        //             danceability: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.danceability)) / v.length),
-        //             energy: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.energy)) / v.length),
-        //             instrumentalness: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.instrumentalness)) / v.length),
-        //             liveness: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.liveness)) / v.length),
-        //             speechiness: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.speechiness)) / v.length)
-        //         })
-        //
-        //     // console.log(vis.averageData);
-        // }
-        // else if (vis.pickedSong !== "default") {
-        //     vis.filteredData = vis.displayData.filter(function (d) {return (d.genre === vis.pickedSong) })
-        //     vis.averageData = []
-        //     vis.averageData.push(
-        //         {
-        //             valence: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.valence)) / v.length),
-        //             acousticness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.acousticness)) / v.length),
-        //             danceability: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.danceability)) / v.length),
-        //             energy: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.energy)) / v.length),
-        //             instrumentalness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.instrumentalness)) / v.length),
-        //             liveness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.liveness)) / v.length),
-        //             speechiness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.speechiness)) / v.length)
-        //         })
-        //     // console.log(vis.averageData);
-        // }
-
-        // console.log(vis.averageData);
-
-        // d3.selectAll("svg > *").remove();
 
         vis.svg.append("circle")
             .attr("cx", 300)
@@ -383,6 +344,7 @@ class RadarSong {
                     .style("top", event.pageY + "px")
                     .html(`
                            <div>
+                                 <h6>Song Name: ${d.name}<h6>
                                  <h6>Valence: ${((vis.averageData[0].valence)*100).toFixed(0)}%<h6>
                                  <h6>Speechiness: ${((vis.averageData[0].speechiness)*100).toFixed(0)}%<h6>
                                  <h6>Liveness: ${((vis.averageData[0].liveness)*100).toFixed(0)}%<h6>
@@ -404,23 +366,8 @@ class RadarSong {
                     .style("top", 0)
                     .html(``);
             });
-        // .on("mouseover", (event, d) => {
-        //     d3.select("#player2")
-        //         .attr("src", d.url)
-        //
-        //     startAudio()
-        // })
-        // .on("mouseout", (event, d) => {
-        //     d3.select("#player2")
-        //         .attr("src", d.url)
-        //
-        //     pauseAudio()
-        // });
 
-
-        // }
-
-        console.log("radar viz class ran and coordinates: ", coordinates)
+        console.log("radar song ran");
     }
 
 }
