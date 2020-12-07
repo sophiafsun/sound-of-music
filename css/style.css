@@ -68,7 +68,7 @@ a, a:hover, a:focus, a:active {
 }
 
 .rightspacer {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 body {
@@ -171,4 +171,8 @@ audio {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.feature {
+    font-weight: bold;
 }
