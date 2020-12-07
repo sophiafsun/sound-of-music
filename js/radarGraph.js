@@ -49,7 +49,7 @@ class RadarGraph {
         // console.log(vis.billboard);
         // console.log(vis.audioFeatures);
 
-        console.log(selectedTimeRange);
+        // console.log(selectedTimeRange);
 
         vis.filtered = []
 
@@ -119,10 +119,10 @@ class RadarGraph {
                 })
         })
 
-        console.log(vis.displayData);
+        // console.log(vis.displayData);
 
         if (selectedTimeRange.length !== 0) {
-            console.log("Yes")
+            // console.log("Yes")
 
             vis.timeData = [];
 
@@ -137,7 +137,7 @@ class RadarGraph {
             vis.timeData = vis.displayData;
         }
 
-        console.log(vis.timeData)
+        // console.log(vis.timeData)
 
         vis.updateVis()
     }
@@ -166,7 +166,7 @@ class RadarGraph {
                     speechiness: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.speechiness)) / v.length)
                 })
 
-            console.log(vis.averageData);
+            // console.log(vis.averageData);
         }
         else if (vis.pickedGenre !== "default") {
             vis.filteredData = vis.displayData.filter(function (d) {return (d.genre === vis.pickedGenre) })
@@ -181,10 +181,10 @@ class RadarGraph {
                     liveness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.liveness)) / v.length),
                     speechiness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.speechiness)) / v.length)
                 })
-            console.log(vis.averageData);
+            // console.log(vis.averageData);
         }
 
-        console.log(vis.averageData);
+        // console.log(vis.averageData);
 
         // d3.selectAll("svg > *").remove();
 
@@ -276,13 +276,13 @@ class RadarGraph {
                 let angle = (Math.PI / 2) + (2 * Math.PI * i / vis.features.length);
                 coordinates.push(angleToCoordinate(angle, (d[ft] * 10)));
             }
-            console.log(coordinates)
+            // console.log(coordinates)
 
             return coordinates;
         }
 
-        console.log(vis.displayData[0])
-        console.log(vis.averageData[0])
+        // console.log(vis.displayData[0])
+        // console.log(vis.averageData[0])
 
         if (isNaN(vis.averageData[0].acousticness)) vis.averageData[0].acousticness = 0;
         if (isNaN(vis.averageData[0].liveness)) vis.averageData[0].liveness = 0;

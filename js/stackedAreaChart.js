@@ -132,7 +132,7 @@ class StackedAreaChart {
         })
 
 
-        console.log("stacked data", vis.categories);
+        // console.log("stacked data", vis.categories);
 
         // Count number of songs per genre
         vis.grouped = d3.rollups(vis.categories, v => v.length, d => d['date'], d => d['genre'])
@@ -142,7 +142,7 @@ class StackedAreaChart {
             return d3.ascending(x.key, y.key);
         })
 
-        console.log("grouped", vis.grouped);
+        // console.log("grouped", vis.grouped);
 
         // Rearrange data
         vis.grouped.forEach( row => {
@@ -204,7 +204,7 @@ class StackedAreaChart {
 
         })
 
-        console.log("display data", vis.displayData);
+        // console.log("display data", vis.displayData);
 
         // Update the visualization
         vis.updateVis();
@@ -218,7 +218,7 @@ class StackedAreaChart {
         let vis = this;
 
 
-        console.log("selected time range", selectedTimeRange[0]);
+        // console.log("selected time range", selectedTimeRange[0]);
 
         if (selectedTimeRange.length !== 0) {
             console.log("user has selected a time range")
@@ -237,14 +237,14 @@ class StackedAreaChart {
             console.log("user has NOT selected a time range");
         }
 
-        console.log("rangeData", vis.rangeData);
+        // console.log("rangeData", vis.rangeData);
 
         // Scales and axes
         vis.x = d3.scaleLinear()
             .range([0, vis.width])
             .domain(d3.extent(vis.rangeData, function(d) { return d.year }));
 
-        console.log("extent", d3.extent(vis.rangeData, d=> d.year));
+        // console.log("extent", d3.extent(vis.rangeData, d=> d.year));
 
         vis.y = d3.scaleLinear()
             .range([vis.height, 0]);
@@ -280,7 +280,7 @@ class StackedAreaChart {
         // TO-DO (Activity II) Stack data
         vis.stackedData = stack(vis.rangeData);
 
-        console.log("Stacked data", vis.stackedData);
+        // console.log("Stacked data", vis.stackedData);
 
         // TO-DO (Activity II) Stacked area layout
         vis.area = d3.area()
