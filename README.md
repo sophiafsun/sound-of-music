@@ -64,7 +64,7 @@ These radar charts give the user a way to compare the average audio feature make
 ### Supplemental Links
 You can find our website here:
 
-You can find our walkthrough video here:
+You can find our walkthrough video here: https://drive.google.com/file/d/10rIXYTGYzodMOKXaDECvmoOp3h9evB9m/view?usp=sharing
 
 ### Authors
 Amanda Stetz (amandastetz@college.harvard.edu), Rucha Joshi (ruchajoshi@college.harvard.edu), Sophia Sun (sophiasun@college.harvard.edu)
