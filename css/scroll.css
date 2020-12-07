@@ -89,11 +89,12 @@ section#seven {
   box-shadow: inset 0px 0px 200px black;
 }
 section#eight {
-  background-color: mintcream;
+  background-color: #08090a;
   justify-content: center;
   text-align: center;
   align-items: center;
   display: flex;
+  box-shadow: inset 0px 0px 200px black;
 }
 section#nine {
   color: #4a6767;

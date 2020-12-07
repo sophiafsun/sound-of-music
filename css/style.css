@@ -139,6 +139,7 @@ audio {
 
 .links, .links:hover {
     color: #5ff65f;
+    opacity: 0.7;
     font-weight: bold;
 }
 

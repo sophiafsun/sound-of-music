@@ -45,7 +45,7 @@
                 What makes a song popular?</h3>
         </div>
         <div class="col-7">
-            <h5 style="text-align: left; padding-left: 150px; padding-right: 70px; font-family: 'Open Sans', sans-serif; color: lightgrey;">
+            <h5 style="text-align: left; padding-left: 150px; padding-right: 70px; font-family: 'Open Sans', sans-serif; color: #edbcf6; opacity: 0.6">
                 <span>
                 It's getting harder and harder for new
                 artists to break into the music industry.
@@ -58,7 +58,9 @@
                 </span>
                 That raises the question, why do we remember and immortalize
                 some songs for decades (we're looking at you Mariah Carey),
-                while others never even make it into the Top 100*? Is there a
+                while others never even make it into the Top 100*?
+                <br><br>
+                Is there a
                 reason why a lot of mainstream music is starting to
                 sound the same? Imagine there was formula for
                 chart topping songs. How would you create the
@@ -163,7 +165,7 @@
                 Why do songs sound the same?</h3>
         </div>
         <div class="col-7">
-            <h4 style="text-align: left; padding-left: 100px; padding-right: 70px; font-family: 'Open Sans', sans-serif; color: lightgrey;">
+            <h4 style="text-align: left; padding-left: 100px; padding-right: 70px; font-family: 'Open Sans', sans-serif; color: #a2eaa2; opacity: 0.6">
                 We've see the trends behind popular music
                 genres, now what is it about these songs that makes them so popular?
                 <br><br>
@@ -307,33 +309,66 @@
         </div>
     </section>
 
-     <section id="eight" class="section">
-    <!--        <h4>[Audio Vis] Ideally, we would want to do an audio visualization <br>-->
-    <!--            of a few top songs that the user can select from.-->
-    <!--        </h4>-->
+    <section id="eight" class="section">
+        <!--        <h4>[Audio Vis] Ideally, we would want to do an audio visualization <br>-->
+        <!--            of a few top songs that the user can select from.-->
+        <!--        </h4>-->
 
-         <div class="col-5" style="padding-left: 100px;">
-             <h6 style="margin-bottom: 30px; color:darkgray;">
-                 We hear you. After reading these audio features we want to see them in action, too!
-                 We've got a few songs lined up for you to choose from to now "see" the song.
-                 <h6 style="margin-bottom: 30px; color:white" class="instruction">
-                     Choose a song from the choices to the right to see the valence and amplitude of the song.
-                 </h6>
-             </h6>
+        <div class="col-5" style="padding-left: 100px;">
+            <h3 style = "color: lightgrey;">Play Your Favorite Audio Features</h3>
+            <h6 style="margin-bottom: 30px; color:darkgray;">
+                We hear you. After reading about these audio features we want to hear them too.
+                Pick an audio feature you think is cool and hear it for yourself!
+                Do you agree with Spotify's classification for this song and feature?
+            </h6>
 
-             <select id='songSelector' style="padding:3px; font-size: 15px; background-color: gray; fill: #dae0e5; border-radius: 5px;" onChange="categoryChange()">
-                 <option value="song1" selected>Song 1</option>
-                 <option value="song2">Song 2</option>
-                 <option value="song3">Song 3</option>
-                 <option value="song4">Song 4</option>
-             </select>
-         </div>
+            <div class="dropdown">
+                <span class="instruction">How to read this</span>
+                <div class="dropdown-content">
+                    <h6 style="text-align: left">
+                        <li> Use the dropdown to select a cool audio feature.</li>
+                        <li> Hover over the radar graph to hear a song with this audio feature.</li>
+                        <li> Hover over the radar graph to see the song title and values of its various audio features.</li>
+                    </h6>
+                </div>
+            </div>
+            <div class="dropdown">
+                <span class="instruction">Features</span>
+                <div class="dropdown-content">
+                    <h6>
+                        <span class="feature">Valence</span> is a measure of how positive, happy, cheerful, and euphoric a song is.<br><br>
+                        <span class="feature">Speechiness</span> explains how much of a song is composed of spoken words.<br><br>
+                        <span class="feature">Liveness</span> measures the probability that a song was performed live.<br><br>
+                        <span class="feature">Instrumentalness</span> is a metric for whether or not a song includes vocals.<br><br>
+                        <span class="feature">Energy</span> is a measurement of intensity, activity, and noisiness.<br><br>
+                        <span class="feature">Danceability</span> is a combination of tempo, rhythm stability, beat strength, and regularity.<br><br>
+                        <span class="feature">Acousticness</span> is a measurement of how likely the song does not involve electrical amplification.
+                    </h6>
+                </div>
+            </div>
 
-         <div id="content">
-             <input type="file" id="thefile" accept="audio/*" />
-             <audio id="audio" controls></audio>
-             <canvas id="canvas"></canvas>
-         </div>
+            <audio id="player2"></audio>
+            <select id='songSelector' style="padding:3px; font-size: 15px; background-color: gray; fill: #dae0e5; border-radius: 5px;"
+                    onChange="songSelector()">
+                <option value="Fear Inoculum" >High Instrumentalness</option>
+                <option value="My Oh My" >Low Instrumentalness</option>
+                <option value="Lil Baby">High Danceability</option>
+                <option value="It's The Most Wonderful Time Of The Year" selected>Low Danceability</option>
+                <option value="Don't Check On Me">High Acousticness</option>
+                <option value="Talk">Low Acousticness</option>
+                <option value="Rescue Me">High Valence</option>
+                <option value="HIGHEST IN THE ROOM">Low Valence</option>
+                <option value="Hot Now">High Speechiness</option>
+                <option value="Falling" >Low Speechiness</option>
+                <option value="Good As Hell">High Energy</option>
+                <option value="Better Together">Low Energy</option>
+                <option value="Earfquake">High Liveliness</option>
+                <option value="La La Land">Low Liveliness</option>
+            </select>
+
+        </div>
+
+        <div id ='radarSong' ></div>
 
     </section>-
 
@@ -343,19 +378,17 @@
                 Okay, so now what?</h3>
         </div>
         <div class="col-7">
-            <h5 style="text-align: left; padding-left: 150px; padding-right: 70px; font-family: 'Open Sans', sans-serif">
-                <span>
-                    <h4>
-                        So that's it. We've seen the rise and fall of genres over the ages, but pop and rap consistently have
-                        topped the charts in recent years. But what does that really mean?
-                        <br><br>
-                        </h4>
-                </span>
+            <h4 style="text-align: left; padding-left: 150px; padding-right: 70px; font-family: 'Open Sans', sans-serif">
+
+                So that's it. We've seen the rise and fall of genres over the ages, but pop and rap consistently have
+                topped the charts in recent years. But what does that really mean?
+                <br><br>
+
                 Pop and rap songs have two things in common - they're high in both danceability and energy.
                 Think about it: these days people want to dance, shimmy, and sing along to their favorite songs.
                 <br><br>
                 <span><h3>Still want to be popstar? Make your next hit a danceable, high energy song, and it'll top the charts. We promise.</h3></span>
-            </h5>
+            </h4>
         </div>
     </section>
 
@@ -415,17 +448,26 @@
                     All of our source codes and datasets can be found in our
                     <a href="https://github.com/sophiafsun/sound-of-music" target="_blank" class="links">Github repo.</a>
                 </h6>
+                <h6>
+                    This website is a final project for CS171 at Harvard University in Fall 2020.
+                </h6>
             </div>
             <div class="row">
                 <h5>Data Sources</h5>
             </div>
             <div class="row">
                 <h6>
-                    <ul style="list-style-type:none;">
+                    <ul>
                         <li><a href="https://data.world/kcmillersean/billboard-hot-100-1958-2017" target="_blank"
-                               class="links">Billboard Top 100 Weekly Charts:</a></li>
+                               class="links">Billboard Top 100 Weekly Charts:</a>
+                            a compiled dataset of songs that have been popular over the past six decades.
+                            Used as the basis for all visualizations.
+                        </li>
                         <li><a href="https://developer.spotify.com/documentation/web-api/" target="_blank"
-                               class="links">Spotify API:</a></li>
+                               class="links">Spotify API:</a> a compiled dataset of popular features of songs,
+                            used in tandem to our Billboard dataset to track audio trends. It is present in
+                            our last three visualizations.
+                        </li>
                     </ul>
                 </h6>
             </div>
@@ -434,9 +476,12 @@
             </div>
             <div class="row">
                 <h6>
-                    <ul style="list-style-type:none;">
-                        <li>Because there was</li>
-                        <li>And now</li>
+                    <ul>
+                        <li>Due to there being a large variety of genres in our initial dataset
+                            we have decided to combine the them into a few "super-genres" for simplicity
+                            and analytical purposes. </li>
+                        <li>Some songs within the dataset were assigned "miscellaneous" or "unclassified"
+                            as a genre. We have excluded these songs from our analysis.</li>
                     </ul>
                 </h6>
             </div>
@@ -481,8 +526,9 @@
     <script src="js/timeline.js"></script>
     <script src="js/timeline2.js"></script>
     <script src="js/radarGraph.js"></script>
+    <script src="js/radarSong.js"></script>
     <script src="js/parallelCoordinates.js"></script>
     <script src="js/stackedAreaChart.js"></script>
-    <script src="js/script.js"></script>
+<!--    <script src="js/script.js"></script>-->
 </body>
 </html>
