@@ -67,6 +67,10 @@ a, a:hover, a:focus, a:active {
     margin-left: 20px;
 }
 
+.rightspacer {
+    margin-right: 20px;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
 }
@@ -122,10 +126,10 @@ audio {
 }
 
 .instruction {
-    border-radius: 25px;
+    border-radius: 5px;
     background: gray;
-    padding: 20px;
-    color: white;
+    padding: 6px 10px;
+    color: #08090a;
 }
 
 .nav {
@@ -140,4 +144,31 @@ audio {
 
 .links:hover {
     text-decoration: underline;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: lightgray;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #08090a;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }

@@ -91,15 +91,25 @@
                                 Clearly, each of these top songs must be doing
                                 something right.
                         </h6>
-                            <h6 style="margin-bottom: 20px;" class="instruction">
-                                <li>Hover over a circle to see info about a song.</li>
-                                <li>Click the drop down to filter by genre.</li>
-                                <li>Brush the timeline to filter by year.</li>
-                            </h6>
-                    </div>
+                </div>
             </div>
+
+
             <div class="row">
-                <select id='categorySelector' style="padding:3px; font-size: 15px; background-color: gray; fill: #dae0e5; border-radius: 5px;" onChange="categoryChange()">
+
+                <div class="dropdown rightspacer">
+                    <span class="instruction">How to read this</span>
+                    <div class="dropdown-content">
+                        <h3>
+                            <li>Hover over a circle to see info about a song.</li>
+                            <li>Click the drop down to filter by genre.</li>
+                            <li>Brush the timeline to filter by year.</li>
+                        </h3>
+                    </div>
+                </div>
+
+
+                <select id='categorySelector' style="padding:5px; font-size: 15px; background-color: gray; border-radius: 5px;" onChange="categoryChange()">
                     <option value="default" selected>Top 100 Overall</option>
                     <option value="country">Country</option>
                     <option value="edm">EDM</option>
@@ -115,6 +125,7 @@
                 <div id="timeline"></div>
             </div>
         </div>
+        </div>
     </section>
 
     <section id="four" class="section">
@@ -126,12 +137,16 @@
                 See how popular certain genres were at various points in time!
             </h6>
 
-            <h6 style="margin-bottom: 30px; color:white;" class="instruction">
+            <div class="dropdown">
+                <span class="instruction">How to read this</span>
+                <div class="dropdown-content">
+                    <h3>
+                        <li>Use the brush feature below to select the time range you are interested in </li>
+                        <li>Hover over a stack to see what genre you're looking at!</li>
+                    </h3>
+                </div>
+            </div>
 
-                <li>Use the brush feature below to select the time range you are interested in </li>
-                <li>Hover over a stack to see what genre you're looking at!</li>
-
-            </h6>
         </div>
         <div id="timeline-stacked" style="text-align: left; padding-left: 200px; padding-right: 30px;"></div>
         </div>
@@ -181,13 +196,20 @@
                     <br><br>
                     Here's a peek at audio characteristics of top songs. Each line represents a song that hit #1 on Billboard.
                 </h6>
-                <h6 style="margin-bottom: 30px; color:white;" class="instruction">
-                    <li>Hover over a song to view details.</li>
-                    <li>Click a song to select and highlight that specific song.</li>
-                    <li>Click a genre in the legend to select all songs of that genre.</li>
-                    <li>Click and hold down to hear an audio snippet of the selected song.</li>
-                    <li> Click Reset to see the Top 100 view.</li>
-                </h6>
+
+                <div class="dropdown">
+                    <span class="instruction">How to read this</span>
+                    <div class="dropdown-content">
+                        <h3>
+                            <li>Hover over a song to view details.</li>
+                            <li>Click a song to select and highlight that specific song.</li>
+                            <li>Click a genre in the legend to select all songs of that genre.</li>
+                            <li>Click and hold down to hear an audio snippet of the selected song.</li>
+                            <li> Click Reset to see the Top 100 view.</li>
+                        </h3>
+                    </div>
+                </div>
+
                 <div id="timeline-par-coord"></div>
             </div>
         </div>
@@ -206,15 +228,23 @@
                     <h6 style="margin-bottom: 30px; color:darkgray;">
                         The top songs in each genre have a unique mark of audio features that define them.<br>
                         Here are the average audio features, as a percentage of the maximum measurement of top songs for each genre.
-                        <h6 style="margin-bottom: 30px; color:white" class="instruction">
-                            Choose a genre from the dropdowns to view and compare the average makeup of songs in each genre.
-                        </h6>
                     </h6>
+                    <div class="dropdown">
+                        <span class="instruction">How to read this</span>
+                        <div class="dropdown-content">
+                            <h3>
+                                Choose a genre from the dropdowns to view and compare the average makeup of songs in each genre.
+                            </h3>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="row">
 
                     <div class="col-6">
+
+                        <div id ='radarGraph' ></div>
 
                         <select id='categorySelector2'
                                 style="padding:3px; font-size: 15px; background-color: #a0a3ae; fill: #dae0e5; border-radius: 5px; cursor: pointer;"
@@ -231,9 +261,11 @@
                             <option value="rock" id="rock2" class="option2">Rock</option>
                         </select>
 
-                        <div id ='radarGraph' ></div>
+
                     </div>
                     <div class="col-6">
+
+                        <div id ='radarGraph2'></div>
 
                         <select id='categorySelector3'
                                 style="padding:3px; font-size: 15px; background-color: #a0a3ae; fill: #dae0e5; border-radius: 5px; cursor: pointer;"
@@ -250,7 +282,6 @@
                             <option value="rock" id="rock3" class="option3">Rock</option>
                         </select>
 
-                        <div id ='radarGraph2'></div>
                     </div>
 
                 </div>
@@ -395,6 +426,23 @@
 
         </div>
     </section>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
