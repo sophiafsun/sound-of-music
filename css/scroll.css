@@ -191,7 +191,7 @@ nav.nav ul li.active:before {
   width: 50%;
   height: 50%;
   margin-top: 100px;
-  font-family: "Neon", cursive;
+  font-family: "Neon", sans-serif;
   background-image: radial-gradient(ellipse 50% 35% at 50% 50%, darkcyan, transparent);
   transform: translate(-50%, -50%);
   left: 50%;
