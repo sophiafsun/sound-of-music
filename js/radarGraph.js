@@ -49,7 +49,7 @@ class RadarGraph {
         // console.log(vis.billboard);
         // console.log(vis.audioFeatures);
 
-        console.log(selectedTimeRange);
+        // console.log(selectedTimeRange);
 
         vis.filtered = []
 
@@ -119,10 +119,10 @@ class RadarGraph {
                 })
         })
 
-        console.log(vis.displayData);
+        // console.log(vis.displayData);
 
         if (selectedTimeRange.length !== 0) {
-            console.log("Yes")
+            // console.log("Yes")
 
             vis.timeData = [];
 
@@ -137,7 +137,7 @@ class RadarGraph {
             vis.timeData = vis.displayData;
         }
 
-        console.log(vis.timeData)
+        // console.log(vis.timeData)
 
         vis.updateVis()
     }
@@ -166,7 +166,7 @@ class RadarGraph {
                     speechiness: d3.rollup(vis.timeData, v => (d3.sum(v, d => d.speechiness)) / v.length)
                 })
 
-            console.log(vis.averageData);
+            // console.log(vis.averageData);
         }
         else if (vis.pickedGenre !== "default") {
             vis.filteredData = vis.displayData.filter(function (d) {return (d.genre === vis.pickedGenre) })
@@ -181,17 +181,17 @@ class RadarGraph {
                     liveness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.liveness)) / v.length),
                     speechiness: d3.rollup(vis.filteredData, v => (d3.sum(v, d => d.speechiness)) / v.length)
                 })
-            console.log(vis.averageData);
+            // console.log(vis.averageData);
         }
 
-        console.log(vis.averageData);
+        // console.log(vis.averageData);
 
         // d3.selectAll("svg > *").remove();
 
         vis.svg.append("circle")
             .attr("cx", 300)
             .attr("cy", 200)
-            .attr("fill", "black")
+            .attr("fill", "#08090a")
             .attr("opacity", 1)
             .attr("r", vis.radialScale(10))
 
@@ -276,13 +276,21 @@ class RadarGraph {
                 let angle = (Math.PI / 2) + (2 * Math.PI * i / vis.features.length);
                 coordinates.push(angleToCoordinate(angle, (d[ft] * 10)));
             }
-            console.log(coordinates)
+            // console.log(coordinates)
 
             return coordinates;
         }
 
-        console.log(vis.displayData[0])
-        console.log(vis.averageData[0])
+        // console.log(vis.displayData[0])
+        // console.log(vis.averageData[0])
+
+        if (isNaN(vis.averageData[0].acousticness)) vis.averageData[0].acousticness = 0;
+        if (isNaN(vis.averageData[0].liveness)) vis.averageData[0].liveness = 0;
+        if (isNaN(vis.averageData[0].danceability)) vis.averageData[0].danceability = 0;
+        if (isNaN(vis.averageData[0].valence)) vis.averageData[0].valence = 0;
+        if (isNaN(vis.averageData[0].speechiness)) vis.averageData[0].speechiness = 0;
+        if (isNaN(vis.averageData[0].energy)) vis.averageData[0].energy = 0;
+        if (isNaN(vis.averageData[0].instrumentalness)) vis.averageData[0].instrumentalness = 0;
 
         // for (var i = 0; i < vis.averageData.length; i ++) {
         let d = vis.averageData[0];
@@ -321,6 +329,44 @@ class RadarGraph {
             .transition()
             .attr("stroke-opacity", 1)
             .attr("opacity", 0.7);
+
+        vis.tooltip = d3.select('body').append('g')
+            .append('div')
+            .attr('class', 'tooltip')
+            .style('opacity', 0);
+
+        vis.svg.append('circle')
+            .datum(vis.averageData[0])
+            .attr("cx", 300)
+            .attr("cy", 200)
+            .attr("r", vis.radialScale(10))
+            .attr('fill', 'none')
+            .attr('pointer-events', 'all')
+            .attr('cursor', 'pointer')
+            .on('mouseover', function(event) {
+                // append tooltip with category data
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                           <div>
+                                 <h6>Valence: ${((vis.averageData[0].valence)*100).toFixed(0)}%<h6>
+                                 <h6>Speechiness: ${((vis.averageData[0].speechiness)*100).toFixed(0)}%<h6>
+                                 <h6>Liveness: ${((vis.averageData[0].liveness)*100).toFixed(0)}%<h6>
+                                 <h6>Instrumentalness: ${((vis.averageData[0].instrumentalness)*100).toFixed(0)}%<h6>
+                                 <h6>Energy: ${((vis.averageData[0].energy)*100).toFixed(0)}%<h6>
+                                 <h6>Danceability: ${((vis.averageData[0].danceability)*100).toFixed(0)}%<h6>
+                                 <h6>Acousticness: ${((vis.averageData[0].acousticness)*100).toFixed(0)}%<h6>
+                            </div>`);
+            })
+            .on('mouseout', function(){
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            });
 
 
         // }

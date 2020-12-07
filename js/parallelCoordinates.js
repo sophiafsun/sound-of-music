@@ -199,8 +199,8 @@ class ParallelCoordinates {
                 })
         })
 
-        console.log("displayData", vis.displayData)
-        console.log("audioFeatures", vis.audioFeatures)
+        // console.log("displayData", vis.displayData)
+        // console.log("audioFeatures", vis.audioFeatures)
 
         vis.updateVis()
     }
@@ -230,7 +230,7 @@ class ParallelCoordinates {
         }*/
         vis.filteredData = vis.timeData.filter(function(d,i){ return i < 100 })
 
-        console.log("time display data", vis.filteredData)
+        // console.log("time display data", vis.filteredData)
 
 
         // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
@@ -253,7 +253,7 @@ class ParallelCoordinates {
             .append("path")
             .attr("d",  d => path(d))
             .attr("class", d => {
-                console.log("draw a song")
+                // console.log("draw a song")
                 return "myPath line " + d.genre + " A" + d.spotify_track_id})
             .attr("id", d => {return d.spotify_track_id})
             .style("fill", "none")
@@ -362,7 +362,7 @@ class ParallelCoordinates {
                          </div>`);
                     }
                 }
-                console.log("tooltip", d)
+                // console.log("tooltip", d)
             })
             .on("mouseout", (event, d) => {
                 if (vis.songClicked === false && vis.legendClicked === false) {
@@ -398,13 +398,13 @@ class ParallelCoordinates {
                     .style("opacity", "1")
                     .style("stroke-width", "4px")
 
-                console.log("clicked songID:", vis.selectedSong)
-                console.log("clicked color: ", vis.colorScale(vis.selectedGenre))
+                // console.log("clicked songID:", vis.selectedSong)
+                // console.log("clicked color: ", vis.colorScale(vis.selectedGenre))
 
                 d3.select("#player")
                     .attr("src", d.spotify_track_preview_url)
 
-                console.log("click!")
+                // console.log("click!")
             })
             .on("mousedown", (event, d) => {
                 d3.select("#player")
@@ -437,7 +437,7 @@ class ParallelCoordinates {
                 }
             })
             .on("mouseover", (event, d) => {
-                console.log("legend mouseover")
+                // console.log("legend mouseover")
                 vis.selectedGenre = d
                 if (vis.legendClicked === false && vis.songClicked === false) {
                     // first every group turns grey
@@ -479,7 +479,7 @@ class ParallelCoordinates {
             .on("click", (event, d) => {
                 vis.legendClicked = true;
                 vis.genreClicked = d;
-                console.log("clicked d", d)
+                // console.log("clicked d", d)
 
                 if (d === "top100") {
                     //return lines to original color
@@ -506,7 +506,7 @@ class ParallelCoordinates {
                         .style("stroke-width", "4px")
                 }
 
-                console.log("click!")
+                // console.log("click!")
             })
 
         vis.resetButton = vis.svg.append("g")

@@ -65,7 +65,7 @@ $(window).scroll(function(){
     if(scrollPosition >= seven) {
         $('.active').removeClass('active');
         $('#nav7').addClass('active');
-        nav7.contents('li').text('Audio Features by Genre');
+        nav7.contents('li').text('Features by Genre');
         nav7.siblings().contents('li').text('');
     }
     if(scrollPosition >= eight) {

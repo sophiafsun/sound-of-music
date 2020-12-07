@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46842f79-6547-4b31-960d-ac472d9aa2b1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
@@ -51,6 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="jsx.switch.disabled" value="true" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -109,9 +111,10 @@
       <screen x="0" y="23" width="1280" height="719" />
     </state>
     <state x="87" y="44" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1280.719@0.23.1280.719" timestamp="1605482210574" />
-    <state x="483" y="231" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605544041924">
-      <screen x="0" y="23" width="1280" height="719" />
+    <state x="483" y="229" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607301651374">
+      <screen x="0" y="23" width="1280" height="713" />
     </state>
+    <state x="483" y="229" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.713@0.23.1280.713" timestamp="1607301651374" />
     <state x="483" y="231" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.719@0.23.1280.719" timestamp="1605544041924" />
     <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606011212143">
       <screen x="0" y="0" width="1440" height="900" />
