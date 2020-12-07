@@ -37,3 +37,10 @@ You can find our website here:
 
 You can find our walkthrough video here:
 
+### Authors
+Amanda Stetz
+
+Rucha Joshi
+
+Sophia Sun
+
