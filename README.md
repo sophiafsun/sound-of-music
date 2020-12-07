@@ -10,6 +10,35 @@ The bulk of our project is implemented in the `index.html` file, the `css/` fold
 
 We borrowed the scrolling webpage layout from some examples we found online, but the design of the webpage, including the neon lights, brick background, and choices for font, were largely of our own creative choices.
 
+### Files
+
+\sound-of-music
+  \css
+    \font
+      NeonTubes2.otf
+      NeonTubes2.ttf
+    scroll.scss
+    style.css
+  \data
+    Hot_100_Audio_Features.csv
+    Hot_Stuff.csv
+  \img
+    amanda.jpeg
+    rucha.jpeg
+    sophia.jpeg
+  \js
+    BubbleGraph.js
+    main.js
+    parallelCoordinates.js
+    radarGraph.js
+    script.js
+    scroll.js
+    stackedAreaChart.js
+    timeline.js
+    timeline2.js
+  index.html
+  README.md
+
 ### Features
 
 Every visualization on our webpage includes a list of instructions explaining how to interact with the visualization. However, here are a few highlights from the site:
