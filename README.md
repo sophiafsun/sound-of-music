@@ -38,9 +38,5 @@ You can find our website here:
 You can find our walkthrough video here:
 
 ### Authors
-Amanda Stetz
-
-Rucha Joshi
-
-Sophia Sun
+Amanda Stetz (amandastetz@college.harvard.edu), Rucha Joshi (ruchajoshi@college.harvard.edu), Sophia Sun (sophiasun@college.harvard.edu)
 
